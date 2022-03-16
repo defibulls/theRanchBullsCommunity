@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.navBtn {
+  @apply cursor-pointer text-lg font-bold transition-all duration-300 ease-in hover:border-b hover:border-white;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.grid-template {
+  grid-template-columns: 1fr 1fr;
+}
+
+.tokenomics {
+  @apply flex flex-col items-start gap-2 sm:flex-row sm:items-center;
+}
+.giveaway {
+  grid-template-columns: 1fr 1% min-content;
+}
