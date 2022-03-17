@@ -17,11 +17,11 @@ const Header = () => {
             className="flex items-center rounded-xl bg-purple-900 py-1 px-2"
           >
             <img
-              src="/images/logo-pixelated.png"
+              src="/Logo/tp-logo.png"
               alt="TRB"
-              className="mr-2 h-12 cursor-pointer rounded-xl object-contain"
+              className="-ml-6 h-12 cursor-pointer rounded-xl object-cover"
             />
-            <p className=" text-lg font-bold">THE RANCH BULLS</p>
+            <p className="-ml-3 text-lg font-bold">THE RANCH BULLS</p>
           </a>
           <div className="ml-12 hidden justify-evenly space-x-10 lg:flex ">
             <a className="navBtn" href="/#about">

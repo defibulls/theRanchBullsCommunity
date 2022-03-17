@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { MoralisProvider } from 'react-moralis'
 import { ContractProvider } from '../context/ContractContext'
+import { Toaster } from 'react-hot-toast'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -11,6 +12,15 @@ function MyApp({ Component, pageProps }: AppProps) {
     >
       <ContractProvider>
         <Component {...pageProps} />
+        <Toaster
+          toastOptions={{
+            style: {
+              background: '#9E23A3',
+              borderRadius: '25px',
+              color: '#fff',
+            },
+          }}
+        />
       </ContractProvider>
     </MoralisProvider>
   )
