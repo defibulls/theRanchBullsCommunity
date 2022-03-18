@@ -12,7 +12,6 @@ export const ContractProvider = ({ children }) => {
       contractABI,
       contractAddress
     )
-    console.log('contract', web3Contract)
     return web3Contract
   }
 

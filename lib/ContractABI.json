@@ -1,6 +1,11 @@
 [
   {
     "inputs": [
+      {
+        "internalType": "address",
+        "name": "_priceFeedAddress",
+        "type": "address"
+      },
       { "internalType": "address", "name": "_royalties", "type": "address" },
       { "internalType": "string", "name": "_initBaseURI", "type": "string" }
     ],
@@ -195,15 +200,6 @@
     "type": "function"
   },
   {
-    "inputs": [
-      { "internalType": "address", "name": "token", "type": "address" }
-    ],
-    "name": "checkTokenBalance",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [],
     "name": "fund",
     "outputs": [],
@@ -222,6 +218,13 @@
   {
     "inputs": [],
     "name": "getBalance",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getMintPrice",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
@@ -261,20 +264,6 @@
     "name": "mint",
     "outputs": [],
     "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "mintingDecimals",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "mintingTokenContract",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -432,16 +421,7 @@
     "inputs": [
       { "internalType": "address", "name": "_address", "type": "address" }
     ],
-    "name": "setMintingTokenAddress",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "uint256", "name": "_decimals", "type": "uint256" }
-    ],
-    "name": "setMintingTokenDecimals",
+    "name": "setPriceFeedAddress",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -570,20 +550,6 @@
       { "internalType": "uint256", "name": "_amount", "type": "uint256" }
     ],
     "name": "withdraw",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_tokenContract",
-        "type": "address"
-      },
-      { "internalType": "uint256", "name": "_amount", "type": "uint256" }
-    ],
-    "name": "withdrawToken",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

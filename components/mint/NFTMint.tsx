@@ -3,7 +3,6 @@ import { useChain, useMoralis } from 'react-moralis'
 import Header from '../Header'
 import { contractAddress, customStyles } from '../../lib/contants'
 import ChainNotSupported from './ChainNotSupported'
-import getWeb3 from '../../lib/getWeb3'
 import Modal from 'react-modal'
 import Loader from '../modals/Loader'
 import { ContractContext } from '../../context/ContractContext'
@@ -21,22 +20,29 @@ const NFTMint = () => {
   const [price, setPrice] = useState<number>(250)
   const [maxMinted, setMaxMinted] = useState<number>(5)
 
+  console.log(contract)
+
   const mint = async () => {
     setloading(true)
 
-    await contract.methods
-      .approve(user?.get('ethAddress'), count)
-      .send({ from: user?.get('ethAddress') }, (err: any) => {
-        toast.error('Something went wrong :', err.message)
-        setloading(false)
-      })
+    // await contract.methods
+    //   .approve(user?.get('ethAddress'), count)
+    //   .send({ from: user?.get('ethAddress') }, (err: any) => {
+    //     toast.error('Something went wrong :', err.message)
+    //     setloading(false)
+    //   })
 
     await contract.methods
       .mint(count)
-      .send({ from: user?.get('ethAddress') }, (err: any) => {
-        toast.error('Something went wrong :', err.message)
-        setloading(false)
-      })
+      .send(
+        { from: user?.get('ethAddress'), value: 800000000000000000 },
+        (err: any) => {
+          if (err) {
+            toast.error(`Something went wrong : ${err.message}`)
+            setloading(false)
+          }
+        }
+      )
 
     toast.success("You've sucessfully minted the NFT!")
     setloading(false)
@@ -67,13 +73,15 @@ const NFTMint = () => {
               <ChainNotSupported />
             ) : (
               <div className="flex h-full w-full flex-col items-center justify-center md:flex-row">
-                <iframe
-                  src="http://localhost:3000/Lottie/demo/data.html"
-                  height="400"
-                  width="500"
-                >
-                  LOGO
-                </iframe>
+                <div className="flex h-[60%] w-full md:w-[50%] md:flex-row">
+                  <iframe
+                    src="http://localhost:3000/Lottie/demo/data.html"
+                    height="100%"
+                    width="100%"
+                  >
+                    LOGO
+                  </iframe>
+                </div>
 
                 <div className="flex h-fit w-full flex-col justify-center md:w-[40%]">
                   <p className="mb-1 text-4xl font-black text-cyan-600 underline underline-offset-2">
@@ -127,7 +135,7 @@ const NFTMint = () => {
                       <button
                         onClick={(e) => {
                           e.preventDefault()
-                          if (count >= 5) {
+                          if (count >= maxMinted) {
                             setCount(5)
                           } else {
                             setCount(count + 1)
