@@ -17,51 +17,78 @@ const NFTMint = () => {
   const [count, setCount] = useState<number>(0)
   const [loading, setloading] = useState<boolean>(false)
   const [minted, setMinted] = useState<number>(0)
-  const [price, setPrice] = useState<number>(250)
+  const [price, setPrice] = useState<any>(0)
   const [maxMinted, setMaxMinted] = useState<number>(5)
-
-  console.log(contract)
+  const [mintingPrice, setMintingPrice] = useState<number>(6)
 
   const mint = async () => {
+    if (count === 0) return toast.error('Please enter a valid amount')
+    if (count > 11)
+      return toast.error('You can only mint up to 11 NFTs at a time')
+
+    await fetchPrice(count)
+    console.log('Count: ', count)
+    console.log('Price: ', mintingPrice)
+
     setloading(true)
 
-    // await contract.methods
-    //   .approve(user?.get('ethAddress'), count)
-    //   .send({ from: user?.get('ethAddress') }, (err: any) => {
-    //     toast.error('Something went wrong :', err.message)
-    //     setloading(false)
-    //   })
+    const totalPrice = Number(mintingPrice) + Number(100000000000000)
 
-    await contract.methods
-      .mint(count)
-      .send(
-        { from: user?.get('ethAddress'), value: 800000000000000000 },
-        (err: any) => {
-          if (err) {
-            toast.error(`Something went wrong : ${err.message}`)
-            setloading(false)
-          }
+    console.log(totalPrice)
+
+    await contract.methods.mint(count).send(
+      {
+        from: user?.get('ethAddress'),
+        value: totalPrice,
+      },
+      (err: any) => {
+        if (err) {
+          toast.error(`Something went wrong, Please try again`)
+          setloading(false)
         }
-      )
+      }
+    )
 
     toast.success("You've sucessfully minted the NFT!")
     setloading(false)
   }
 
+  const fetchPrice = async (count: any) => {
+    if (count == 1) {
+      setPrice(await contract.methods.ORDER_QUANTITY_1().call())
+      setMintingPrice(await contract.methods.getMintPrice(price * count).call())
+    } else if (count === 2) {
+      setPrice(await contract.methods.ORDER_QUANTITY_2().call())
+      setMintingPrice(await contract.methods.getMintPrice(price * count).call())
+    } else if (count == 3) {
+      setPrice(await contract.methods.ORDER_QUANTITY_3().call())
+      setMintingPrice(await contract.methods.getMintPrice(price * count).call())
+    } else if (count == 5) {
+      setPrice(await contract.methods.ORDER_QUANTITY_5().call())
+      setMintingPrice(await contract.methods.getMintPrice(price * count).call())
+    } else if (count == 7) {
+      setPrice(await contract.methods.ORDER_QUANTITY_7().call())
+      setMintingPrice(await contract.methods.getMintPrice(price * count).call())
+    } else if (count == 11) {
+      setPrice(await contract.methods.ORDER_QUANTITY_11().call())
+      setMintingPrice(await contract.methods.getMintPrice(price * count).call())
+    } else {
+      setPrice(await contract.methods.ORDER_QUANTITY_1().call())
+      setMintingPrice(await contract.methods.getMintPrice(price * count).call())
+    }
+  }
+
   const fetchData = async () => {
     const mintedNFTs = await contract.methods.totalSupply().call()
     setMinted(mintedNFTs)
-    const mintingPrice = await contract.methods.NODEBULLS_MINT_PRICE().call()
-    setPrice(mintingPrice)
-    const maxMint = await contract.methods.NODEBULLS_MAX_MINTS_PER_TX().call()
-    setMaxMinted(maxMint)
   }
 
   useEffect(() => {
     if (contract) {
       fetchData()
+      fetchPrice(count)
     }
-  }, [contract])
+  }, [contract, mint, count])
 
   return (
     <div className="h-full overflow-y-scroll lg:overflow-hidden">
@@ -72,10 +99,10 @@ const NFTMint = () => {
             {chainId !== '0x13881' ? (
               <ChainNotSupported />
             ) : (
-              <div className="flex h-full w-full flex-col items-center justify-center md:flex-row">
-                <div className="flex h-[60%] w-full md:w-[50%] md:flex-row">
+              <div className="flex h-full w-full flex-col items-center justify-center lg:flex-row">
+                <div className="flex h-full w-full lg:h-[60%] lg:w-[60%] ">
                   <iframe
-                    src="http://localhost:3000/Lottie/demo/data.html"
+                    src="http://localhost:3000/10/demo/data.html"
                     height="100%"
                     width="100%"
                   >
@@ -83,7 +110,7 @@ const NFTMint = () => {
                   </iframe>
                 </div>
 
-                <div className="flex h-fit w-full flex-col justify-center md:w-[40%]">
+                <div className="flex w-full flex-col justify-center lg:w-[50%]">
                   <p className="mb-1 text-4xl font-black text-cyan-600 underline underline-offset-2">
                     MINT LIVE
                   </p>
@@ -92,7 +119,7 @@ const NFTMint = () => {
                   <p className="text-5xl font-black">
                     1 <span className="text-purple-600">BULL</span> COSTS{' '}
                     {price}
-                    <span className="text-purple-600"> USDC</span>
+                    <span className="text-purple-600"> USD</span>
                     <br />
                     <br />
                   </p>
@@ -135,8 +162,8 @@ const NFTMint = () => {
                       <button
                         onClick={(e) => {
                           e.preventDefault()
-                          if (count >= maxMinted) {
-                            setCount(5)
+                          if (count >= 11) {
+                            setCount(11)
                           } else {
                             setCount(count + 1)
                           }
@@ -169,7 +196,7 @@ const NFTMint = () => {
                       MINT
                     </button>
                     <p>
-                      TOTAL PRICE: <b>{count * price} USDC</b>
+                      TOTAL PRICE: <b>{count * price} USD</b>
                     </p>
                   </div>
                 </div>

@@ -1,10 +1,11 @@
 import Head from 'next/head'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useMoralis } from 'react-moralis'
 import Header from '../components/Header'
 import ConnectWallet from '../components/mint/ConnectWallet'
 import Profile from '../components/myBulls/Profile'
+import { contractAddress } from '../lib/contants'
 
 const Mybulls = () => {
   const { isAuthenticated, userError, authError } = useMoralis()
@@ -28,13 +29,14 @@ const Mybulls = () => {
   }, [userError])
 
   return (
-    <div className="h-screen bg-black text-white transition-all duration-500 ease-in-out">
+    <div className="h-full bg-black text-white transition-all duration-500 ease-in-out">
       <Head>
         <title>The Ranch - Profile</title>
       </Head>
-      ]
       <Header />
-      {isAuthenticated ? <Profile /> : <ConnectWallet />}
+      <main className="flex flex-col justify-center text-white">
+        {isAuthenticated ? <Profile /> : <ConnectWallet />}
+      </main>
     </div>
   )
 }

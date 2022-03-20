@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from 'react'
+import { useMoralis } from 'react-moralis'
 import { contractABI, contractAddress } from '../lib/contants'
 import getWeb3 from '../lib/getWeb3'
 

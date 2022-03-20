@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Image from 'next/image'
+import toast from 'react-hot-toast'
 import { useMoralis } from 'react-moralis'
 
 const ConnectWallet = () => {
@@ -10,12 +10,13 @@ const ConnectWallet = () => {
       await authenticate({ signingMessage: 'Log in to THE RANCH BULL' })
         .then(function (user) {})
         .catch(function (error) {
+          toast.error(error.message)
           console.log(error)
         })
     }
   }
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center bg-[#15202b] text-white">
+    <div className="flex h-screen w-full flex-col items-center justify-center overflow-y-hidden bg-[#15202b] text-white">
       <div className="flex h-full w-full flex-col items-center justify-center">
         <Head>
           <title>The Ranch - Login</title>

@@ -8,7 +8,7 @@ const Header = () => {
 
   return (
     <div
-      className={`fixed top-0 z-40 h-24 w-full border-b bg-black p-[20px] transition-all duration-500 ease-in`}
+      className={`fixed top-0 z-10 h-24 w-full border-b bg-black p-[20px] transition-all duration-500 ease-in`}
     >
       <div className="flex justify-between">
         <div className="flex items-center ">
