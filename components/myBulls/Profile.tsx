@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useMoralis } from 'react-moralis'
 import { contractAddress } from '../../lib/contants'
@@ -17,6 +18,8 @@ interface NFTprops {
 const Profile = () => {
   const [nfts, setNfts] = useState<any>([])
   const { isAuthenticated, user, Moralis } = useMoralis()
+
+  const router = useRouter()
 
   useEffect(() => {
     if (!isAuthenticated) return
@@ -104,11 +107,26 @@ const Profile = () => {
           </li>
         </div>
       </div>
-      <div className="mt-5  grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
-        {nfts?.map((nft: NFTprops, index: number) => (
-          <Card name={nft.name} image={nft.image} id={index} key={index} />
-        ))}
-      </div>
+      {nfts.length === 0 ? (
+        <div className="mt-5 flex h-full w-full flex-col items-center">
+          <h1 className="mb-4 text-lg">
+            You haven't minted any NFT! Click on the button to mint some NFTs
+          </h1>
+
+          <button
+            className="rounded-xl bg-purple-600 p-4 font-bold"
+            onClick={() => router.push('/mint')}
+          >
+            Click Here
+          </button>
+        </div>
+      ) : (
+        <div className="mt-5  grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+          {nfts?.map((nft: NFTprops, index: number) => (
+            <Card name={nft.name} image={nft.image} id={index} key={index} />
+          ))}
+        </div>
+      )}
     </div>
   )
 }
