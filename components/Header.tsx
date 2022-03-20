@@ -30,15 +30,11 @@ const Header = () => {
             <a href="/#tokenomics" className="navBtn">
               TOKENOMICS
             </a>
-            {/* <a href="#roadmap" className="navBtn">
-              ROADMAP
-            </a> */}
-            <a className="navBtn" href="#giveaway">
-              GIVEAWAY
-            </a>
-            <a href="/#treasury" className="navBtn">
-              TREASURY
-            </a>
+            {isAuthenticated && (
+              <a href="/mybulls" className="navBtn">
+                MY BULLS
+              </a>
+            )}
           </div>
         </div>
         <div className="flex items-center space-x-5">
