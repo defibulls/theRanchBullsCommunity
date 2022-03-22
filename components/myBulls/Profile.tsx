@@ -1,7 +1,8 @@
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import { useMoralis } from 'react-moralis'
-import { contractAddress } from '../../lib/contants'
+import { contractAddress } from '../../lib/constants'
 import Card from './Card'
 
 interface NFTprops {
@@ -16,7 +17,7 @@ interface NFTprops {
 }
 
 const Profile = () => {
-  const [nfts, setNfts] = useState<any>([])
+  const [nfts, setNfts] = useState<any>()
   const { isAuthenticated, user, Moralis } = useMoralis()
 
   const router = useRouter()
@@ -24,9 +25,10 @@ const Profile = () => {
   useEffect(() => {
     if (!isAuthenticated) return
     getNFTs()
-  }, [isAuthenticated, user])
+  }, [isAuthenticated])
 
   const getNFTs = async () => {
+    console.log(contractAddress)
     await Moralis.Web3API.account
       .getNFTs({
         chain: 'mumbai',
@@ -37,25 +39,32 @@ const Profile = () => {
         const data = res.result
         let nft: any[] = []
         for (let i = 0; i < data.length; i++) {
-          await fetch(data[i].token_uri).then((res: any) =>
-            res.json().then((data: any) => nft.push(data))
-          )
+          await fetch(data[i].token_uri).then((res: any) => {
+            res.json().then((res: any) => {
+              nft.push(res)
+            })
+          })
         }
+        // await data.map(async (data: any) => {
+        //   await fetch(data.token_uri).then((res: any) => {
+        //     res.json().then((res: any) => {
+        //       nft.push(res)
+        //     })
+        //   })
+        // })
         setNfts(nft)
-      })
-      .catch((err: any) => {
-        console.log(err)
       })
   }
 
-  console.log(nfts)
+  const image = nfts?.[nfts.length - 1]?.image
+
+  const httpsimg = image?.replace('ipfs://', 'https://dweb.link/ipfs/')
+
   return (
     <div className="flex min-h-[100vh] flex-col py-[22.5%] px-[7%] md:py-[10.5%]">
       <div className="flex w-full flex-col items-center border-b pb-6 sm:flex-row">
         <img
-          src={`https://avatars.dicebear.com/api/pixel-art/${user?.get(
-            'username'
-          )}.svg`}
+          src={httpsimg}
           alt=""
           className="h-52 w-52 rounded-full border-4 border-teal-500 object-contain"
         />
@@ -107,7 +116,7 @@ const Profile = () => {
           </li>
         </div>
       </div>
-      {nfts.length === 0 ? (
+      {nfts?.length == 0 ? (
         <div className="mt-5 flex h-full w-full flex-col items-center">
           <h1 className="mb-4 text-lg">
             You haven't minted any NFT! Click on the button to mint some NFTs
@@ -121,11 +130,14 @@ const Profile = () => {
           </button>
         </div>
       ) : (
-        <div className="mt-5  grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
-          {nfts?.map((nft: NFTprops, index: number) => (
-            <Card name={nft.name} image={nft.image} id={index} key={index} />
-          ))}
-        </div>
+        <>
+          <h1 className="my-8 text-4xl font-black">MY BULLS</h1>
+          <div className="mt-5 grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {nfts?.map((nft: NFTprops, index: number) => (
+              <Card name={nft.name} image={nft.image} id={index} key={index} />
+            ))}
+          </div>
+        </>
       )}
     </div>
   )

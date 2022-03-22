@@ -5,7 +5,7 @@ import { useMoralis } from 'react-moralis'
 import Header from '../components/Header'
 import ConnectWallet from '../components/mint/ConnectWallet'
 import Profile from '../components/myBulls/Profile'
-import { contractAddress } from '../lib/contants'
+import { contractAddress } from '../lib/constants'
 
 const Mybulls = () => {
   const { isAuthenticated, userError, authError } = useMoralis()
@@ -34,7 +34,7 @@ const Mybulls = () => {
         <title>The Ranch - Profile</title>
       </Head>
       <Header />
-      <main className="flex flex-col justify-center text-white">
+      <main className="flex w-full flex-col justify-center text-white">
         {isAuthenticated ? <Profile /> : <ConnectWallet />}
       </main>
     </div>

@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react'
 import { useMoralis } from 'react-moralis'
-import { contractABI, contractAddress } from '../lib/contants'
+import { contractABI, contractAddress } from '../lib/constants'
 import getWeb3 from '../lib/getWeb3'
 
 export const ContractContext = createContext()

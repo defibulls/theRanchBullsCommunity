@@ -7,7 +7,6 @@ interface CardProps {
 const Card = ({ id, name, image }: CardProps) => {
   const httpsimg = image.replace('ipfs://', 'https://dweb.link/ipfs/')
 
-  console.log(httpsimg)
   return (
     <div className="mr-[30px] h-fit w-[300px] rounded-3xl bg-[#1a1c1e] text-white">
       <img className="w-full rounded-t-3xl" src={httpsimg} alt={name} />
