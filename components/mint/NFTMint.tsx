@@ -126,7 +126,7 @@ const NFTMint = () => {
               <div className="flex h-full w-full flex-col items-center justify-center lg:flex-row">
                 <div className="flex h-full w-full lg:h-[60%] lg:w-[60%] ">
                   <iframe
-                    src="http://localhost:3000/10/demo/data.html"
+                    src="http://localhost:3000/08/demo/data.html"
                     height="100%"
                     width="100%"
                   >

@@ -23,7 +23,7 @@ const ConnectWallet = () => {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <iframe
-          src="http://localhost:3000/Lottie/demo/data.html"
+          src="http://localhost:3000/08/demo/data.html"
           height="300"
           width="500"
         >
