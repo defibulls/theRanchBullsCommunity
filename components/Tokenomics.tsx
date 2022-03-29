@@ -20,12 +20,12 @@ const Tokenomics = () => {
         </div>
         <div className="mt-[2rem] grid w-full grid-cols-1 gap-y-0 lg:grid-cols-2 lg:gap-y-[20%]">
           <div className="tokenomics">
-            <img
+            {/* <img
               src="https://www.nodebears.com/static/media/ticket.779f37ef.png"
               loading="lazy"
               className="hidden w-[128px] object-contain md:block"
               alt=""
-            />
+            /> */}
             <div className="flex flex-col ">
               <p className="text-2xl font-black">
                 LIFETIME TICKET FOR GIVEAWAYS
@@ -36,12 +36,12 @@ const Tokenomics = () => {
             </div>
           </div>
           <div className="tokenomics">
-            <img
+            {/* <img
               src="https://www.nodebears.com/static/media/raising.f2764e28.png"
               loading="lazy"
               className="hidden w-[128px] object-contain md:block"
               alt=""
-            />
+            /> */}
             <div className="flex flex-col ">
               <p className="text-2xl font-black">RAISING CAPITAL</p>
               <p className="text-2xl font-light">
@@ -51,12 +51,12 @@ const Tokenomics = () => {
             </div>
           </div>
           <div className="tokenomics">
-            <img
+            {/* <img
               src="https://www.nodebears.com/static/media/weekly.a89b5668.png"
               loading="lazy"
               className="hidden w-[128px] object-contain md:block"
               alt=""
-            />
+            /> */}
             <div className="flex flex-col ">
               <p className="text-2xl font-black">WEEKLY GIVEAWAY</p>
               <p className="text-2xl font-light">
@@ -66,12 +66,12 @@ const Tokenomics = () => {
             </div>
           </div>
           <div className="tokenomics">
-            <img
+            {/* <img
               src=""
               loading="lazy"
               className="hidden w-[128px] object-contain md:block"
               alt=""
-            />
+            /> */}
             <div className="flex flex-col ">
               <p className="text-2xl font-black">COMPOUNDING REWARDS</p>
               <p className="text-2xl font-light">

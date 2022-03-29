@@ -4,30 +4,30 @@ const About = () => {
       id="about"
       className="flex max-h-fit min-h-[100vh] w-full flex-col items-center justify-around gap-4 bg-teal-500 p-[10%] md:max-h-[100vh] md:flex-row md:p-0 md:px-[10%]"
     >
-      <div className="grid-template grid h-fit w-full md:w-[30%]">
+      <div className="grid-template grid h-fit w-full gap-4 md:w-[30%]">
         <img
           src="/images/31.png"
           alt=""
           loading="lazy"
-          className="h-auto w-full object-contain "
+          className="h-auto w-full rounded-md object-contain"
         />
         <img
           src="/images/212.png"
           alt=""
           loading="lazy"
-          className="h-auto w-full object-contain "
+          className="h-auto w-full rounded-md object-contain "
         />
         <img
           src="/images/112.png"
           alt=""
           loading="lazy"
-          className="h-auto w-full object-contain "
+          className="h-auto w-full rounded-md object-contain "
         />
         <img
           src="/images/132.png"
           alt=""
           loading="lazy"
-          className="h-auto w-full object-contain "
+          className="h-auto w-full rounded-md object-contain "
         />
       </div>
       <div className="flex h-full w-full flex-col items-start justify-center p-5 md:w-[50%] ">

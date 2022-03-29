@@ -22,11 +22,7 @@ const ConnectWallet = () => {
           <title>The Ranch - Login</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <iframe
-          src="http://localhost:3000/08/demo/data.html"
-          height="300"
-          width="500"
-        >
+        <iframe src="/08/demo/data.html" height="300" width="500">
           LOGO
         </iframe>
         <div className="mb-4 text-xl font-bold text-gray-500">
