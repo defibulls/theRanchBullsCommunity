@@ -5,6 +5,7 @@ import Header from '../components/Header'
 import About from '../components/About'
 import Tokenomics from '../components/Tokenomics'
 import Giveaway from '../components/Giveaway'
+import Footer from '../components/Footer'
 
 const home: NextPage = () => {
   return (
@@ -20,8 +21,9 @@ const home: NextPage = () => {
         <About />
         <Tokenomics />
         {/* <Roadmap /> */}
-        <Giveaway />
+        {/* <Giveaway /> */}
         {/* <Treasury /> */}
+        <Footer />
       </main>
     </div>
   )
