@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
 import { useMoralis } from 'react-moralis'
-import { contractAddress } from '../../lib/constants'
+import { contractAddress, customStyles } from '../../lib/constants'
 import Card from './Card'
+import Modal from 'react-modal'
+import ProfileLoader from '../modals/ProfileLoader'
 
 interface NFTprops {
   name: string
@@ -19,6 +20,7 @@ interface NFTprops {
 const Profile = () => {
   const [nfts, setNfts] = useState<any>()
   const { isAuthenticated, user, Moralis } = useMoralis()
+  const [loading, setLoading] = useState<boolean>(false)
 
   const router = useRouter()
 
@@ -29,6 +31,7 @@ const Profile = () => {
 
   const getNFTs = async () => {
     console.log(contractAddress)
+    setLoading(true)
     await Moralis.Web3API.account
       .getNFTs({
         chain: 'mumbai',
@@ -53,6 +56,7 @@ const Profile = () => {
         //   })
         // })
         setNfts(nft)
+        setLoading(false)
       })
   }
 
@@ -139,6 +143,9 @@ const Profile = () => {
           </div>
         </>
       )}
+      <Modal isOpen={loading} style={customStyles}>
+        <ProfileLoader />
+      </Modal>
     </div>
   )
 }

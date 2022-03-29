@@ -5,7 +5,7 @@ interface CardProps {
 }
 
 const Card = ({ id, name, image }: CardProps) => {
-  const httpsimg = image.replace('ipfs://', 'https://dweb.link/ipfs/')
+  const httpsimg = image.replace('ipfs://', 'https://cloudflare-ipfs.com/ipfs/')
 
   return (
     <div className="mr-[30px] h-fit w-[300px] rounded-3xl bg-[#1a1c1e] text-white">

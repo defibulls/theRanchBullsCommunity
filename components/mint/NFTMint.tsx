@@ -19,7 +19,6 @@ const NFTMint = () => {
   const [minted, setMinted] = useState<number>(0)
   const [price, setPrice] = useState<any>(0)
   const [mintingPrice, setMintingPrice] = useState<number>(6)
-  const [index, setIndex] = useState<number>(0)
   const [mintedByWallet, setMintedByWallet] = useState<number>(0)
   const [maxMintPerWallet, setMaxMintPerWallet] = useState<number>(0)
   const [paused, setPaused] = useState<boolean>(false)
@@ -30,17 +29,20 @@ const NFTMint = () => {
     if (count > 11)
       return toast.error('You can only mint up to 11 NFTs at a time')
 
+    console.log('count', count)
+    console.log(mintedByWallet)
+
     const totalQuantity = Number(count) + Number(mintedByWallet)
+    console.log(totalQuantity)
 
     if (totalQuantity > maxMintPerWallet)
       return toast.error(
         `You can only mint up to ${maxMintPerWallet} NFTs per Wallet Address`
       )
+
     await fetchPrice(count)
 
     setloading(true)
-
-    const totalPrice = Number(mintingPrice) + Number(100000000000000)
 
     await contract.methods.mint(count).send(
       {
@@ -49,7 +51,7 @@ const NFTMint = () => {
       },
       (err: any) => {
         if (err) {
-          toast.error(`Something went wrong, Please try again`)
+          toast.error(err.message)
           setloading(false)
         }
       }
@@ -110,7 +112,8 @@ const NFTMint = () => {
     }
   }, [contract, count])
 
-  const primeNumbers = [1, 2, 3, 5, 7, 11]
+  console.log(mintedByWallet < maxMintPerWallet)
+
   const msg =
     'Buy a single Bull or get a prime number bundle discount with 2, 3, 5, 7 or 11 Bulls.'
 
@@ -180,12 +183,18 @@ const NFTMint = () => {
                           className="rounded-lg border p-3 "
                           onClick={(e) => {
                             e.preventDefault()
-                            if (index == 0) {
+                            if (count == 1) {
                               setCount(1)
-                              setIndex(0)
-                            } else {
-                              setIndex(index - 1)
-                              setCount(primeNumbers[index])
+                            } else if (count == 2) {
+                              setCount(count - 1)
+                            } else if (count == 3) {
+                              setCount(count - 1)
+                            } else if (count == 5) {
+                              setCount(count - 2)
+                            } else if (count == 7) {
+                              setCount(count - 2)
+                            } else if (count == 11) {
+                              setCount(count - 4)
                             }
                           }}
                         >
@@ -211,12 +220,18 @@ const NFTMint = () => {
                           disabled={mintedByWallet <= maxMintPerWallet}
                           onClick={(e) => {
                             e.preventDefault()
-                            if (index >= 5) {
+                            if (count == 11) {
                               setCount(11)
-                              setIndex(5)
-                            } else {
-                              setIndex(index + 1)
-                              setCount(primeNumbers[index])
+                            } else if (count == 1) {
+                              setCount(count + 1)
+                            } else if (count == 2) {
+                              setCount(count + 1)
+                            } else if (count == 3) {
+                              setCount(count + 2)
+                            } else if (count == 5) {
+                              setCount(count + 2)
+                            } else if (count == 7) {
+                              setCount(count + 4)
                             }
                           }}
                           className="rounded-lg border p-3"
@@ -252,13 +267,13 @@ const NFTMint = () => {
                       <p>
                         TOTAL PRICE: <b>{count * price} USD</b>
                       </p>
-                      {mintedByWallet <= maxMintPerWallet && (
-                        <h1 className="text-gray-600">
-                          You can only mint up to {maxMintPerWallet} NFTs per
-                          Wallet Address
-                        </h1>
-                      )}
                     </div>
+                    {mintedByWallet <= maxMintPerWallet && (
+                      <h1 className="text-gray-600">
+                        You can only mint up to {maxMintPerWallet} NFTs per
+                        Wallet Address
+                      </h1>
+                    )}
                   </div>
                 )}
               </div>

@@ -30,6 +30,7 @@ const Mint = () => {
     <div className="h-screen bg-black text-white transition-all duration-500 ease-in-out">
       <Head>
         <title>The Ranch - Mint</title>
+        <link rel="icon" href="/Logo/tp-white.png" />
       </Head>
       {isAuthenticated ? <NFTMint /> : <ConnectWallet />}
     </div>

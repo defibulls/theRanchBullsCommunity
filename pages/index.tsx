@@ -4,16 +4,14 @@ import Home from '../components/Home'
 import Header from '../components/Header'
 import About from '../components/About'
 import Tokenomics from '../components/Tokenomics'
-import Roadmap from '../components/Roadmap'
 import Giveaway from '../components/Giveaway'
-import Treasury from '../components/Treasury'
 
 const home: NextPage = () => {
   return (
     <div className="h-screen overflow-y-scroll bg-black text-white transition-all duration-500 ease-in-out">
       <Head>
         <title>The Ranch Bulls</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/Logo/tp-white.png" />
       </Head>
 
       <Header />
@@ -23,7 +21,7 @@ const home: NextPage = () => {
         <Tokenomics />
         {/* <Roadmap /> */}
         <Giveaway />
-        <Treasury />
+        {/* <Treasury /> */}
       </main>
     </div>
   )
