@@ -33,9 +33,9 @@ export const ContractProvider = ({ children }) => {
   useEffect(async () => {
     const web3 = await getWeb3()
     let contract = await loadWeb3Contract(web3)
+    setContract(contract)
     let airdropContract = await loadAirdropContract(web3)
     setAirdropContract(airdropContract)
-    setContract(contract)
   }, [])
 
   return (

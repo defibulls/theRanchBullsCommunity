@@ -68,7 +68,13 @@ const Profile = () => {
     <div className="flex min-h-[100vh] flex-col py-[22.5%] px-[7%] md:py-[10.5%]">
       <div className="flex w-full flex-col items-center border-b pb-6 sm:flex-row">
         <img
-          src={httpsimg}
+          src={
+            httpsimg
+              ? httpsimg
+              : `https://avatars.dicebear.com/api/pixel-art/${user?.get(
+                  'ethAddress'
+                )}.svg`
+          }
           alt=""
           className="h-52 w-52 rounded-full border-4 border-teal-500 object-contain"
         />

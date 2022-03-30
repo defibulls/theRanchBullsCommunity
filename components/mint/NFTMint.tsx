@@ -20,9 +20,11 @@ const NFTMint = () => {
   const [price, setPrice] = useState<any>(0)
   const [mintingPrice, setMintingPrice] = useState<number>(6)
   const [mintedByWallet, setMintedByWallet] = useState<number>(0)
-  const [maxMintPerWallet, setMaxMintPerWallet] = useState<number>(0)
+  const [maxMintPerWallet, setMaxMintPerWallet] = useState<number>(100)
   const [paused, setPaused] = useState<boolean>(false)
   const [publicSale, setPublicSale] = useState<boolean>(false)
+  const [disabled, setDisabled] = useState<boolean>(false)
+  console.log(contract)
 
   const mint = async () => {
     if (count === 0) return toast.error('Please enter a valid amount')
@@ -105,14 +107,27 @@ const NFTMint = () => {
     setPublicSale(_publicLiveSale)
   }
 
+  const disable = (a: number, b: number) => {
+    console.log(maxMintPerWallet, mintedByWallet)
+    if (a == b) {
+      setDisabled(true)
+    } else {
+      setDisabled(false)
+    }
+  }
+
   useEffect(() => {
     if (contract) {
-      fetchData()
       fetchPrice(count)
+      fetchData()
     }
   }, [contract, count])
 
-  console.log(mintedByWallet < maxMintPerWallet)
+  useEffect(() => {
+    if (contract) {
+      disable(maxMintPerWallet, mintedByWallet)
+    }
+  }, [contract, mintedByWallet, maxMintPerWallet])
 
   const msg =
     'Buy a single Bull or get a prime number bundle discount with 2, 3, 5, 7 or 11 Bulls.'
@@ -144,7 +159,7 @@ const NFTMint = () => {
                       <br />
                     </p>
                     <a
-                      href="https://discord.com/invite/eTQbPZkV"
+                      href="https://discord.gg/URMH4bSAht"
                       target="_blank"
                       rel="noreferrer"
                     >
@@ -154,9 +169,9 @@ const NFTMint = () => {
                     </a>
                   </div>
                 ) : (
-                  <div className="flex w-full flex-col justify-center lg:w-[50%]">
+                  <div className="flex w-full flex-col justify-center lg:w-[60%]">
                     <p className="mb-1 text-4xl font-black text-cyan-600 underline underline-offset-2">
-                      {publicSale ? 'MINT LIVE' : 'MINT NOT LIVE'}
+                      {publicSale ? 'MINT LIVE' : 'PUBLIC SALE NOT LIVE'}
                     </p>
 
                     <p className="text-4xl font-black">{minted} / 4999 </p>
@@ -167,15 +182,21 @@ const NFTMint = () => {
                       <br />
                       <br />
                     </p>
-                    <p className="text-xl font-bold text-cyan-600">
-                      {msg.toLocaleUpperCase()}
+                    <p
+                      className={`text-lg font-normal text-cyan-600 ${
+                        disabled && 'text-red-500'
+                      }`}
+                    >
+                      {disabled
+                        ? `You can only mint upto ${maxMintPerWallet} NFTs per Wallet Address!`
+                        : msg.toLocaleUpperCase()}
                       <br />
                       <br />
                     </p>
                     <div className="flex w-fit flex-col items-center gap-4">
                       <div className="flex items-center gap-4">
                         <button
-                          disabled={mintedByWallet <= maxMintPerWallet}
+                          disabled={disabled}
                           className="rounded-lg border p-3 "
                           onClick={(e) => {
                             e.preventDefault()
@@ -213,7 +234,7 @@ const NFTMint = () => {
                         </p>
                         <p className="text-2xl font-bold">BULLS</p>
                         <button
-                          disabled={mintedByWallet <= maxMintPerWallet}
+                          disabled={disabled}
                           onClick={(e) => {
                             e.preventDefault()
                             if (count == 11) {
@@ -251,25 +272,21 @@ const NFTMint = () => {
                           </svg>
                         </button>
                       </div>
-                      <button
-                        disabled={
-                          mintedByWallet <= maxMintPerWallet || !publicSale
-                        }
-                        onClick={mint}
-                        className="w-full rounded-md bg-cyan-600 px-4 py-2 disabled:cursor-not-allowed disabled:bg-gray-600"
-                      >
-                        MINT
-                      </button>
-                      <p>
-                        TOTAL PRICE: <b>{count * price} USD</b>
-                      </p>
+                      {publicSale && (
+                        <>
+                          <button
+                            disabled={disabled}
+                            onClick={mint}
+                            className="w-full rounded-md bg-cyan-600 px-4 py-2 disabled:cursor-not-allowed disabled:bg-gray-600"
+                          >
+                            MINT
+                          </button>
+                          <p>
+                            TOTAL PRICE: <b>{count * price} USD</b>
+                          </p>
+                        </>
+                      )}
                     </div>
-                    {mintedByWallet <= maxMintPerWallet && (
-                      <h1 className="text-gray-600">
-                        You can only mint up to {maxMintPerWallet} NFTs per
-                        Wallet Address
-                      </h1>
-                    )}
                   </div>
                 )}
               </div>
