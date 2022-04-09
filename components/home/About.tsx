@@ -2,7 +2,7 @@ const About = () => {
   return (
     <div
       id="about"
-      className="flex max-h-fit min-h-[100vh] w-full flex-col items-center justify-around gap-4 bg-teal-500 p-[10%] md:max-h-[100vh] md:flex-row md:p-0 md:px-[10%]"
+      className="flex max-h-fit min-h-[100vh] w-full snap-start flex-col items-center justify-around gap-4 bg-teal-500 p-[10%] md:max-h-[100vh] md:flex-row md:p-0 md:px-[10%]"
     >
       <div className="grid-template grid h-fit w-full gap-4 md:w-[30%]">
         <img

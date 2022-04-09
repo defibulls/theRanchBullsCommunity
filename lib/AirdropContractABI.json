@@ -16,6 +16,55 @@
     "anonymous": false,
     "inputs": [
       {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "AirDropCount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address[]",
+        "name": "nftOwnerAddresses_all",
+        "type": "address[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256[]",
+        "name": "indexOfNfts_all",
+        "type": "uint256[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "winning_amount_all",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "address[]",
+        "name": "nftOwnerAddresses_superBulls",
+        "type": "address[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256[]",
+        "name": "indexOfNfts_superBulls",
+        "type": "uint256[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "winning_amount_superBulls",
+        "type": "uint256"
+      }
+    ],
+    "name": "Air_Drop_Event",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
         "indexed": true,
         "internalType": "address",
         "name": "previousOwner",
@@ -29,31 +78,6 @@
       }
     ],
     "name": "OwnershipTransferred",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address[]",
-        "name": "nftOwnerAddresses",
-        "type": "address[]"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256[]",
-        "name": "indexOfNfts",
-        "type": "uint256[]"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "winning_amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "centennial_Air_Drop",
     "type": "event"
   },
   {
@@ -76,6 +100,24 @@
     "type": "event"
   },
   {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_amt_of_winners_all",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_amt_of_winners_superbulls",
+        "type": "uint256"
+      }
+    ],
+    "name": "AirDrop",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "TheRanchBullsMintAddress",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
@@ -96,13 +138,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "centennialAirDrop",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [
       { "internalType": "address", "name": "token", "type": "address" }
     ],
@@ -120,29 +155,8 @@
   },
   {
     "inputs": [],
-    "name": "dev1",
+    "name": "coreTeamWallet",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "dev1_percent",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "dev2",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "dev2_percent",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -276,6 +290,19 @@
   },
   {
     "inputs": [
+      {
+        "internalType": "address payable",
+        "name": "_address",
+        "type": "address"
+      }
+    ],
+    "name": "setCoreTeamWallet",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
       { "internalType": "address", "name": "_address", "type": "address" }
     ],
     "name": "setRewardTokenAddress",
@@ -303,50 +330,6 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_percent", "type": "uint256" }
-    ],
-    "name": "set_Dev1_percent",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "uint256", "name": "_percent", "type": "uint256" }
-    ],
-    "name": "set_Dev2_percent",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address payable",
-        "name": "_address",
-        "type": "address"
-      }
-    ],
-    "name": "setdev1",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address payable",
-        "name": "_address",
-        "type": "address"
-      }
-    ],
-    "name": "setdev2",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
       { "internalType": "address", "name": "newOwner", "type": "address" }
     ],
     "name": "transferOwnership",
@@ -358,7 +341,7 @@
     "inputs": [
       { "internalType": "uint256", "name": "_amount", "type": "uint256" }
     ],
-    "name": "updateEligableRewardAmount",
+    "name": "updateEligibleRewardAmount",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

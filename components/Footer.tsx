@@ -1,8 +1,8 @@
 const Footer = () => {
   return (
-    <div className="flex h-fit flex-col items-center bg-gray-800 p-8">
+    <div className="flex h-fit snap-end flex-col items-center bg-gray-800 p-8">
       <a
-        href="/#home"
+        href="/home"
         className="flex items-center rounded-xl bg-purple-900 py-1 px-2"
       >
         <img

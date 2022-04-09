@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState } from 'react'
-import { useMoralis } from 'react-moralis'
 import {
-  airdropContract,
+  airdropContractAddress,
   airdropContractABI,
   contractABI,
   contractAddress,
@@ -12,7 +11,7 @@ export const ContractContext = createContext()
 
 export const ContractProvider = ({ children }) => {
   const [contract, setContract] = useState(null)
-  const [airdropContracts, setAirdropContract] = useState(null)
+  const [airdropContract, setAirdropContract] = useState(null)
 
   const loadWeb3Contract = async (web3) => {
     const web3Contract = await new web3.eth.Contract(
@@ -25,7 +24,7 @@ export const ContractProvider = ({ children }) => {
   const loadAirdropContract = async (web3) => {
     const web3Contract = await new web3.eth.Contract(
       airdropContractABI,
-      airdropContract
+      airdropContractAddress
     )
     return web3Contract
   }
@@ -34,12 +33,16 @@ export const ContractProvider = ({ children }) => {
     const web3 = await getWeb3()
     let contract = await loadWeb3Contract(web3)
     setContract(contract)
+  }, [])
+
+  useEffect(async () => {
+    const web3 = await getWeb3()
     let airdropContract = await loadAirdropContract(web3)
     setAirdropContract(airdropContract)
   }, [])
 
   return (
-    <ContractContext.Provider value={{ contract, airdropContracts }}>
+    <ContractContext.Provider value={{ contract, airdropContract }}>
       {children}
     </ContractContext.Provider>
   )

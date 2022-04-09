@@ -2,7 +2,7 @@ const Tokenomics = () => {
   return (
     <div
       id="tokenomics"
-      className="flex min-h-[100vh] flex-col items-center justify-around gap-4 bg-cyan-600 p-[10%] md:flex-row md:p-0 md:px-[10%]"
+      className="flex min-h-[100vh] snap-start flex-col items-center justify-around gap-4  bg-cyan-600 p-[10%] md:flex-row md:p-0 md:px-[10%]"
     >
       <div className="flex max-h-fit min-h-[100%] w-full flex-col items-start justify-center">
         <div className="relative flex w-full flex-row items-end justify-center md:justify-start">

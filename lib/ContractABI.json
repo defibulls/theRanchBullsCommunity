@@ -1,12 +1,14 @@
 [
   {
     "inputs": [
+      { "internalType": "address", "name": "royalties", "type": "address" },
+      { "internalType": "address", "name": "dev1", "type": "address" },
+      { "internalType": "address", "name": "dev2", "type": "address" },
       {
         "internalType": "address",
         "name": "_priceFeedAddress",
         "type": "address"
       },
-      { "internalType": "address", "name": "_royalties", "type": "address" },
       { "internalType": "string", "name": "_initBaseURI", "type": "string" }
     ],
     "stateMutability": "nonpayable",
@@ -108,112 +110,49 @@
   },
   {
     "inputs": [],
-    "name": "NODEBULLS_MAX_MINTS_TOTAL_PER_WALLET",
+    "name": "COMMON_BULLS_MAX",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "NODEBULLS_SALE_TOTAL",
+    "name": "COMMON_BULLS_MAX_MINTS_TOTAL_PER_WALLET",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "ORDER_QUANTITY_1",
+    "name": "SUPER_BULL_COST",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "ORDER_QUANTITY_11",
+    "name": "SUPER_BULL_MAX",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "ORDER_QUANTITY_2",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "ORDER_QUANTITY_3",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "ORDER_QUANTITY_5",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "ORDER_QUANTITY_7",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "uint256", "name": "num", "type": "uint256" }],
-    "name": "SET_ORDER_QUANTITY_1",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "uint256", "name": "num", "type": "uint256" }],
-    "name": "SET_ORDER_QUANTITY_11",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "uint256", "name": "num", "type": "uint256" }],
-    "name": "SET_ORDER_QUANTITY_2",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "uint256", "name": "num", "type": "uint256" }],
-    "name": "SET_ORDER_QUANTITY_3",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "uint256", "name": "num", "type": "uint256" }],
-    "name": "SET_ORDER_QUANTITY_5",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "uint256", "name": "num", "type": "uint256" }],
-    "name": "SET_ORDER_QUANTITY_7",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "WHITELIST_TOTAL",
+    "name": "SUPER_BULL_MAX_MINTS_TOTAL_PER_WALLET",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "name": "addressPurchases",
+    "name": "addressPurchasesCommonBulls",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "name": "addressPurchasesSuperBulls",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
@@ -241,6 +180,29 @@
     ],
     "name": "balanceOf",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "tokenQuantity", "type": "uint256" }
+    ],
+    "name": "commonBullsMint",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "dev1",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "dev2",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -277,6 +239,15 @@
     "type": "function"
   },
   {
+    "inputs": [
+      { "internalType": "address", "name": "_owner", "type": "address" }
+    ],
+    "name": "governanceCheck",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [{ "internalType": "uint256", "name": "num", "type": "uint256" }],
     "name": "isAllowedTokenQuantity",
     "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
@@ -294,12 +265,10 @@
     "type": "function"
   },
   {
-    "inputs": [
-      { "internalType": "uint256", "name": "tokenQuantity", "type": "uint256" }
-    ],
-    "name": "mint",
-    "outputs": [],
-    "stateMutability": "payable",
+    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "mintingCost",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -441,6 +410,34 @@
   },
   {
     "inputs": [
+      { "internalType": "uint256", "name": "_quantity", "type": "uint256" },
+      { "internalType": "uint256", "name": "_price", "type": "uint256" }
+    ],
+    "name": "set_minting_price",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_price", "type": "uint256" }
+    ],
+    "name": "set_minting_price_of_enlightenedBulls",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "tokenQuantity", "type": "uint256" }
+    ],
+    "name": "superBullsMint",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
       { "internalType": "bytes4", "name": "interfaceId", "type": "bytes4" }
     ],
     "name": "supportsInterface",
@@ -474,6 +471,20 @@
       { "internalType": "uint256", "name": "index", "type": "uint256" }
     ],
     "name": "tokenByIndex",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "tokenCountCommonBulls",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "tokenCountSuperBulls",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
@@ -536,9 +547,7 @@
     "type": "function"
   },
   {
-    "inputs": [
-      { "internalType": "uint256", "name": "_amount", "type": "uint256" }
-    ],
+    "inputs": [],
     "name": "withdraw",
     "outputs": [],
     "stateMutability": "nonpayable",

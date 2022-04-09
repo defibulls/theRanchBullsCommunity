@@ -1,8 +1,17 @@
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import { useChain, useMoralis } from 'react-moralis'
 
 const ChainNotSupported = () => {
   const { switchNetwork, chainId } = useChain()
   const { enableWeb3 } = useMoralis()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (chainId == null) {
+      router.push('/mint')
+    }
+  }, [])
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
       <h1 className="text-2xl font-bold text-gray-700">

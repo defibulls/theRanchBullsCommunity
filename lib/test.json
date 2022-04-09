@@ -1,0 +1,49 @@
+{
+  "anonymous": false,
+  "inputs": [
+    {
+      "indexed": false,
+      "internalType": "uint256",
+      "name": "AirDropCount",
+      "type": "uint256"
+    },
+    {
+      "indexed": false,
+      "internalType": "address[]",
+      "name": "nftOwnerAddresses_all",
+      "type": "address[]"
+    },
+    {
+      "indexed": false,
+      "internalType": "uint256[]",
+      "name": "indexOfNfts_all",
+      "type": "uint256[]"
+    },
+    {
+      "indexed": false,
+      "internalType": "uint256",
+      "name": "winning_amount_all",
+      "type": "uint256"
+    },
+    {
+      "indexed": false,
+      "internalType": "address[]",
+      "name": "nftOwnerAddresses_superBulls",
+      "type": "address[]"
+    },
+    {
+      "indexed": false,
+      "internalType": "uint256[]",
+      "name": "indexOfNfts_superBulls",
+      "type": "uint256[]"
+    },
+    {
+      "indexed": false,
+      "internalType": "uint256",
+      "name": "winning_amount_superBulls",
+      "type": "uint256"
+    }
+  ],
+  "name": "Air_Drop_Event",
+  "type": "event"
+}

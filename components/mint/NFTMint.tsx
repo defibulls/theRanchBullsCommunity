@@ -18,86 +18,80 @@ const NFTMint = () => {
   const [loading, setloading] = useState<boolean>(false)
   const [minted, setMinted] = useState<number>(0)
   const [price, setPrice] = useState<any>(0)
-  const [mintingPrice, setMintingPrice] = useState<number>(6)
   const [mintedByWallet, setMintedByWallet] = useState<number>(0)
   const [maxMintPerWallet, setMaxMintPerWallet] = useState<number>(100)
   const [paused, setPaused] = useState<boolean>(false)
   const [publicSale, setPublicSale] = useState<boolean>(false)
   const [disabled, setDisabled] = useState<boolean>(false)
-  console.log(contract)
+  const [commonBull, setCommonBull] = useState<boolean>(false)
+  const [superMaxMint, setSuperMaxMint] = useState<number>(10)
+  const [superBullMinted, setSuperBullMinted] = useState<number>(0)
+  const [superBullPrice, setSuperBullPrice] = useState<number>(220)
+  const [totalPrice, setTotalPrice] = useState<number>()
+  const [mintPrice, setMintPrice] = useState()
 
   const mint = async () => {
     if (count === 0) return toast.error('Please enter a valid amount')
     if (count > 11)
       return toast.error('You can only mint up to 11 NFTs at a time')
 
-    console.log('count', count)
-    console.log(mintedByWallet)
-
     const totalQuantity = Number(count) + Number(mintedByWallet)
-    console.log(totalQuantity)
 
     if (totalQuantity > maxMintPerWallet)
       return toast.error(
         `You can only mint up to ${maxMintPerWallet} NFTs per Wallet Address`
       )
 
-    await fetchPrice(count)
-
     setloading(true)
 
-    await contract.methods.mint(count).send(
-      {
-        from: user?.get('ethAddress'),
-        value: mintingPrice,
-      },
-      (err: any) => {
-        if (err) {
-          toast.error(err.message)
-          setloading(false)
+    setMintPrice(await contract.methods.getMintPrice(totalPrice).call())
+
+    if (commonBull) {
+      await contract.methods.superBullsMint(count).send(
+        {
+          from: user?.get('ethAddress'),
+          value: mintPrice,
+        },
+        (err: any) => {
+          if (err) {
+            toast.error(err.message.toLocaleString())
+            setloading(false)
+          }
         }
-      }
-    )
+      )
+    } else {
+      await contract.methods.commonBullsMint(count).send(
+        {
+          from: user?.get('ethAddress'),
+          value: mintPrice,
+        },
+        (err: any) => {
+          if (err) {
+            toast.error(err.message.toLocaleString())
+            setloading(false)
+          }
+        }
+      )
+    }
 
     toast.success("You've sucessfully minted the NFT!")
     setloading(false)
   }
 
-  const fetchPrice = async (count: any) => {
-    if (count == 1) {
-      setPrice(await contract.methods.ORDER_QUANTITY_1().call())
-      setMintingPrice(await contract.methods.getMintPrice(price * count).call())
-    } else if (count === 2) {
-      setPrice(await contract.methods.ORDER_QUANTITY_2().call())
-      setMintingPrice(await contract.methods.getMintPrice(price * count).call())
-    } else if (count == 3) {
-      setPrice(await contract.methods.ORDER_QUANTITY_3().call())
-      setMintingPrice(await contract.methods.getMintPrice(price * count).call())
-    } else if (count == 5) {
-      setPrice(await contract.methods.ORDER_QUANTITY_5().call())
-      setMintingPrice(await contract.methods.getMintPrice(price * count).call())
-    } else if (count == 7) {
-      setPrice(await contract.methods.ORDER_QUANTITY_7().call())
-      setMintingPrice(await contract.methods.getMintPrice(price * count).call())
-    } else if (count == 11) {
-      setPrice(await contract.methods.ORDER_QUANTITY_11().call())
-      setMintingPrice(await contract.methods.getMintPrice(price * count).call())
-    } else {
-      setPrice(await contract.methods.ORDER_QUANTITY_1().call())
-      setMintingPrice(await contract.methods.getMintPrice(price * count).call())
-    }
+  const fetchPrice = async (count: number) => {
+    setPrice(await contract.methods.mintingCost(count).call())
   }
 
   const fetchData = async () => {
     const mintedNFTs = await contract.methods.totalSupply().call()
     setMinted(mintedNFTs)
     const _mintedByWallet = await contract.methods
-      .addressPurchases(user?.get('ethAddress'))
+      .addressPurchasesCommonBulls(user?.get('ethAddress'))
       .call()
     setMintedByWallet(_mintedByWallet)
 
     const _maxMintByWallet = await contract.methods
-      .NODEBULLS_MAX_MINTS_TOTAL_PER_WALLET()
+      .COMMON_BULLS_MAX_MINTS_TOTAL_PER_WALLET()
       .call()
     setMaxMintPerWallet(_maxMintByWallet)
     const _mintLive = await contract.methods.paused().call()
@@ -105,10 +99,23 @@ const NFTMint = () => {
 
     const _publicLiveSale = await contract.methods.publicSaleLive().call()
     setPublicSale(_publicLiveSale)
+
+    const _superMaxMint = await contract.methods
+      .SUPER_BULL_MAX_MINTS_TOTAL_PER_WALLET()
+      .call()
+    setSuperMaxMint(_superMaxMint)
+    const _superBullMinted = await contract.methods
+      .addressPurchasesSuperBulls(user?.get('ethAddress'))
+      .call()
+    setSuperBullMinted(_superBullMinted)
+
+    const _superBullPrice = await contract.methods.SUPER_BULL_COST().call()
+    setSuperBullPrice(_superBullPrice)
   }
 
+  console.log(contract)
+
   const disable = (a: number, b: number) => {
-    console.log(maxMintPerWallet, mintedByWallet)
     if (a == b) {
       setDisabled(true)
     } else {
@@ -116,21 +123,87 @@ const NFTMint = () => {
     }
   }
 
+  const checkHandler = () => {
+    setCommonBull(!commonBull)
+  }
+
+  useEffect(() => {
+    if (contract) {
+      fetchData()
+    }
+  }, [contract])
+
   useEffect(() => {
     if (contract) {
       fetchPrice(count)
-      fetchData()
+      calculateTotalPrice()
     }
-  }, [contract, count])
+  }, [contract, count, commonBull])
+
+  const calculateTotalPrice = () => {
+    const superBullPricet = count * price
+
+    const commonBullPrice = count * superBullPrice
+    if (commonBull) {
+      setTotalPrice(commonBullPrice)
+    } else {
+      setTotalPrice(superBullPricet)
+    }
+  }
+
+  const decrement = (e: any) => {
+    e.preventDefault()
+    if (count == 1) return
+    if (commonBull) {
+      setCount(count - 1)
+    } else {
+      if (count == 1) {
+        setCount(1)
+      } else if (count == 2) {
+        setCount(count - 1)
+      } else if (count == 3) {
+        setCount(count - 1)
+      } else if (count == 5) {
+        setCount(count - 2)
+      } else if (count == 7) {
+        setCount(count - 2)
+      } else if (count == 11) {
+        setCount(count - 4)
+      }
+    }
+  }
+
+  const increment = (e: any) => {
+    e.preventDefault()
+    if (count == 11) return
+
+    if (commonBull) {
+      if (count == 5) return
+      setCount(count + 1)
+    } else {
+      if (count == 1) {
+        setCount(count + 1)
+      } else if (count == 2) {
+        setCount(count + 1)
+      } else if (count == 3) {
+        setCount(count + 2)
+      } else if (count == 5) {
+        setCount(count + 2)
+      } else if (count == 7) {
+        setCount(count + 4)
+      }
+    }
+  }
 
   useEffect(() => {
     if (contract) {
-      disable(maxMintPerWallet, mintedByWallet)
+      if (commonBull) {
+        disable(superMaxMint, superBullMinted)
+      } else {
+        disable(maxMintPerWallet, mintedByWallet)
+      }
     }
   }, [contract, mintedByWallet, maxMintPerWallet])
-
-  const msg =
-    'Buy a single Bull or get a prime number bundle discount with 2, 3, 5, 7 or 11 Bulls.'
 
   return (
     <div className="h-full overflow-y-scroll lg:overflow-hidden">
@@ -176,8 +249,11 @@ const NFTMint = () => {
 
                     <p className="text-4xl font-black">{minted} / 4999 </p>
                     <p className="text-5xl font-black">
-                      EACH <span className="text-purple-600">BULL</span> COSTS{' '}
-                      {price}
+                      EACH{' '}
+                      <span className="text-purple-600">
+                        {!commonBull ? 'BULL' : 'SUPER BULL'}
+                      </span>{' '}
+                      COSTS {!commonBull ? price : superBullPrice}
                       <span className="text-purple-600"> USD</span>
                       <br />
                       <br />
@@ -187,33 +263,44 @@ const NFTMint = () => {
                         disabled && 'text-red-500'
                       }`}
                     >
-                      {disabled
-                        ? `You can only mint upto ${maxMintPerWallet} NFTs per Wallet Address!`
-                        : msg.toLocaleUpperCase()}
-                      <br />
+                      {disabled ? (
+                        `You can only mint upto ${maxMintPerWallet} NFTs per Wallet Address!`
+                      ) : (
+                        <p>
+                          {!commonBull
+                            ? 'BUY A SINGLE BULL OR GET A PRIME NUMBER BUNDLE DISCOUNT WITH 2, 3, 5, 7 OR 11 BULLS.'
+                            : `MAX ${superMaxMint}. NFTs CAN BE MINTED PER WALLET`}
+                        </p>
+                      )}
                       <br />
                     </p>
+                    <div className="mb-8 flex w-full items-center">
+                      <label
+                        htmlFor="toggleB"
+                        className="flex cursor-pointer items-center"
+                      >
+                        <div className="relative">
+                          <input
+                            type="checkbox"
+                            id="toggleB"
+                            className="sr-only"
+                            checked={commonBull}
+                            onChange={checkHandler}
+                          />
+                          <div className="block h-8 w-14 rounded-full bg-gray-600"></div>
+                          <div className="dot absolute left-1 top-1 h-6 w-6 rounded-full bg-white transition"></div>
+                        </div>
+                        <div className="ml-3 text-lg font-medium text-gray-700">
+                          SUPER BULL
+                        </div>
+                      </label>
+                    </div>
                     <div className="flex w-fit flex-col items-center gap-4">
                       <div className="flex items-center gap-4">
                         <button
                           disabled={disabled}
                           className="rounded-lg border p-3 "
-                          onClick={(e) => {
-                            e.preventDefault()
-                            if (count == 1) {
-                              setCount(1)
-                            } else if (count == 2) {
-                              setCount(count - 1)
-                            } else if (count == 3) {
-                              setCount(count - 1)
-                            } else if (count == 5) {
-                              setCount(count - 2)
-                            } else if (count == 7) {
-                              setCount(count - 2)
-                            } else if (count == 11) {
-                              setCount(count - 4)
-                            }
-                          }}
+                          onClick={(e) => decrement(e)}
                         >
                           <svg
                             stroke="currentColor"
@@ -235,22 +322,7 @@ const NFTMint = () => {
                         <p className="text-2xl font-bold">BULLS</p>
                         <button
                           disabled={disabled}
-                          onClick={(e) => {
-                            e.preventDefault()
-                            if (count == 11) {
-                              setCount(11)
-                            } else if (count == 1) {
-                              setCount(count + 1)
-                            } else if (count == 2) {
-                              setCount(count + 1)
-                            } else if (count == 3) {
-                              setCount(count + 2)
-                            } else if (count == 5) {
-                              setCount(count + 2)
-                            } else if (count == 7) {
-                              setCount(count + 4)
-                            }
-                          }}
+                          onClick={(e) => increment(e)}
                           className="rounded-lg border p-3"
                         >
                           <svg
@@ -282,7 +354,7 @@ const NFTMint = () => {
                             MINT
                           </button>
                           <p>
-                            TOTAL PRICE: <b>{count * price} USD</b>
+                            TOTAL PRICE: <b>{totalPrice} USD</b>
                           </p>
                         </>
                       )}

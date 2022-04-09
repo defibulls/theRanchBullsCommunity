@@ -1,20 +1,33 @@
-import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useMoralis } from 'react-moralis'
 
+const style = {
+  wrapper: `p-4 w-screen flex justify-between items-center`,
+  headerLogo: `flex  items-center justify-start`,
+  nav: `flex-1 md:flex justify-center hidden items-center`,
+  navItemsContainer: `flex bg-[#191B1F] rounded-3xl`,
+  navItem: `px-4 py-2 m-1 flex items-center text-lg font-semibold text-[0.9rem] cursor-pointer rounded-3xl`,
+  activeNavItem: `bg-[#20242A] rounded-3xl`,
+  buttonsContainer: `flex w-1/4 justify-end items-center`,
+  buttonIconContainer: `flex items-center justify-center w-8 h-8`,
+  buttonAccent: ``,
+}
+
 const Header = () => {
-  const { isAuthenticated, logout } = useMoralis()
+  const { isAuthenticated, logout, user, authenticate } = useMoralis()
+  const router = useRouter()
+  const [selectedNav, setSelectedNav] = useState<string>('')
 
   return (
     <div
-      className={`fixed top-0 z-10 h-24 w-full border-b bg-black p-[20px] transition-all duration-500 ease-in`}
+      className={`fixed top-0 z-30 h-24 w-full p-[20px] transition-all duration-500 ease-in`}
     >
       <div className="flex justify-between">
-        <div className="flex items-center ">
-          <a
-            href="/#home"
-            className="flex items-center rounded-xl bg-purple-900 py-1 px-2"
+        <div className={style.headerLogo}>
+          <div
+            onClick={() => router.push('/home')}
+            className="flex cursor-pointer items-center rounded-xl bg-purple-900 py-1 px-2"
           >
             <img
               src="/Logo/tp-logo.png"
@@ -22,36 +35,98 @@ const Header = () => {
               className="-ml-6 h-12 cursor-pointer rounded-xl object-cover"
             />
             <p className="-ml-3 text-lg font-bold">THE RANCH BULLS</p>
-          </a>
-          <div className="ml-12 hidden justify-evenly space-x-10 lg:flex ">
-            <a className="navBtn" href="/#about">
-              ABOUT
-            </a>
-            <a href="/#tokenomics" className="navBtn">
-              TOKENOMICS
-            </a>
-            {isAuthenticated && (
-              <a href="/mybulls" className="navBtn">
-                MY BULLS
-              </a>
-            )}
           </div>
         </div>
-        <div className="flex items-center space-x-5">
+        <div className={style.nav}>
+          <div className={style.navItemsContainer}>
+            <div
+              onClick={() => {
+                router.push('/home/#about')
+                setSelectedNav('about')
+              }}
+              className={`${style.navItem} ${
+                selectedNav === 'about' && style.activeNavItem
+              }`}
+            >
+              ABOUT
+            </div>
+            <div
+              onClick={() => {
+                router.push('/home#tokenomics')
+                setSelectedNav('tokenomics')
+              }}
+              className={`${style.navItem} ${
+                selectedNav === 'tokenomics' && style.activeNavItem
+              }`}
+            >
+              TOKENOMICS
+            </div>
+            <div
+              onClick={() => {
+                router.push('mybulls')
+                setSelectedNav('mybulls')
+              }}
+              className={`${style.navItem} ${
+                selectedNav === 'mybulls' && style.activeNavItem
+              }`}
+            >
+              MY BULLS
+            </div>
+            <div
+              onClick={() => {
+                router.push('/mint')
+                setSelectedNav('mint')
+              }}
+              className={`${selectedNav === 'mint' && style.activeNavItem}`}
+            >
+              <div className={style.navItem}>
+                MINT {/* <FiArrowUpRight /> */}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex h-full items-center space-x-5">
           {isAuthenticated ? (
             <div
-              onClick={() => logout()}
-              className="cursor-pointer rounded-md bg-purple-800 py-3 px-4 font-bold"
+              className={`mx-2 flex cursor-pointer items-center justify-between rounded-2xl bg-[#191B1F] px-2 py-1 text-[1rem] font-semibold`}
             >
-              Logout
+              <div
+                className={`mr-2 flex h-8 items-center rounded-2xl border-[#163256] bg-[#172A42] p-2`}
+              >
+                {user?.get('ethAddress').slice(0, 5)}...
+                {user?.get('ethAddress').slice(-4)}
+              </div>
+              <div
+                onClick={logout}
+                className="rounded-full border-[#163256] bg-[#172A42] p-2"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                  />
+                </svg>
+              </div>
             </div>
           ) : (
-            <a
-              href="https://medium.com/@defibulls/theranch-bulls-d327210fd68"
-              className="block rounded-md border bg-black px-2 py-1 font-mono font-bold text-white"
+            <div
+              onClick={() => authenticate()}
+              className={`mx-2 flex cursor-pointer items-center rounded-2xl bg-[#191B1F] px-2 py-1 text-[0.9rem] font-semibold`}
             >
-              WHITEPAPER
-            </a>
+              <div
+                className={`flex h-full items-center justify-center rounded-2xl border border-[#163256] bg-[#172A42] px-2 py-1 text-[#4F90EA] hover:border-[#234169]`}
+              >
+                Connect Wallet
+              </div>
+            </div>
           )}
         </div>
       </div>
