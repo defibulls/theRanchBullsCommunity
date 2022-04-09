@@ -213,18 +213,15 @@ const Profile = () => {
         </div>
       ) : (
         <div className="relative flex h-full w-2/3 flex-col rounded-xl border border-gray-200 bg-opacity-60 bg-clip-padding backdrop-blur-xl backdrop-filter md:w-1/3 lg:mt-0">
-          <div className="absolute top-5 right-5 rounded-xl bg-teal-500 py-2 px-4 text-xl text-black ">
-            NFTs Owned: {owned} <br />
+          {/* <div className="absolute top-5 right-5 rounded-xl bg-teal-500 py-2 px-4 text-xl text-black ">
+            NFTs Owned: {nftOwned} <br />
             Current Index: {current}
-          </div>
+          </div> */}
           <Carousel
             animationHandler="fade"
             autoPlay
-            className=" mt-3"
-            statusFormatter={(item, total) => {
-              setOwned(total)
-              setCurrent(item)
-            }}
+            className="mt-3"
+            showStatus={false}
             infiniteLoop
             showIndicators={false}
             showThumbs={true}
