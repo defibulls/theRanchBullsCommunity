@@ -23,7 +23,7 @@ const Home = () => {
         <button
           type="button"
           onClick={() => router.push('/mint')}
-          className="rounded-lg bg-green-600 py-2 px-12"
+          className="rounded-lg bg-purple-600 py-2 px-12"
         >
           MINT
         </button>

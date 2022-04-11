@@ -11,7 +11,6 @@ const ConnectWallet = () => {
         .then(function (user) {})
         .catch(function (error) {
           toast.error(error.message)
-          console.log(error)
         })
     }
   }

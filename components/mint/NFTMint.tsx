@@ -23,12 +23,16 @@ const NFTMint = () => {
   const [paused, setPaused] = useState<boolean>(false)
   const [publicSale, setPublicSale] = useState<boolean>(false)
   const [disabled, setDisabled] = useState<boolean>(false)
-  const [commonBull, setCommonBull] = useState<boolean>(false)
+  const [superBull, setsuperBull] = useState<boolean>(false)
   const [superMaxMint, setSuperMaxMint] = useState<number>(10)
+  const [superBullMintedByWallet, setSuperBullMintedByWallet] =
+    useState<number>(0)
   const [superBullMinted, setSuperBullMinted] = useState<number>(0)
   const [superBullPrice, setSuperBullPrice] = useState<number>(220)
   const [totalPrice, setTotalPrice] = useState<number>()
   const [mintPrice, setMintPrice] = useState()
+  const [commonBullMax, setCommonBullMax] = useState<number>(4999)
+  const [superBullMax, setSuperBullMax] = useState<number>(1000)
 
   const mint = async () => {
     if (count === 0) return toast.error('Please enter a valid amount')
@@ -46,7 +50,7 @@ const NFTMint = () => {
 
     setMintPrice(await contract.methods.getMintPrice(totalPrice).call())
 
-    if (commonBull) {
+    if (superBull) {
       await contract.methods.superBullsMint(count).send(
         {
           from: user?.get('ethAddress'),
@@ -74,7 +78,12 @@ const NFTMint = () => {
       )
     }
 
-    toast.success("You've sucessfully minted the NFT!")
+    if (superBull) {
+      toast.success(`You've sucessfully minted ${count} Super Bull!`)
+    } else {
+      toast.success(`You've sucessfully minted ${count} Bull!`)
+    }
+
     setloading(false)
   }
 
@@ -83,7 +92,7 @@ const NFTMint = () => {
   }
 
   const fetchData = async () => {
-    const mintedNFTs = await contract.methods.totalSupply().call()
+    const mintedNFTs = await contract.methods.tokenCountCommonBulls().call()
     setMinted(mintedNFTs)
     const _mintedByWallet = await contract.methods
       .addressPurchasesCommonBulls(user?.get('ethAddress'))
@@ -104,13 +113,24 @@ const NFTMint = () => {
       .SUPER_BULL_MAX_MINTS_TOTAL_PER_WALLET()
       .call()
     setSuperMaxMint(_superMaxMint)
-    const _superBullMinted = await contract.methods
+    const _superBullMintedByWallet = await contract.methods
       .addressPurchasesSuperBulls(user?.get('ethAddress'))
       .call()
-    setSuperBullMinted(_superBullMinted)
+    setSuperBullMintedByWallet(_superBullMintedByWallet)
 
     const _superBullPrice = await contract.methods.SUPER_BULL_COST().call()
     setSuperBullPrice(_superBullPrice)
+
+    const _commmonBullsMax = await contract.methods.COMMON_BULLS_MAX().call()
+    setCommonBullMax(_commmonBullsMax)
+
+    const _superBullMax = await contract.methods.SUPER_BULL_MAX().call()
+    setSuperBullMax(_superBullMax - 4999)
+
+    const _superBullMinted = await contract.methods
+      .tokenCountSuperBulls()
+      .call()
+    setSuperBullMinted(_superBullMinted - 5000)
   }
 
   console.log(contract)
@@ -124,42 +144,50 @@ const NFTMint = () => {
   }
 
   const checkHandler = () => {
-    setCommonBull(!commonBull)
+    setsuperBull(!superBull)
   }
 
   useEffect(() => {
     if (contract) {
       fetchData()
     }
-  }, [contract])
+  }, [contract, mint])
 
   useEffect(() => {
     if (contract) {
       fetchPrice(count)
-      calculateTotalPrice()
+      calculateTotalPrice(count)
     }
-  }, [contract, count, commonBull])
+  }, [contract, count, superBull, fetchPrice])
 
-  const calculateTotalPrice = () => {
-    const superBullPricet = count * price
+  useEffect(() => {
+    if (contract) {
+      calculateTotalPrice(count)
+    }
+  }, [superBull, fetchPrice])
 
-    const commonBullPrice = count * superBullPrice
-    if (commonBull) {
-      setTotalPrice(commonBullPrice)
-    } else {
+  useEffect(() => {
+    setCount(1)
+  }, [superBull])
+
+  const calculateTotalPrice = (count: number) => {
+    const commonBullPricet = count * price
+
+    const superBullPricet = count * superBullPrice
+    if (superBull) {
       setTotalPrice(superBullPricet)
+    } else {
+      setTotalPrice(commonBullPricet)
     }
   }
 
   const decrement = (e: any) => {
     e.preventDefault()
     if (count == 1) return
-    if (commonBull) {
+    if (superBull) {
       setCount(count - 1)
     } else {
-      if (count == 1) {
-        setCount(1)
-      } else if (count == 2) {
+      if (count == 2) {
         setCount(count - 1)
       } else if (count == 3) {
         setCount(count - 1)
@@ -176,8 +204,7 @@ const NFTMint = () => {
   const increment = (e: any) => {
     e.preventDefault()
     if (count == 11) return
-
-    if (commonBull) {
+    if (superBull) {
       if (count == 5) return
       setCount(count + 1)
     } else {
@@ -197,8 +224,8 @@ const NFTMint = () => {
 
   useEffect(() => {
     if (contract) {
-      if (commonBull) {
-        disable(superMaxMint, superBullMinted)
+      if (superBull) {
+        disable(superMaxMint, superBullMintedByWallet)
       } else {
         disable(maxMintPerWallet, mintedByWallet)
       }
@@ -247,13 +274,17 @@ const NFTMint = () => {
                       {publicSale ? 'MINT LIVE' : 'PUBLIC SALE NOT LIVE'}
                     </p>
 
-                    <p className="text-4xl font-black">{minted} / 4999 </p>
+                    <p className="text-4xl font-black">
+                      {superBull
+                        ? `${superBullMinted} / ${superBullMax}`
+                        : `${minted} / ${commonBullMax}`}
+                    </p>
                     <p className="text-5xl font-black">
                       EACH{' '}
                       <span className="text-purple-600">
-                        {!commonBull ? 'BULL' : 'SUPER BULL'}
+                        {!superBull ? 'BULL' : 'SUPER BULL'}
                       </span>{' '}
-                      COSTS {!commonBull ? price : superBullPrice}
+                      COSTS {!superBull ? price : superBullPrice}
                       <span className="text-purple-600"> USD</span>
                       <br />
                       <br />
@@ -267,9 +298,19 @@ const NFTMint = () => {
                         `You can only mint upto ${maxMintPerWallet} NFTs per Wallet Address!`
                       ) : (
                         <p>
-                          {!commonBull
-                            ? 'BUY A SINGLE BULL OR GET A PRIME NUMBER BUNDLE DISCOUNT WITH 2, 3, 5, 7 OR 11 BULLS.'
-                            : `MAX ${superMaxMint}. NFTs CAN BE MINTED PER WALLET`}
+                          {!superBull ? (
+                            <>
+                              BUY A SINGLE BULL OR GET A PRIME NUMBER BUNDLE{' '}
+                              <br />
+                              DISCOUNT WITH 2, 3, 5, 7 OR 11 BULLS.
+                            </>
+                          ) : (
+                            <>
+                              MAX {superMaxMint} SUPER BULLS CAN BE MINTED PER
+                              WALLET ADDRESS! <br /> (5 SUPER BULLS PER
+                              TRANSACTION)
+                            </>
+                          )}
                         </p>
                       )}
                       <br />
@@ -284,7 +325,7 @@ const NFTMint = () => {
                             type="checkbox"
                             id="toggleB"
                             className="sr-only"
-                            checked={commonBull}
+                            checked={superBull}
                             onChange={checkHandler}
                           />
                           <div className="block h-8 w-14 rounded-full bg-gray-600"></div>

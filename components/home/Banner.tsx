@@ -30,7 +30,7 @@ const Banner = () => {
           </h1>
           <button
             onClick={() => router.push('/home')}
-            className="m-auto mb-6 w-full cursor-pointer rounded-lg border-0 bg-[#bfc500] p-[5%] text-base font-bold"
+            className="m-auto mb-6 w-full cursor-pointer rounded-lg border-0 bg-purple-700 p-[5%] text-base font-bold"
             type="button"
           >
             ENTER
