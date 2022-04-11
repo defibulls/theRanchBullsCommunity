@@ -53,7 +53,7 @@ const LeaderBoard = () => {
       <div className="flex w-full flex-col justify-between gap-4 lg:flex-row">
         <div className="flex w-full flex-col items-center">
           <p className="mb-4 text-2xl font-bold underline underline-offset-1">
-            WEEKLY WINNERS ({winner.length} WINNERS)
+            WEEKLY WINNERS ({winner?.length} WINNERS)
           </p>
           {winnerAddress ? (
             <div className="grid w-full grid-cols-3 items-center gap-2">
