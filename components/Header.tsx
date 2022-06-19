@@ -14,7 +14,7 @@ const style = {
   buttonAccent: ``,
 }
 
-const Header = () => {
+const Header = ({ notLanding }: any) => {
   const { isAuthenticated, logout, user, authenticate } = useMoralis()
   const router = useRouter()
   const [selectedNav, setSelectedNav] = useState<string>('')
@@ -37,54 +37,56 @@ const Header = () => {
             <p className="-ml-3 text-lg font-bold">THE RANCH BULLS</p>
           </div>
         </div>
-        <div className={style.nav}>
-          <div className={style.navItemsContainer}>
-            <div
-              onClick={() => {
-                router.push('/home/#about')
-                setSelectedNav('about')
-              }}
-              className={`${style.navItem} ${
-                selectedNav === 'about' && style.activeNavItem
-              }`}
-            >
-              ABOUT
-            </div>
-            <div
-              onClick={() => {
-                router.push('/home#tokenomics')
-                setSelectedNav('tokenomics')
-              }}
-              className={`${style.navItem} ${
-                selectedNav === 'tokenomics' && style.activeNavItem
-              }`}
-            >
-              TOKENOMICS
-            </div>
-            <div
-              onClick={() => {
-                router.push('mybulls')
-                setSelectedNav('mybulls')
-              }}
-              className={`${style.navItem} ${
-                selectedNav === 'mybulls' && style.activeNavItem
-              }`}
-            >
-              MY BULLS
-            </div>
-            <div
-              onClick={() => {
-                router.push('/mint')
-                setSelectedNav('mint')
-              }}
-              className={`${selectedNav === 'mint' && style.activeNavItem}`}
-            >
-              <div className={style.navItem}>
-                MINT {/* <FiArrowUpRight /> */}
+        {notLanding && (
+          <div className={style.nav}>
+            <div className={style.navItemsContainer}>
+              <div
+                onClick={() => {
+                  router.push('/home/#about')
+                  setSelectedNav('about')
+                }}
+                className={`${style.navItem} ${
+                  selectedNav === 'about' && style.activeNavItem
+                }`}
+              >
+                ABOUT
+              </div>
+              <div
+                onClick={() => {
+                  router.push('/home#tokenomics')
+                  setSelectedNav('tokenomics')
+                }}
+                className={`${style.navItem} ${
+                  selectedNav === 'tokenomics' && style.activeNavItem
+                }`}
+              >
+                TOKENOMICS
+              </div>
+              <div
+                onClick={() => {
+                  router.push('mybulls')
+                  setSelectedNav('mybulls')
+                }}
+                className={`${style.navItem} ${
+                  selectedNav === 'mybulls' && style.activeNavItem
+                }`}
+              >
+                MY BULLS
+              </div>
+              <div
+                onClick={() => {
+                  router.push('/mint')
+                  setSelectedNav('mint')
+                }}
+                className={`${selectedNav === 'mint' && style.activeNavItem}`}
+              >
+                <div className={style.navItem}>
+                  MINT {/* <FiArrowUpRight /> */}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
         <div className="flex h-full items-center space-x-5">
           {isAuthenticated ? (
             <div

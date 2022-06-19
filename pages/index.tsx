@@ -12,7 +12,7 @@ const home: NextPage = () => {
         <link rel="icon" href="/Logo/tp-white.png" />
       </Head>
 
-      <Header />
+      <Header notLanding={false} />
       <main className="flex snap-y snap-mandatory flex-col justify-center">
         <Banner />
         <Video />

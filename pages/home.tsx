@@ -14,7 +14,7 @@ const home = () => {
         <link rel="icon" href="/Logo/tp-white.png" />
       </Head>
 
-      <Header />
+      <Header notLanding={true} />
       <main className="flex flex-col justify-center">
         <Home />
         <About />
