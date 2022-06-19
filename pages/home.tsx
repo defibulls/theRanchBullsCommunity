@@ -19,7 +19,7 @@ const home = () => {
         <Home />
         <About />
         <Tokenomics />
-        <LeaderBoard />
+        {/* <LeaderBoard /> */}
         <Footer />
       </main>
     </div>

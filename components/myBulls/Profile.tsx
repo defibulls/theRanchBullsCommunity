@@ -26,7 +26,7 @@ const Profile = () => {
   const { airdropContract } = useContext(ContractContext)
   const { isAuthenticated, user, Moralis } = useMoralis()
   const [loading, setLoading] = useState<boolean>(false)
-  const [reward, setReward] = useState<number>()
+  const [reward, setReward] = useState<number>(0)
   const [nftOwned, setNftOwned] = useState<number>(0)
 
   const router = useRouter()

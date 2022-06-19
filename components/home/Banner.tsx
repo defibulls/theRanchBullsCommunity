@@ -4,19 +4,19 @@ const Banner = () => {
   const router = useRouter()
   return (
     <header
-      className="scrollbar-hide relative h-screen w-full"
+      className="scrollbar-hide relative h-screen w-full snap-center"
       style={{
         backgroundImage: `url(/images/farm.png)`,
         backgroundPosition: 'center center',
         backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
+        backgroundRepeat: 'repeat',
       }}
     >
       <div
         className="absolute bottom-0 z-10 h-[100vh] w-full "
         style={{
           background: 'rgba(0,0,0,0.4)',
-          backgroundImage: `linear-gradient(to top, rgba(0,0,0,0.8) 0, rgba(0,0,0,0) 60%, rgba(0,0,0,0.4) 100%)`,
+          backgroundImage: `linear-gradient(to top, rgba(0,0,0, 4) 0, rgba(0,0,0,0) 60%, rgba(0,0,0,0.4) 100%)`,
         }}
       />
       <div className="absolute bottom-0 left-0 z-20 flex bg-black p-[2%] md:w-[35%] lg:ml-0">
@@ -37,8 +37,8 @@ const Banner = () => {
           </button>
         </div>
         <div className="scroll m-auto max-w-[16.667%] flex-shrink-0  flex-grow-0 basis-[16.67%] animate-pulse pr-0 text-sm font-medium italic">
-          <div className=" top-[50%] left-[50%] m-auto w-max -rotate-90">
-            ENTER NOW
+          <div className=" top-[50%] left-[50%] m-auto w-max -rotate-90 italic">
+            ← SCROLL DOWN
           </div>
         </div>
       </div>

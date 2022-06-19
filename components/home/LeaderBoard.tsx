@@ -1,29 +1,42 @@
 import { useEffect, useState } from 'react'
 import { useMoralisQuery } from 'react-moralis'
+import { client } from '../../lib/sanity'
 
 const LeaderBoard = () => {
   const [winner, setWinner] = useState<any>([])
-  const [winnerAddress, setWinnerAddress] = useState<any>([])
+  const [winnerAddress, setWinnerAddress] = useState([])
   const [winningPrice, setWinningPrice] = useState<number>(0)
   const { data } = useMoralisQuery(
     'GiveawayWinner',
-    (query) => query.ascending('createdAt'),
+    (query) => query.descending('createdAt'),
     [],
     {
       live: true,
     }
   )
+
   const getData = async () => {
-    const indexOfNfts = data?.[0]?.attributes.indexOfNfts_all.slice(0, 5)
+    const indexOfNfts = await data?.[0]?.attributes.indexOfNfts_all.slice(0, 5)
     setWinner(indexOfNfts)
-    const _winnersAddress = data?.[0]?.attributes.nftOwnerAddresses_all.slice(
-      0,
-      5
-    )
+    const _winnersAddress =
+      await data?.[0]?.attributes.nftOwnerAddresses_all.slice(0, 5)
     setWinnerAddress(_winnersAddress)
-    const _winningAmountDec = data?.[0]?.attributes.winning_amount_all
+    const _winningAmountDec = await data?.[0]?.attributes.winning_amount_all
     const _winningAmount = Number(_winningAmountDec) / Number(1000000)
     setWinningPrice(_winningAmount)
+    const airdropCount = await data?.[0]?.attributes.AirDropCount
+
+    winnerAddress?.map(async (address) => {
+      const leaderboardDoc = {
+        _type: 'leaderboard',
+        _id: address,
+        address: address,
+        timestamp: new Date(Date.now()).toISOString(),
+        totalReward: _winningAmount,
+      }
+
+      await client.createIfNotExists(leaderboardDoc)
+    })
   }
 
   useEffect(() => {

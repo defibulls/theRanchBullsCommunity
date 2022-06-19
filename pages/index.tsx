@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Banner from '../components/home/Banner'
 import Header from '../components/Header'
+import Video from '../components/home/Video'
 
 const home: NextPage = () => {
   return (
@@ -12,8 +13,9 @@ const home: NextPage = () => {
       </Head>
 
       <Header />
-      <main className="flex flex-col justify-center">
+      <main className="flex snap-y snap-mandatory flex-col justify-center">
         <Banner />
+        <Video />
       </main>
     </div>
   )
