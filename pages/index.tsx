@@ -15,7 +15,7 @@ const home: NextPage = () => {
       <Header notLanding={false} />
       <main className="flex snap-y snap-mandatory flex-col justify-center">
         <Banner />
-        <Video />
+        {/* <Video /> */}
       </main>
     </div>
   )

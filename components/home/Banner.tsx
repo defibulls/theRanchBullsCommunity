@@ -2,9 +2,10 @@ import { useRouter } from 'next/router'
 
 const Banner = () => {
   const router = useRouter()
+
   return (
     <header
-      className="scrollbar-hide relative h-screen w-full snap-center"
+      className="scrollbar-hide relative flex h-screen w-full flex-col items-center justify-center"
       style={{
         backgroundImage: `url(/images/farm.png)`,
         backgroundPosition: 'center center',
@@ -19,27 +20,29 @@ const Banner = () => {
           backgroundImage: `linear-gradient(to top, rgba(0,0,0, 4) 0, rgba(0,0,0,0) 60%, rgba(0,0,0,0.4) 100%)`,
         }}
       />
-      <div className="absolute bottom-0 left-0 z-20 flex bg-black p-[2%] md:w-[35%] lg:ml-0">
-        <div className="max-w-[75%] flex-shrink-0 flex-grow-0 basis-[75%] border-b border-[#dee2e6]">
-          <h1 className="sticky mb-4 text-3xl font-extrabold italic">
-            WELCOME TO
-            <br />
-            THE RANCH BULL
-            <br />
+      <div className="z-20 flex p-[2%]">
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="mb-4 text-center text-3xl font-extrabold italic underline underline-offset-2">
+            WELCOME TO <br />
+            THE RANCH BULLS <br />
             CLUB
           </h1>
+          <video
+            controls
+            autoPlay
+            muted
+            src="/nft1.mp4"
+            className="mb-4 rounded-xl"
+            width="550"
+            height="300"
+          ></video>
           <button
             onClick={() => router.push('/home')}
-            className="m-auto mb-6 w-full cursor-pointer rounded-lg border-0 bg-purple-700 p-[5%] text-base font-bold"
+            className="w-1/2 cursor-pointer rounded-lg border-0 bg-purple-700 py-3 px-4 text-base font-bold"
             type="button"
           >
             ENTER
           </button>
-        </div>
-        <div className="scroll m-auto max-w-[16.667%] flex-shrink-0  flex-grow-0 basis-[16.67%] animate-pulse pr-0 text-sm font-medium italic">
-          <div className=" top-[50%] left-[50%] m-auto w-max -rotate-90 italic">
-            ← SCROLL DOWN
-          </div>
         </div>
       </div>
     </header>
