@@ -4,7 +4,7 @@ import { useMoralis } from 'react-moralis'
 
 const style = {
   wrapper: `p-4 w-screen flex justify-between items-center`,
-  headerLogo: `flex  items-center justify-start`,
+  headerLogo: `flex items-center justify-center`,
   nav: `flex-1 md:flex justify-center hidden items-center`,
   navItemsContainer: `flex bg-[#191B1F] rounded-3xl`,
   navItem: `px-4 py-2 m-1 flex items-center text-lg font-semibold text-[0.9rem] cursor-pointer rounded-3xl`,
@@ -24,18 +24,12 @@ const Header = ({ notLanding }: any) => {
       className={`fixed top-0 z-30 h-24 w-full p-[20px] transition-all duration-500 ease-in`}
     >
       <div className="flex justify-between">
-        <div className={style.headerLogo}>
-          <div
-            onClick={() => router.push('/home')}
-            className="flex cursor-pointer items-center rounded-xl bg-purple-900 py-1 px-2"
-          >
-            <img
-              src="/Logo/tp-logo.png"
-              alt="TRB"
-              className="-ml-6 h-12 cursor-pointer rounded-xl object-cover"
-            />
-            <p className="-ml-3 text-lg font-bold">THE RANCH BULLS</p>
-          </div>
+        <div className={style.headerLogo} onClick={() => router.push('/home')}>
+          <img
+            src="/Logo/tp-trbc.png"
+            alt="TRB"
+            className="h-12 cursor-pointer rounded-xl object-cover"
+          />
         </div>
         {notLanding && (
           <div className={style.nav}>
@@ -65,7 +59,6 @@ const Header = ({ notLanding }: any) => {
               <div
                 onClick={() => {
                   router.push('mybulls')
-                  setSelectedNav('mybulls')
                 }}
                 className={`${style.navItem} ${
                   selectedNav === 'mybulls' && style.activeNavItem
@@ -76,7 +69,9 @@ const Header = ({ notLanding }: any) => {
               <div
                 onClick={() => {
                   router.push('/mint')
-                  setSelectedNav('mint')
+                  if (router.pathname == '/mint') {
+                    setSelectedNav('mint')
+                  }
                 }}
                 className={`${selectedNav === 'mint' && style.activeNavItem}`}
               >

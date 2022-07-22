@@ -22,11 +22,12 @@ const Banner = () => {
       />
       <div className="z-20 flex p-[2%]">
         <div className="flex flex-col items-center justify-center">
-          <h1 className="mb-4 text-center text-3xl font-extrabold italic underline underline-offset-2">
+          <h1 className="mb-4 text-center font-marker text-3xl font-extrabold">
             WELCOME TO <br />
             THE RANCH BULLS <br />
-            CLUB
+            COMMUNITY
           </h1>
+          {/* <img src="/welcome.png" alt="" className=" w-[20%] object-contain" /> */}
           <video
             controls
             autoPlay
@@ -38,7 +39,7 @@ const Banner = () => {
           ></video>
           <button
             onClick={() => router.push('/home')}
-            className="w-1/2 cursor-pointer rounded-lg border-0 bg-purple-700 py-3 px-4 text-base font-bold"
+            className="w-[30%] cursor-pointer rounded-lg border-0 bg-[#8E05C2] py-3 px-4 font-marker text-base font-bold"
             type="button"
           >
             ENTER

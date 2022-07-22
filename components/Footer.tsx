@@ -1,16 +1,15 @@
 const Footer = () => {
   return (
-    <div className="flex h-fit snap-end flex-col items-center bg-gray-800 p-8">
+    <div className="flex h-fit flex-col items-center bg-gray-800 p-8">
       <a
         href="/home"
-        className="flex items-center rounded-xl bg-purple-900 py-1 px-2"
+        className="flex w-full items-center justify-center rounded-xl py-1 px-2"
       >
         <img
-          src="/Logo/tp-logo.png"
+          src="/Logo/tp-trbc.png"
           alt="TRB"
-          className="-ml-6 h-12 cursor-pointer rounded-xl object-cover"
+          className="w-1/4 cursor-pointer rounded-xl object-cover"
         />
-        <p className="-ml-3 text-lg font-bold">THE RANCH BULLS</p>
       </a>
       <div className="mt-10 flex w-full justify-center gap-8">
         <a target="_blank" href="https://discord.gg/URMH4bSAht">
@@ -28,7 +27,7 @@ const Footer = () => {
           />
         </a>
       </div>
-      <p className="mt-8 w-full text-center text-4xl font-light text-white">
+      <p className="mt-8 w-full text-center font-marker text-4xl font-light text-white">
         RANCH BULLS 2022
       </p>
     </div>

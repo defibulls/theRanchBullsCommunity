@@ -33,7 +33,7 @@ const Mybulls = () => {
         <title>The Ranch - Profile</title>
         <link rel="icon" href="/Logo/tp-white.png" />
       </Head>
-      <Header />
+      <Header notLanding={false} />
       <main className="flex w-full flex-col justify-center text-white">
         {isAuthenticated ? <Profile /> : <ConnectWallet />}
       </main>
