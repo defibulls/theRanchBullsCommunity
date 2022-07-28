@@ -27,6 +27,8 @@ const NFTMint = () => {
   const [maxBulls, setMaxBulls] = useState<number>(0)
   const [enterRaffle, setEnterRaffle] = useState<boolean>(false)
 
+  console.log(tokenContract)
+
   const mint = async () => {
     if (count === 0) return toast.error('Please enter a valid amount')
     if (count > 11)
@@ -38,7 +40,6 @@ const NFTMint = () => {
       )
 
     setloading(true)
-    console.log(totalPrice)
     const account = user?.get('ethAddress')
 
     await tokenContract.methods
@@ -67,6 +68,9 @@ const NFTMint = () => {
           }
         )
       })
+      .catch((err: any) => {
+        toast.error(err.message)
+      })
 
     const minted = count
 
@@ -81,8 +85,9 @@ const NFTMint = () => {
   const fetchData = async () => {
     const mintedNFTs = await contract.methods.totalSupply().call()
     setMinted(mintedNFTs)
+    const account = user?.get('ethAddress')
     const _mintedByWallet = await contract.methods
-      .getMintCountForAddress(user?.get('ethAddress'))
+      .getMintCountForAddress(account)
       .call()
     setMintedByWallet(_mintedByWallet)
     const _maxMintByWallet = await contract.methods.nftPerAddressLimit().call()
@@ -92,6 +97,7 @@ const NFTMint = () => {
     const _publicLiveSale = await contract.methods.publicSaleLive().call()
     setPublicSale(_publicLiveSale)
     const _totalBulls = await contract.methods.maxSupply().call()
+    console.log(_totalBulls)
     setMaxBulls(_totalBulls)
   }
 
