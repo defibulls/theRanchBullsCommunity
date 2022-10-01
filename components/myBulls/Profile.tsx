@@ -39,8 +39,6 @@ const Profile = () => {
   const [rewardDate, setRewardDate] = useState(0)
   const [buddyAddress, setBuddyAddress] = useState(0)
 
-  console.log(contract)
-
   const getRewardsData = async () => {
     const _usdcRewards = await contract.methods
       .getUsdcBalanceForAddress()
