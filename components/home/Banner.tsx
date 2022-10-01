@@ -27,10 +27,10 @@ const Banner = () => {
             THE RANCH BULLS <br />
             COMMUNITY
           </h1>
-          {/* <img src="/welcome.png" alt="" className=" w-[20%] object-contain" /> */}
           <video
             controls
             autoPlay
+            loop
             muted
             src="/nft1.mp4"
             className="mb-4 rounded-xl"
@@ -49,5 +49,4 @@ const Banner = () => {
     </header>
   )
 }
-
 export default Banner

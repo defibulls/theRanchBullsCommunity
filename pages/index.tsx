@@ -9,7 +9,7 @@ const home: NextPage = () => {
     <div className="scrollbar-hide h-full overflow-y-scroll bg-black text-white transition-all duration-500 ease-in-out">
       <Head>
         <title>The Ranch Bulls</title>
-        <link rel="icon" href="/Logo/tp-white.png" />
+        <link rel="icon" href="/Logo/tp-logo.png" />
       </Head>
 
       <Header notLanding={false} />

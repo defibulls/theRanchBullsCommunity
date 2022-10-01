@@ -1,5 +1,4 @@
-import { useRouter } from 'next/router'
-import React, { CSSProperties, useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useMoralis } from 'react-moralis'
 import { contractAddress, customStyles } from '../../lib/constants'
 import Card from './Card'
@@ -9,6 +8,8 @@ import 'react-responsive-carousel/lib/styles/carousel.css'
 import { Carousel } from 'react-responsive-carousel'
 import { ContractContext } from '../../context/ContractContext'
 import toast from 'react-hot-toast'
+import { PencilIcon } from '@heroicons/react/24/solid'
+import SetPartnerModal from '../modals/SetPartnerModal'
 
 interface NFTprops {
   name: string
@@ -18,41 +19,66 @@ interface NFTprops {
   attributes: any
   image: string
   dna: string
+  className: string
   edition: number
 }
 
 const Profile = () => {
   const [nfts, setNfts] = useState<any>([])
-  const { airdropContract } = useContext(ContractContext)
   const { isAuthenticated, user, Moralis } = useMoralis()
   const [loading, setLoading] = useState<boolean>(false)
-  const [reward, setReward] = useState<number>(0)
+  const [usdcRewards, setUsdcRewards] = useState<number>(0)
+  const { contract, open, setOpen } = useContext(ContractContext)
   const [nftOwned, setNftOwned] = useState<number>(0)
+  const [modal, setModal] = useState<string>('rewards')
+  const [wbtcRewards, setWbtcRewards] = useState<number>(0)
+  const [totalMaintenanceFeePending, setTotalMaintenanceFeePending] =
+    useState<number>(0)
+  const [standingMaintenanceFee, setStandingMaintenanceFee] =
+    useState<number>(0)
+  const [rewardDate, setRewardDate] = useState(0)
+  const [buddyAddress, setBuddyAddress] = useState(0)
 
-  const router = useRouter()
+  console.log(contract)
+
+  const getRewardsData = async () => {
+    const _usdcRewards = await contract.methods
+      .getUsdcBalanceForAddress()
+      .call()
+    setUsdcRewards(_usdcRewards / 1000000)
+    const _wbtcRewards = await contract.methods
+      .getWbtcBalanceForAddress()
+      .call()
+    setWbtcRewards(_wbtcRewards / 100000000)
+
+    const _rewardDate = await contract.methods.currentRewardingDate().call()
+    setRewardDate(_rewardDate)
+  }
+
+  const getBuddyAddress = async () => {
+    const _buddyAddress = await contract.methods
+      .myPartner(user?.get('ethAddress'))
+      .call()
+    setBuddyAddress(_buddyAddress)
+  }
+
+  useEffect(() => {
+    if (contract) {
+      getRewardsData()
+      getMaintenanceFeeInfo()
+      getBuddyAddress()
+    }
+  }, [contract])
 
   useEffect(() => {
     if (!isAuthenticated) return
     getNFTs()
   }, [isAuthenticated])
 
-  const getRewardBalance = async () => {
-    const _reward = await airdropContract.methods
-      .getUserRewardBalance(user?.get('ethAddress'))
-      .call()
-
-    if (_reward == 0) {
-      setReward(_reward)
-    } else {
-      const rewardUsdc = _reward / 1000000
-      setReward(rewardUsdc)
-    }
-  }
-
   const getNFTs = async () => {
     setLoading(true)
     const data = await Moralis.Web3API.account.getNFTs({
-      chain: 'mumbai',
+      chain: '0x13881',
       address: user?.get('ethAddress'),
       token_addresses: [contractAddress],
     })
@@ -76,166 +102,272 @@ const Profile = () => {
         .catch((err) => alert(err.message))
     }
 
-    // await data.result?.map(async (nft) => {
-    //   await fetch(nft.token_uri!).then((data) => {
-    //     const nftm = data.json()
-    //     nftm.then((data) => nftsr.push(data))
-    //   })
-    // })
     setNfts(nftsr)
     setLoading(false)
   }
 
-  const withdrawReward = async (e: any) => {
-    e.preventDefault()
-    if (reward == 0) return toast.error('You have no reward to withdraw')
+  const getMaintenanceFeeInfo = async () => {
+    const _maintenanceFeePending = await contract.methods
+      .getMaintenanceFeeBalanceForAddress()
+      .call()
 
-    await airdropContract.methods
-      .withdrawRewards(user?.get('ethAddress'))
+    setTotalMaintenanceFeePending(_maintenanceFeePending / 1000000)
+
+    const _standingMaintenanceFee = await contract.methods
+      .getMaintenanceFeeStandingForAddress()
+      .call()
+
+    setStandingMaintenanceFee(_standingMaintenanceFee / 1000000)
+  }
+
+  const paytotalMaintenanceFee = async () => {
+    if (totalMaintenanceFeePending == 0)
+      return toast.error('You have already payed the maintenance fee')
+    await contract.methods
+      .payMaintanenceFees()
       .send({ from: user?.get('ethAddress') })
   }
 
-  useEffect(() => {
-    if (airdropContract && user) {
-      getRewardBalance()
+  const renderSection = (modal: string) => {
+    if (modal == 'rewards') {
+      return (
+        <div className="flex w-full flex-col justify-between space-y-4 pr-10">
+          <div className="flex flex-col space-y-5">
+            <h1 className="text-left text-xl font-semibold uppercase tracking-wider  text-gray-500">
+              TOTAL USDC REWARDS
+            </h1>
+          </div>
+          <div className=" flex w-full items-center justify-between">
+            <h2 className="text-lg font-medium">{usdcRewards} USDC</h2>
+            <button
+              onClick={(e) => withdrawUsdcReward(e)}
+              className="flex h-10 w-20 items-center justify-center rounded-lg bg-teal-500  px-3 text-base font-medium"
+            >
+              Claim
+            </button>
+          </div>
+          <div className="flex flex-col space-y-5">
+            <h1 className="text-left text-xl font-semibold uppercase tracking-wider  text-gray-500">
+              TOTAL WBTC REWARDS
+            </h1>
+          </div>
+          <div className=" flex w-full items-center justify-between">
+            <h2 className="text-lg font-medium">{wbtcRewards} WBTC</h2>
+            <button
+              onClick={(e) => withdrawWbtcReward(e)}
+              className="flex h-10 w-20 items-center justify-center rounded-lg bg-teal-500  px-3 text-base font-medium"
+            >
+              Claim
+            </button>
+          </div>
+          <h1 className="text-base font-semibold uppercase tracking-wider text-gray-500">
+            Next Reward Date - {rewardDate == 0 ? 'TBD' : rewardDate}
+          </h1>
+        </div>
+      )
+    } else if (modal == 'buddy') {
+      return (
+        <div className="flex flex-col space-y-5">
+          <h1 className="text-left text-xl font-semibold uppercase tracking-widest  text-gray-500">
+            Buddy address
+          </h1>
+          <div className="flex w-full justify-around rounded-lg border border-gray-500 px-3 py-2">
+            <p className="pr-3 text-sm tracking-wide text-gray-400">
+              {buddyAddress}
+            </p>
+            <PencilIcon
+              className="h-5 cursor-pointer"
+              onClick={() => setOpen(true)}
+            />
+          </div>
+        </div>
+      )
+    } else {
+      return (
+        <div className="w-full space-y-5 pr-10">
+          <div className="flex flex-col space-y-5">
+            <h1 className="text-left text-xl font-semibold uppercase tracking-wider  text-gray-500">
+              TOTAL Maintenance fee pending
+            </h1>
+          </div>
+          <div className=" flex w-full items-center justify-between">
+            <h2 className="text-lg font-medium">
+              {totalMaintenanceFeePending} USDC
+            </h2>
+            <button
+              onClick={() => paytotalMaintenanceFee()}
+              className="flex h-10 w-20 items-center justify-center rounded-lg bg-teal-500  px-3 text-base font-medium"
+            >
+              Pay
+            </button>
+          </div>
+          <div className="flex flex-col space-y-5">
+            <h1 className="text-left text-xl font-semibold uppercase tracking-wider  text-gray-500">
+              Standing Maintenance fee
+            </h1>
+          </div>
+          <div className=" flex w-full items-center justify-between text-red-500">
+            <h2 className="text-lg font-medium">
+              {standingMaintenanceFee} USDC
+            </h2>
+          </div>
+        </div>
+      )
     }
-  }, [airdropContract, user])
+  }
+
+  const withdrawUsdcReward = async (e: any) => {
+    e.preventDefault()
+    if (usdcRewards == 0)
+      return toast.error('You have no USDC reward to withdraw')
+    await contract.methods.withdrawUsdcBalance().send()
+  }
+
+  const withdrawWbtcReward = async (e: any) => {
+    e.preventDefault()
+    if (wbtcRewards == 0)
+      return toast.error('You have no WBTC reward to withdraw')
+
+    await contract.methods.withdrawWbtcBalance().send()
+  }
 
   const image = nfts?.[nfts.length - 1]?.image
 
   const httpsimg = image?.replace('ipfs://', 'https://dweb.link/ipfs/')
 
   return (
-    <div
-      className="flex h-full flex-col justify-center py-[22.5%] px-[7%] md:h-screen md:py-[10.5%] lg:flex-row"
-      style={{
-        backgroundImage: `url(/images/farm.png)`,
-        backgroundPosition: 'center center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-      }}
-    >
-      <div className="flex w-full flex-col items-center justify-center rounded-xl border bg-opacity-60 py-5 backdrop-blur-lg backdrop-filter sm:flex-row lg:mr-10 lg:w-2/3">
-        <img
-          src={
-            httpsimg
-              ? httpsimg
-              : `https://avatars.dicebear.com/api/pixel-art/${user?.get(
-                  'ethAddress'
-                )}.svg`
-          }
-          alt=""
-          className="h-52 w-52 rounded-full border-4 border-teal-500 object-contain"
-        />
+    <div className=" flex flex-col bg-black" style={{}}>
+      <div
+        className="flex h-fit flex-col justify-between lg:flex-row"
+        style={{
+          backgroundImage: `url(/images/farm.png)`,
+          backgroundPosition: 'center center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'repeat',
+        }}
+      >
+        <div
+          className="flex h-fit w-full flex-col items-center justify-around  xl:flex-row xl:items-start"
+          style={{
+            background: 'rgba(0,0,0,0.4)',
+            backgroundImage: `linear-gradient(to top, rgba(0,0,0, 5) 0, rgba(0,0,0,0) 60%, rgba(0,0,0,0.4) 100%)`,
+          }}
+        >
+          <div className="xs:mx-5 mt-32 flex h-fit w-full flex-col items-center rounded-xl bg-black bg-opacity-50 py-10 px-10 md:mx-10 md:w-fit  md:flex-row">
+            <img
+              src={
+                httpsimg
+                  ? httpsimg
+                  : `https://avatars.dicebear.com/api/pixel-art/${user?.get(
+                      'ethAddress'
+                    )}.svg`
+              }
+              alt=""
+              className="h-52 w-52 rounded-full border-4 border-teal-500 object-contain"
+            />
 
-        <div className="mt-6 flex w-fit flex-col space-y-6 pl-10 sm:mt-2">
-          <li className="flex md:items-start">
-            <div className="flex items-center gap-[0.5rem]">
-              <div className="rounded-xl bg-teal-500 p-[0.5rem]">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
-                  />
-                </svg>
-              </div>
-              <p className="chakra-text css-kaq1dv">
-                {user?.get('ethAddress')}
-              </p>
-            </div>
-          </li>
-          <li className="flex md:items-start">
-            <div className="flex items-center gap-[0.5rem]">
-              <div className="rounded-xl bg-teal-500 p-[0.5rem]">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                  />
-                </svg>
-              </div>
-              <p className="">{nftOwned}</p>
-            </div>
-          </li>
-          <li className="flex md:items-start">
-            <div className="flex w-full items-center justify-between gap-[0.5rem]">
-              <div className="flex items-center">
-                <div className="mr-2 rounded-xl bg-teal-500 p-[0.5rem]">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z" />
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
+            <div className="mt-6 flex w-fit flex-col space-y-6 sm:mt-2 md:pl-10">
+              <li className="flex md:items-start">
+                <div className="flex items-center gap-[0.5rem]">
+                  <div className="rounded-xl bg-teal-500 p-[0.5rem]">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
+                      />
+                    </svg>
+                  </div>
+                  <p className="">{user?.get('ethAddress')}</p>
                 </div>
-                <p className="">{reward} USDC</p>
-              </div>
-              <button
-                onClick={(e) => withdrawReward(e)}
-                className="rounded-xl bg-teal-500 py-2 px-4"
-              >
-                CLAIM
-              </button>
+              </li>
+              <li className="flex md:items-start">
+                <div className="flex items-center gap-[0.5rem]">
+                  <div className="rounded-xl bg-teal-500 p-[0.5rem]">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                      />
+                    </svg>
+                  </div>
+                  <p className="">{nftOwned}</p>
+                </div>
+              </li>
             </div>
-          </li>
+          </div>
+          <div className="mt-32 flex h-fit w-[70%] flex-col rounded-xl bg-black bg-opacity-50 p-5 md:mr-10 md:w-[24rem]">
+            <Carousel
+              autoPlay
+              showStatus={false}
+              infiniteLoop
+              showIndicators={false}
+              showThumbs={false}
+              interval={2000}
+            >
+              {nfts?.map((nft: NFTprops, index: number) => (
+                <Card
+                  name={nft.name}
+                  image={nft.image}
+                  id={index}
+                  key={index}
+                />
+              ))}
+            </Carousel>
+          </div>
         </div>
       </div>
-      {nfts?.length == 0 ? (
-        <div className="mt-10 flex w-full flex-col items-center justify-center rounded-xl border border-gray-200 bg-opacity-60 bg-clip-padding py-5 backdrop-blur-xl backdrop-filter md:w-1/3 lg:mt-0 lg:h-full">
-          <h1 className="mb-4 w-full text-center text-lg">
-            You haven't minted any NFT! Click on the button to mint some NFTs
+      <div className="mx-10 flex h-fit w-fit flex-col items-center justify-center rounded-xl bg-black bg-opacity-50 p-10">
+        <div className="flex w-full items-start space-x-8 p-10 text-base font-semibold">
+          <h1
+            className={`${
+              modal === 'rewards' ? `border-b-2 border-teal-500` : ``
+            } cursor-pointer uppercase`}
+            onClick={() => setModal('rewards')}
+          >
+            Rewards
           </h1>
+          <h1
+            className={`${
+              modal == 'buddy' ? `border-b-2 border-teal-500` : ``
+            }  cursor-pointer uppercase`}
+            onClick={() => setModal('buddy')}
+          >
+            Buddy Address
+          </h1>
+          <h1
+            className={`${
+              modal === 'maintenance' ? `border-b-2 border-teal-500` : ``
+            } cursor-pointer uppercase`}
+            onClick={() => setModal('maintenance')}
+          >
+            Maintenance Fee
+          </h1>
+        </div>
+        <div className="flex w-full flex-col items-start pl-10">
+          {renderSection(modal)}
+        </div>
+      </div>
 
-          <button
-            className="rounded-xl bg-purple-600 p-4 font-bold"
-            onClick={() => router.push('/mint')}
-          >
-            Click Here
-          </button>
-        </div>
-      ) : (
-        <div className="mt-5 flex h-full w-full flex-col justify-center rounded-xl border border-gray-200  bg-opacity-60 bg-clip-padding p-5 backdrop-blur-xl backdrop-filter md:w-2/3 lg:mt-0 lg:w-1/3 lg:p-0">
-          {/* <div className="absolute top-5 right-5 rounded-xl bg-teal-500 py-2 px-4 text-xl text-black ">
-            NFTs Owned: {nftOwned} <br />
-            Current Index: {current}
-          </div> */}
-          <Carousel
-            autoPlay
-            showStatus={false}
-            infiniteLoop
-            showIndicators={false}
-            showThumbs={false}
-            interval={5000}
-          >
-            {nfts?.map((nft: NFTprops, index: number) => (
-              <Card name={nft.name} image={nft.image} id={index} key={index} />
-            ))}
-          </Carousel>
-        </div>
-      )}
+      <Modal isOpen={open} style={customStyles}>
+        <SetPartnerModal />
+      </Modal>
+
       <Modal isOpen={loading} style={customStyles}>
         <ProfileLoader />
       </Modal>

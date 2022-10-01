@@ -28,12 +28,12 @@ const Mybulls = () => {
   }, [userError])
 
   return (
-    <div className="h-full bg-black text-white transition-all duration-500 ease-in-out">
+    <div className=" bg-black text-white transition-all duration-500 ease-in-out">
       <Head>
         <title>The Ranch - Profile</title>
-        <link rel="icon" href="/Logo/tp-white.png" />
+        <link rel="icon" href="/Logo/tp-logo.png" />
       </Head>
-      <Header notLanding={false} />
+      <Header notLanding={true} />
       <main className="flex w-full flex-col justify-center text-white">
         {isAuthenticated ? <Profile /> : <ConnectWallet />}
       </main>

@@ -88,7 +88,8 @@ const Header = ({ notLanding }: any) => {
               className={`mx-2 flex cursor-pointer items-center justify-between rounded-2xl bg-[#191B1F] px-2 py-1 text-[1rem] font-semibold`}
             >
               <div
-                className={`mr-2 flex h-8 items-center rounded-2xl border-[#163256] bg-[#172A42] p-2`}
+                onClick={() => router.push('/mybulls')}
+                className={`z-50 mr-2 flex h-8 cursor-pointer items-center rounded-2xl border-[#163256] bg-[#172A42] p-2`}
               >
                 {user?.get('ethAddress').slice(0, 5)}...
                 {user?.get('ethAddress').slice(-4)}

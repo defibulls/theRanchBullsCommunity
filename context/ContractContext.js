@@ -12,6 +12,7 @@ export const ContractContext = createContext()
 export const ContractProvider = ({ children }) => {
   const [contract, setContract] = useState(null)
   const [tokenContract, setTokenContract] = useState(null)
+  const [open, setOpen] = useState(false)
 
   const loadTokenContract = async (web3) => {
     const web3Contract = await new web3.eth.Contract(
@@ -38,7 +39,9 @@ export const ContractProvider = ({ children }) => {
   }, [])
 
   return (
-    <ContractContext.Provider value={{ contract, tokenContract }}>
+    <ContractContext.Provider
+      value={{ contract, tokenContract, open, setOpen }}
+    >
       {children}
     </ContractContext.Provider>
   )

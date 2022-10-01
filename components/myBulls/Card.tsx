@@ -9,10 +9,10 @@ const Card = ({ id, name, image }: CardProps) => {
 
   return (
     <div className="flex items-center justify-center">
-      <div className="h-full w-[300px] flex-col rounded-3xl bg-[#1a1c1e] text-white">
-        <img className="w-full rounded-t-3xl" src={httpsimg} alt={name} />
-        <div className="p-[20px]">
-          <div className="text-xl font-black">{name}</div>
+      <div className="h-full w-[280px] flex-col rounded-xl bg-[#1a1c1e] text-white">
+        <img className="w-full rounded-t-xl" src={httpsimg} alt={name} />
+        <div className="p-[10px]">
+          <div className="text-md font-black">{name}</div>
         </div>
       </div>
     </div>

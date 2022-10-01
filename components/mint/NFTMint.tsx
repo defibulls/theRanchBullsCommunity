@@ -11,7 +11,7 @@ import toast from 'react-hot-toast'
 Modal.setAppElement('#__next')
 
 const NFTMint = () => {
-  const { user } = useMoralis()
+  const { user, Moralis } = useMoralis()
   const { contract, tokenContract } = useContext(ContractContext)
   const { chainId } = useChain()
   const [count, setCount] = useState<number>(1)
@@ -19,7 +19,7 @@ const NFTMint = () => {
   const [minted, setMinted] = useState<number>(0)
   const [price, setPrice] = useState<any>(0)
   const [mintedByWallet, setMintedByWallet] = useState<number>(0)
-  const [maxMintPerWallet, setMaxMintPerWallet] = useState<number>(100)
+  const [maxMintPerWallet, setMaxMintPerWallet] = useState<number>(0)
   const [paused, setPaused] = useState<boolean>(false)
   const [publicSale, setPublicSale] = useState<boolean>(false)
   const [disabled, setDisabled] = useState<boolean>(false)
@@ -27,7 +27,12 @@ const NFTMint = () => {
   const [maxBulls, setMaxBulls] = useState<number>(0)
   const [enterRaffle, setEnterRaffle] = useState<boolean>(false)
 
-  console.log(tokenContract)
+  const getGasPrice = async () => {
+    const web3Provider = await Moralis.enableWeb3() // Get ethers.js web3Provider
+    const gasPrice = await web3Provider.getGasPrice()
+
+    return gasPrice
+  }
 
   const mint = async () => {
     if (count === 0) return toast.error('Please enter a valid amount')
@@ -42,11 +47,14 @@ const NFTMint = () => {
     setloading(true)
     const account = user?.get('ethAddress')
 
+    const gasPrice = await getGasPrice()
+
     await tokenContract.methods
       .approve(contractAddress, String(totalPrice + '000000'))
       .send(
         {
           from: account,
+          gasPrice: gasPrice,
         },
         (err: any) => {
           if (err) {
@@ -59,6 +67,7 @@ const NFTMint = () => {
         await contract.methods.mint(count, enterRaffle).send(
           {
             from: account,
+            gasPrice: gasPrice,
           },
           (err: any) => {
             if (err) {
@@ -97,12 +106,11 @@ const NFTMint = () => {
     const _publicLiveSale = await contract.methods.publicSaleLive().call()
     setPublicSale(_publicLiveSale)
     const _totalBulls = await contract.methods.maxSupply().call()
-    console.log(_totalBulls)
     setMaxBulls(_totalBulls)
   }
 
-  const disable = (minted: number, maxMint: number) => {
-    if (minted < maxMint) {
+  const disable = () => {
+    if (Number(mintedByWallet) < Number(maxMintPerWallet)) {
       setDisabled(false)
     } else {
       setDisabled(true)
@@ -175,9 +183,9 @@ const NFTMint = () => {
 
   useEffect(() => {
     if (contract) {
-      disable(mintedByWallet, maxMintPerWallet)
+      disable()
     }
-  }, [contract, mintedByWallet, maxMintPerWallet])
+  }, [mintedByWallet, contract, maxMintPerWallet])
 
   return (
     <div className="h-full overflow-y-scroll lg:overflow-hidden">
@@ -237,7 +245,7 @@ const NFTMint = () => {
                       <br />
                     </p>
                     <p
-                      className={`text-lg font-normal text-cyan-600 ${
+                      className={`pb-4 text-lg font-normal text-cyan-600 ${
                         disabled && 'text-red-500'
                       }`}
                     >

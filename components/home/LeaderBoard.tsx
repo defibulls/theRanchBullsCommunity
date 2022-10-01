@@ -24,7 +24,6 @@ const LeaderBoard = () => {
     const _winningAmountDec = await data?.[0]?.attributes.winning_amount_all
     const _winningAmount = Number(_winningAmountDec) / Number(1000000)
     setWinningPrice(_winningAmount)
-    const airdropCount = await data?.[0]?.attributes.AirDropCount
 
     winnerAddress?.map(async (address) => {
       const leaderboardDoc = {

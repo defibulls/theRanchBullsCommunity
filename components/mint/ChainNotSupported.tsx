@@ -8,7 +8,7 @@ const ChainNotSupported = () => {
   const router = useRouter()
 
   useEffect(() => {
-    if (chainId == null) {
+    if (chainId === null) {
       router.push('/mint')
     }
   }, [])
@@ -19,7 +19,7 @@ const ChainNotSupported = () => {
       </h1>
       <button
         onClick={() => {
-          if (chainId == null) {
+          if (chainId === null) {
             enableWeb3()
           } else {
             switchNetwork('0x13881')
