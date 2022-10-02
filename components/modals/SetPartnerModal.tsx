@@ -1,3 +1,4 @@
+import { XCircleIcon } from '@heroicons/react/24/solid'
 import { useState, useContext } from 'react'
 import { useMoralis } from 'react-moralis'
 import { ContractContext } from '../../context/ContractContext'
@@ -26,7 +27,7 @@ function Modaluser() {
   }
 
   const style = {
-    wrapper: `h-[20rem] z-50 w-[35rem] space-y-5 text-white bg-[#000] rounded-3xl p-10 flex flex-col items-center justify-center`,
+    wrapper: `h-[20rem] z-50 w-[35rem] relative space-y-5 text-white bg-[#000] rounded-3xl p-10 flex flex-col items-center justify-center`,
     title: `font-semibold text-xl mb-6`,
   }
 
@@ -49,6 +50,12 @@ function Modaluser() {
       >
         {updating ? 'Updating. . .' : 'Update'}
       </button>
+      <div
+        onClick={() => setOpen(false)}
+        className="absolute right-8 top-5 cursor-pointer"
+      >
+        <XCircleIcon className="h-5 text-red-500" />
+      </div>
     </div>
   )
 }

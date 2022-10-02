@@ -24,7 +24,7 @@ const ContactForm = (props: Props) => {
   return (
     <div
       id="contact"
-      className="flex h-screen w-full snap-center flex-col items-center justify-around gap-4 bg-black p-[10%] md:max-h-[100vh] md:px-[10%]"
+      className="relative flex h-screen w-full snap-center flex-col items-center justify-around gap-4 bg-black p-[10%] md:max-h-[100vh] md:px-[10%]"
     >
       <div className="relative flex h-full w-full items-start">
         <p className="font-marker text-3xl font-black uppercase">
@@ -33,7 +33,7 @@ const ContactForm = (props: Props) => {
           <img
             src="/images/transparentBg/88bgt.png"
             alt=""
-            className="absolute right-[320px] top-[-122px] hidden w-[200px] object-contain lg:block"
+            className="absolute right-[320px] top-[-120px] hidden w-[200px] object-contain lg:block"
           />
         </p>
       </div>

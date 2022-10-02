@@ -21,7 +21,6 @@ const home = () => {
         <Home />
         <About />
         <Tokenomics />
-        {user && <ContactForm />}
       </main>
       <Footer />
     </div>

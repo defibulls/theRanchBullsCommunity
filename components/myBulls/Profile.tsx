@@ -234,7 +234,7 @@ const Profile = () => {
   const httpsimg = image?.replace('ipfs://', 'https://dweb.link/ipfs/')
 
   return (
-    <div className=" flex flex-col bg-black" style={{}}>
+    <div className="flex min-h-screen flex-col bg-black">
       <div
         className="flex h-fit flex-col justify-between lg:flex-row"
         style={{

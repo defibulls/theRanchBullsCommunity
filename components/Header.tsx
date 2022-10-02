@@ -47,24 +47,23 @@ const Header = ({ notLanding }: any) => {
               </div>
               <div
                 onClick={() => {
-                  router.push('/home#tokenomics')
-                  setSelectedNav('tokenomics')
+                  router.push('/myfarmyard')
                 }}
                 className={`${style.navItem} ${
                   selectedNav === 'tokenomics' && style.activeNavItem
                 }`}
               >
-                TOKENOMICS
+                MY FARMYARD
               </div>
               <div
                 onClick={() => {
-                  router.push('mybulls')
+                  router.push('/support')
                 }}
                 className={`${style.navItem} ${
                   selectedNav === 'mybulls' && style.activeNavItem
                 }`}
               >
-                MY BULLS
+                SUPPORT
               </div>
               <div
                 onClick={() => {

@@ -276,7 +276,7 @@ const NFTMint = () => {
                           <div className="dot absolute left-1 top-1 h-6 w-6 rounded-full bg-white transition"></div>
                         </div>
                         <div className="ml-3 text-lg font-medium text-gray-700">
-                          RAFFLE
+                          CYCLE RAFFLE
                         </div>
                       </label>
                     </div>
