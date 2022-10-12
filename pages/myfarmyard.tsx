@@ -28,7 +28,7 @@ const Mybulls = () => {
   }, [userError])
 
   return (
-    <div className=" bg-black text-white transition-all duration-500 ease-in-out">
+    <div className="bg-black text-white transition-all duration-500 ease-in-out ">
       <Head>
         <title>The Ranch - Profile</title>
         <link rel="icon" href="/Logo/tp-logo.png" />

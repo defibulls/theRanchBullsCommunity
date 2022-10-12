@@ -35,10 +35,6 @@
   border-radius: 5px;
 }
 
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
 .grid-template {
   grid-template-columns: 1fr 1fr;
 }

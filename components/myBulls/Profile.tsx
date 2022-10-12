@@ -129,7 +129,7 @@ const Profile = () => {
   const renderSection = (modal: string) => {
     if (modal == 'rewards') {
       return (
-        <div className="flex w-full flex-col justify-between space-y-4 pr-10">
+        <div className="flex w-full flex-col justify-between space-y-4  pr-10 scrollbar-thin scrollbar-thumb-cyan-600">
           <div className="flex flex-col space-y-5">
             <h1 className="text-left text-xl font-semibold uppercase tracking-wider  text-gray-500">
               TOTAL USDC REWARDS
