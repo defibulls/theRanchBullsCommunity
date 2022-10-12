@@ -8,7 +8,7 @@
 }
 
 .tokenomics {
-  @apply flex flex-col items-start gap-2 sm:flex-row sm:items-center;
+  @apply flex flex-col items-start gap-2 sm:flex-row;
 }
 
 .label {

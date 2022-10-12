@@ -44,17 +44,20 @@ const About = () => {
         </div>
         <p className="text-xl font-light">
           <br />
-          4999 The Ranch Bulls NFT have been created on the Polygon Blockchain.
-          There will never be an addition to this number.
+          The BTC Bulls community is built around Bitcoin Mining. This project
+          is a hybrid of a MAAS (mining-as-a-service) and a club.
           <br />
           <br />
-          Each bull comes with different traits and thus gives them different
-          levels of rarity.
+          The Ranch itself is a community-driven ecosystem, each member is
+          expected to pull their own weight for the betterment of the community
+          as a whole. The key point of the BTC Bulls is buying an NFT which are
+          means of buying into a fractionalized BTC mining cluster.
           <br />
           <br />
-          On The Ranch, each bull is seen through the same lens and will have an
-          equal opportunity for success and profit. Each NFT can be minted for
-          $250 and paid in USDC.
+          The BTC Bulls will serve as the central focus of The Ranch ecosystem.
+          Other animals will join The Ranch and the reward system of those NFTs
+          tie back to the ownership of the BTC Bulls themselves.
+          <br />
         </p>
       </div>
     </div>

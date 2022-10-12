@@ -17,7 +17,7 @@ const home = () => {
       </Head>
 
       <Header notLanding={true} />
-      <main className="flex flex-col justify-center">
+      <main className="bg-black pb-10">
         <Home />
         <About />
         <Tokenomics />

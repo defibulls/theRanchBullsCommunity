@@ -36,8 +36,8 @@ const NFTMint = () => {
 
   const mint = async () => {
     if (count === 0) return toast.error('Please enter a valid amount')
-    if (count > 11)
-      return toast.error('You can only mint up to 11 NFTs at a time')
+    if (count > 5)
+      return toast.error('You can only mint up to 5 NFTs at a time')
     const totalQuantity = Number(count) + Number(mintedByWallet)
     if (totalQuantity > maxMintPerWallet)
       return toast.error(
@@ -148,33 +148,13 @@ const NFTMint = () => {
   const decrement = (e: any) => {
     e.preventDefault()
     if (count == 1) return
-    if (count == 2) {
-      setCount(count - 1)
-    } else if (count == 3) {
-      setCount(count - 1)
-    } else if (count == 5) {
-      setCount(count - 2)
-    } else if (count == 7) {
-      setCount(count - 2)
-    } else if (count == 11) {
-      setCount(count - 4)
-    }
+    setCount(count - 1)
   }
 
   const increment = (e: any) => {
     e.preventDefault()
-    if (count == 11) return
-    if (count == 1) {
-      setCount(count + 1)
-    } else if (count == 2) {
-      setCount(count + 1)
-    } else if (count == 3) {
-      setCount(count + 2)
-    } else if (count == 5) {
-      setCount(count + 2)
-    } else if (count == 7) {
-      setCount(count + 4)
-    }
+    if (count == 5) return
+    setCount(count + 1)
   }
 
   const checkHandler = () => {

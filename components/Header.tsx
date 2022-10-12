@@ -49,9 +49,7 @@ const Header = ({ notLanding }: any) => {
                 onClick={() => {
                   router.push('/myfarmyard')
                 }}
-                className={`${style.navItem} ${
-                  selectedNav === 'tokenomics' && style.activeNavItem
-                }`}
+                className={`${style.navItem} `}
               >
                 MY FARMYARD
               </div>
@@ -87,7 +85,7 @@ const Header = ({ notLanding }: any) => {
               className={`mx-2 flex cursor-pointer items-center justify-between rounded-2xl bg-[#191B1F] px-2 py-1 text-[1rem] font-semibold`}
             >
               <div
-                onClick={() => router.push('/mybulls')}
+                onClick={() => router.push('/myfarmyard')}
                 className={`z-50 mr-2 flex h-8 cursor-pointer items-center rounded-2xl border-[#163256] bg-[#172A42] p-2`}
               >
                 {user?.get('ethAddress').slice(0, 5)}...
