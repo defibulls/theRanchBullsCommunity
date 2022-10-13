@@ -6,17 +6,11 @@ const style = {
   title: `font-semibold text-xl mb-6`,
 }
 
-const cssOverride = css`
-  display: block;
-  margin: 0 auto;
-  border-color: white;
-`
-
 const ProfileLoader = () => {
   return (
     <div className={style.wrapper}>
       <div className={style.title}>Please wait a moment...</div>
-      <RingLoader color={'#fff'} loading={true} css={cssOverride} size={30} />
+      <RingLoader color={'#fff'} loading={true} size={30} />
     </div>
   )
 }
