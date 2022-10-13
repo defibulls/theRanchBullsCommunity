@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { motion } from 'framer-motion'
 
 const Home = () => {
   const router = useRouter()
@@ -20,7 +21,20 @@ const Home = () => {
           backgroundImage: `linear-gradient(to top, rgba(0,0,0, 4) 0, rgba(0,0,0,0) 60%, rgba(0,0,0,0.4) 100%)`,
         }}
       />
-      <div className="z-10 flex h-screen w-full items-center justify-center md:w-[60%]">
+      <motion.div
+        initial={{
+          x: -200,
+          opacity: 0,
+        }}
+        animate={{
+          x: 0,
+          opacity: 1,
+        }}
+        transition={{
+          duration: 1.5,
+        }}
+        className="z-10 flex h-screen w-full items-center justify-center md:w-[60%]"
+      >
         <iframe
           src="/polygonanimation/demo/data.html"
           height="40%"
@@ -28,22 +42,72 @@ const Home = () => {
         >
           LOGO
         </iframe>
-      </div>
+      </motion.div>
       <div className="flex h-full w-full flex-col items-start justify-center p-5 md:w-[70%] ">
-        <p className="z-40 mb-4 text-3xl font-black md:text-5xl">
+        <motion.p
+          initial={{
+            y: -200,
+            opacity: 0,
+          }}
+          animate={{
+            y: 0,
+            opacity: 1,
+          }}
+          transition={{
+            duration: 1.5,
+          }}
+          className="z-10 mb-4 text-3xl font-black md:text-5xl"
+        >
           <span className="">MINT LIVE</span> 1ST OF APRIL
-        </p>
-        <hr className="z-40 mb-2 w-full border-gray-400" />
-        <p className="z-40 mb-4 text-2xl font-light md:text-4xl">
+        </motion.p>
+        <motion.hr
+          initial={{
+            x: 200,
+            opacity: 0,
+          }}
+          animate={{
+            x: 0,
+            opacity: 1,
+          }}
+          transition={{
+            duration: 1.5,
+          }}
+          className="z-10 mb-2 w-full border-gray-400"
+        />
+        <motion.p
+          initial={{
+            y: 200,
+            opacity: 0,
+          }}
+          animate={{
+            y: 0,
+            opacity: 1,
+          }}
+          transition={{
+            duration: 1.5,
+          }}
+          className="z-10 mb-4 text-2xl font-light md:text-4xl"
+        >
           <b>4999 NFTs</b> available for 250 USD
-        </p>
-        <button
+        </motion.p>
+        <motion.button
+          initial={{
+            y: 200,
+            opacity: 0,
+          }}
+          animate={{
+            y: 0,
+            opacity: 1,
+          }}
+          transition={{
+            duration: 1.5,
+          }}
           type="button"
           onClick={() => router.push('/mint')}
-          className="z-40 rounded-lg bg-purple-600 py-2 px-12 font-marker"
+          className="z-10 rounded-lg bg-purple-600 py-2 px-12 font-marker"
         >
           MINT
-        </button>
+        </motion.button>
       </div>
     </div>
   )

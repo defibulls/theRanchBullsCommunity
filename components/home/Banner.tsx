@@ -1,11 +1,12 @@
 import { useRouter } from 'next/router'
+import { motion } from 'framer-motion'
 
 const Banner = () => {
   const router = useRouter()
 
   return (
     <header
-      className="scrollbar-hide relative flex h-screen w-full flex-col items-center justify-center"
+      className="relative flex h-screen w-full flex-col items-center justify-center scrollbar-hide"
       style={{
         backgroundImage: `url(/images/farm.png)`,
         backgroundPosition: 'center center',
@@ -22,12 +23,36 @@ const Banner = () => {
       />
       <div className="z-20 flex p-[2%]">
         <div className="flex flex-col items-center justify-center">
-          <h1 className="mb-4 text-center font-marker text-3xl font-extrabold">
+          <motion.h1
+            initial={{
+              y: -200,
+              opacity: 0,
+            }}
+            animate={{
+              y: 0,
+              opacity: 1,
+            }}
+            transition={{
+              duration: 1.5,
+            }}
+            className="mb-4 text-center font-marker text-3xl font-extrabold"
+          >
             WELCOME TO <br />
             THE RANCH BULLS <br />
             COMMUNITY
-          </h1>
-          <video
+          </motion.h1>
+          <motion.video
+            initial={{
+              x: -200,
+              opacity: 0,
+            }}
+            animate={{
+              x: 0,
+              opacity: 1,
+            }}
+            transition={{
+              duration: 1.5,
+            }}
             controls
             autoPlay
             loop
@@ -36,14 +61,25 @@ const Banner = () => {
             className="mb-4 rounded-xl"
             width="550"
             height="300"
-          ></video>
-          <button
+          ></motion.video>
+          <motion.button
+            initial={{
+              y: 200,
+              opacity: 0,
+            }}
+            animate={{
+              y: 0,
+              opacity: 1,
+            }}
+            transition={{
+              duration: 1.5,
+            }}
             onClick={() => router.push('/home')}
             className="w-[30%] cursor-pointer rounded-lg border-0 bg-[#8E05C2] py-3 px-4 font-marker text-base font-bold"
             type="button"
           >
             ENTER
-          </button>
+          </motion.button>
         </div>
       </div>
     </header>

@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useMoralis } from 'react-moralis'
+import { motion } from 'framer-motion'
 
 const style = {
   wrapper: `p-4 w-screen flex justify-between items-center`,
@@ -24,15 +25,42 @@ const Header = ({ notLanding }: any) => {
       className={`fixed top-0 z-30 h-24 w-full p-[20px] transition-all duration-500 ease-in`}
     >
       <div className="flex justify-between">
-        <div className={style.headerLogo} onClick={() => router.push('/home')}>
+        <motion.div
+          initial={{
+            x: -200,
+            opacity: 0,
+          }}
+          animate={{
+            x: 0,
+            opacity: 1,
+          }}
+          transition={{
+            duration: 1.5,
+          }}
+          className={style.headerLogo}
+          onClick={() => router.push('/home')}
+        >
           <img
             src="/Logo/tp-trbc.png"
             alt="TRB"
             className="h-12 cursor-pointer rounded-xl object-cover"
           />
-        </div>
+        </motion.div>
         {notLanding && (
-          <div className={style.nav}>
+          <motion.div
+            initial={{
+              y: -200,
+              opacity: 0,
+            }}
+            animate={{
+              y: 0,
+              opacity: 1,
+            }}
+            transition={{
+              duration: 1.5,
+            }}
+            className={style.nav}
+          >
             <div className={style.navItemsContainer}>
               <div
                 onClick={() => {
@@ -77,9 +105,22 @@ const Header = ({ notLanding }: any) => {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         )}
-        <div className="flex h-full items-center space-x-5">
+        <motion.div
+          initial={{
+            x: 200,
+            opacity: 0,
+          }}
+          animate={{
+            x: 0,
+            opacity: 1,
+          }}
+          transition={{
+            duration: 1.5,
+          }}
+          className="flex h-full items-center space-x-5"
+        >
           {isAuthenticated ? (
             <div
               className={`mx-2 flex cursor-pointer items-center justify-between rounded-2xl bg-[#191B1F] px-2 py-1 text-[1rem] font-semibold`}
@@ -123,7 +164,7 @@ const Header = ({ notLanding }: any) => {
               </div>
             </div>
           )}
-        </div>
+        </motion.div>
       </div>
     </div>
   )

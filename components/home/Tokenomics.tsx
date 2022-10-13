@@ -6,10 +6,10 @@ const Tokenomics = () => {
     >
       <div className="flex min-h-fit w-full flex-col items-start justify-center">
         <div className="relative flex w-full flex-row items-end justify-center md:justify-start">
-          <p className="font-marker text-4xl font-black">
+          <div className="font-marker text-4xl font-black">
             TOKENOMICS
             <hr aria-orientation="horizontal" className="my-5" />
-          </p>
+          </div>
 
           <img
             src="images\transparentBg\23bgt.png"

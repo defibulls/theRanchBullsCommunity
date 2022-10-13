@@ -9,7 +9,7 @@ import { useMoralis } from 'react-moralis'
 const home = () => {
   const { user } = useMoralis()
   return (
-    <div className="text-white transition-all duration-500 ease-in-out scrollbar-hide">
+    <div className="text-white transition-all duration-500  ease-in-out">
       <Head>
         <title>The Ranch Bulls</title>
         <link rel="icon" href="/Logo/tp-logo.png" />

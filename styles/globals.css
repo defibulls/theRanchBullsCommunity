@@ -7,6 +7,10 @@
   @apply cursor-pointer text-lg font-bold transition-all duration-300 ease-in hover:border-white;
 }
 
+body {
+  @apply scrollbar-thin scrollbar-w-2 scrollbar-thumb-purple-500 scrollbar-track-rounded-2xl scrollbar-thumb-rounded-2xl
+}
+
 .tokenomics {
   @apply flex flex-col items-start gap-2 sm:flex-row;
 }

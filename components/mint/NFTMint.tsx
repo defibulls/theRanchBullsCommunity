@@ -90,6 +90,7 @@ const NFTMint = () => {
   const fetchPrice = async () => {
     setPrice(await contract.methods.mintingCost().call())
   }
+  console.log(contract)
 
   const fetchData = async () => {
     const mintedNFTs = await contract.methods.totalSupply().call()
