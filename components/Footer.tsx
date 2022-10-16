@@ -12,19 +12,19 @@ const Footer = () => {
               <div className="mt-6 flex flex-col space-y-4">
                 <a
                   href="/home"
-                  className="text-lg font-medium leading-[1.4] text-gray-500 hover:text-white"
+                  className="w-fit text-lg font-medium leading-[1.4] text-gray-500 hover:text-white"
                 >
                   Home
                 </a>
                 <a
                   href="/home#about"
-                  className="text-lg font-medium leading-[1.4] text-gray-500 hover:text-white"
+                  className="w-fit text-lg font-medium leading-[1.4] text-gray-500 hover:text-white"
                 >
                   About
                 </a>
                 <a
                   href="/home#tokenomics"
-                  className="text-lg font-medium leading-[1.4] text-gray-500 hover:text-white"
+                  className="w-fit text-lg font-medium leading-[1.4] text-gray-500 hover:text-white"
                 >
                   Tokenomics
                 </a>
@@ -62,7 +62,7 @@ const Footer = () => {
                         bgColor="black"
                       />
                       <p className="text-lg font-medium text-gray-500 hover:text-white">
-                        The Ranch
+                        Discord
                       </p>
                     </div>
                   </Link>
