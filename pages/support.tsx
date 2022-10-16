@@ -2,8 +2,9 @@ import Head from 'next/head'
 import React from 'react'
 import { useMoralis } from 'react-moralis'
 import Header from '../components/Header'
-import ContactForm from '../components/home/ContactForm'
+import ContactForm from '../components/support/ContactForm'
 import ConnectWallet from '../components/mint/ConnectWallet'
+import FAQs from '../components/support/FAQs'
 
 type Props = {}
 
@@ -17,6 +18,7 @@ const support = (props: Props) => {
       </Head>
       <Header notLanding={true} />
       <section className="pt-28">
+        <FAQs />
         {isAuthenticated ? <ContactForm /> : <ConnectWallet />}
       </section>
     </div>
