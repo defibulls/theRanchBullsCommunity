@@ -58,7 +58,7 @@ const Home = () => {
           }}
           className="z-10 mb-4 text-3xl font-black md:text-5xl"
         >
-          <span className="">MINT LIVE</span> 1ST OF APRIL
+          <span className="">MINT LIVE</span> 22ND OF NOVEMBER
         </motion.p>
         <motion.hr
           initial={{
