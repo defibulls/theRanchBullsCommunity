@@ -40,7 +40,7 @@ const Home = () => {
           height="40%"
           width="100%"
         >
-          LOGO
+          Polygon bitcoin
         </iframe>
       </motion.div>
       <div className="flex h-full w-full flex-col items-start justify-center p-5 md:w-[70%] ">
