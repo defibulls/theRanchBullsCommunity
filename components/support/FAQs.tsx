@@ -1,35 +1,46 @@
-import { MinusIcon, PlusIcon } from '@heroicons/react/24/solid'
 import React, { useState } from 'react'
-
-type Props = {}
+import { client } from '../../lib/sanity'
 
 const faqs = [
   {
     id: 1,
-    question: 'WHEN WILL I GET THE BTC MINED?',
+    question:
+      'How many BTC BULL NFTs will there be, and will there ever be any more?',
     answer:
-      'We will payout the BTC monthly to our holders after 6 months of mining operations to compound our funds. There will be a holder specific section on our website where NFT holders can then connect their BTC wallet and claim their monthly reward.',
+      '10,000 BTC BULLS to start, and that’s the final cap we will ever produce.',
   },
   {
     id: 2,
-    question: "What's the mint price?",
+    question: 'How much does it cost for 1 BTC BULL?',
     answer:
-      'During phase three the mint price will be pegged to approximately ~$425 USD in Ethereum. The price of mint will increase in the next phases.',
+      '$350 paid in USDC.e on the polygon blockchain. \n USDC.e Contract:  0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
   },
   {
     id: 3,
-    question: 'HOW WILL I MINT?',
+    question: 'When will I get the BTC mined?',
     answer:
-      'Minting will take place directly on our website and will then the secondary market will be OpenSea. Please only use the official links we give to avoid being scammed.',
+      'Monthly deposits back into the contracts between the 1-5th of every month in the form of WBTC',
   },
 ]
 
-const FAQs = (props: Props) => {
-  const [show, handleShow] = useState(false)
+const FAQs = () => {
+  const [faqs, setFaqs] = useState<any>([])
+  const fetchFaqs = async () => {
+    const query = `
+      *[_type == "faqs"]{
+        question,
+        answer
+      }
+    `
+    const sanityResponse = await client.fetch(query)
+    setFaqs(sanityResponse)
+  }
+
+  fetchFaqs()
   return (
     <div
       id="faqs"
-      className="relative mt-5 flex min-h-fit w-full snap-center flex-col  items-start justify-start gap-4 bg-black px-[10%] pb-10  transition-all duration-500 ease-in-out sm:mt-10 md:max-h-[100vh] md:px-[10%]"
+      className="relative mt-5 flex min-h-fit w-full snap-center flex-col  items-start justify-start gap-4 bg-black px-[10%] pb-10  transition-all duration-500 ease-in-out sm:mt-10 md:min-h-[100vh] md:px-[10%]"
     >
       <div className="relative flex w-full items-start">
         <div className="font-marker text-3xl font-black uppercase">
@@ -43,7 +54,7 @@ const FAQs = (props: Props) => {
         </div>
       </div>
       <div className="grid grid-cols-1 gap-10 transition-all duration-700 md:grid-cols-2">
-        {faqs.map((faq, i) => (
+        {faqs.map((faq: any, i: number) => (
           <div
             key={i}
             className="group flex h-fit flex-col rounded-md bg-gray-800 px-20 py-8 transition-all duration-500 ease-in-out"
