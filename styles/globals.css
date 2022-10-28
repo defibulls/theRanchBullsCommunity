@@ -70,6 +70,10 @@ body {
   width: auto;
 }
 
+.transform-origin {
+  transform-origin: center bottom;
+}
+
 .transitions:hover::before {
   transform: scaleX(1);
   visibility: visible;

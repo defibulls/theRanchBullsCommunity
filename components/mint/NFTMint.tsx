@@ -302,7 +302,7 @@ const NFTMint = () => {
                           ></circle>
                         </svg>
                         <img
-                          className="absolute left-0 right-0  top-[30%] m-auto h-[40%]"
+                          className="transform-origin absolute left-0 right-0 top-[10%] m-auto h-[40%]"
                           style={{
                             transform: `rotate(${
                               270 + (rafflePlayers * 180) / 100
