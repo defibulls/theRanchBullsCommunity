@@ -88,7 +88,7 @@ const Home = () => {
           }}
           className="z-10 mb-4 text-2xl font-light md:text-4xl"
         >
-          <b>10000 NFTs</b> available for 350 USD
+          <b>10,000 NFTs</b> available for 350 USD
         </motion.p>
         <motion.button
           initial={{

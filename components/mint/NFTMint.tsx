@@ -26,6 +26,7 @@ const NFTMint = () => {
   const [totalPrice, setTotalPrice] = useState<number>()
   const [maxBulls, setMaxBulls] = useState<number>(0)
   const [enterRaffle, setEnterRaffle] = useState<boolean>(false)
+  const [rafflePlayers, setRafflePlayers] = useState<number>(0)
 
   const getGasPrice = async () => {
     const web3Provider = await Moralis.enableWeb3() // Get ethers.js web3Provider
@@ -90,7 +91,6 @@ const NFTMint = () => {
   const fetchPrice = async () => {
     setPrice(await contract.methods.mintingCost().call())
   }
-  console.log(contract)
 
   const fetchData = async () => {
     const mintedNFTs = await contract.methods.totalSupply().call()
@@ -108,6 +108,10 @@ const NFTMint = () => {
     setPublicSale(_publicLiveSale)
     const _totalBulls = await contract.methods.maxSupply().call()
     setMaxBulls(_totalBulls)
+    const _rafflePlayers = await contract.methods
+      .getNumberOfRafflePlayers()
+      .call()
+    setRafflePlayers(_rafflePlayers)
   }
 
   const disable = () => {
@@ -121,6 +125,7 @@ const NFTMint = () => {
   useEffect(() => {
     if (contract) {
       fetchData()
+      console.log(contract)
     }
   }, [contract, mint])
 
@@ -253,13 +258,60 @@ const NFTMint = () => {
                             checked={enterRaffle}
                             onChange={checkHandler}
                           />
-                          <div className="block h-8 w-14 rounded-full bg-gray-600"></div>
+                          <div
+                            style={{}}
+                            className="block h-8 w-14 rounded-full bg-gray-600"
+                          ></div>
                           <div className="dot absolute left-1 top-1 h-6 w-6 rounded-full bg-white transition"></div>
                         </div>
-                        <div className="ml-3 text-lg font-medium text-gray-700">
+                        <div className="ml-3 text-lg font-bold tracking-widest text-gray-600">
                           CYCLE RAFFLE
                         </div>
                       </label>
+                      <div className="relative m-auto ml-2 h-12 w-12 cursor-pointer">
+                        <svg className="h-full w-full rotate-180">
+                          <circle
+                            className=""
+                            stroke="rgb(147, 51, 234)"
+                            strokeWidth="4"
+                            strokeDasharray="62, 943"
+                            r="20"
+                            cx="50%"
+                            cy="50%"
+                            fill="none"
+                          ></circle>
+                          <circle
+                            id="avg"
+                            r="20"
+                            cx="50%"
+                            cy="50%"
+                            stroke="#7CCCE5"
+                            strokeWidth="4"
+                            strokeDasharray="41, 943"
+                            fill="none"
+                          ></circle>
+                          <circle
+                            id="high"
+                            r="20"
+                            cx="50%"
+                            cy="50%"
+                            stroke="#E04644"
+                            stroke-width="4"
+                            stroke-dasharray="20, 943"
+                            fill="none"
+                          ></circle>
+                        </svg>
+                        <img
+                          className="absolute left-0 right-0  top-[30%] m-auto h-[40%]"
+                          style={{
+                            transform: `rotate(${
+                              270 + (rafflePlayers * 180) / 100
+                            }deg)`,
+                          }}
+                          src="gauge-needle.svg"
+                          alt=""
+                        ></img>
+                      </div>
                     </div>
 
                     <div className="flex w-fit flex-col items-center gap-4">

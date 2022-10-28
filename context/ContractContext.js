@@ -38,6 +38,8 @@ export const ContractProvider = ({ children }) => {
     loadTokenContract()
   }, [])
 
+  console.log(contract)
+
   return (
     <ContractContext.Provider
       value={{ contract, tokenContract, open, setOpen }}
