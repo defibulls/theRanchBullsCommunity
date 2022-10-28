@@ -148,7 +148,7 @@ const About = () => {
             x: 200,
             opacity: 0,
           }}
-          animate={{
+          whileInView={{
             x: 0,
             opacity: 1,
           }}

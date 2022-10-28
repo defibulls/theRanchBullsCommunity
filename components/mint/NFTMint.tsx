@@ -7,6 +7,7 @@ import Modal from 'react-modal'
 import Loader from '../modals/Loader'
 import { ContractContext } from '../../context/ContractContext'
 import toast from 'react-hot-toast'
+import { motion } from 'framer-motion'
 
 Modal.setAppElement('#__next')
 
@@ -183,7 +184,21 @@ const NFTMint = () => {
               <ChainNotSupported />
             ) : (
               <div className="flex h-full w-full flex-col items-center justify-center lg:flex-row">
-                <div className="flex h-full w-full items-center justify-center lg:h-[60%] lg:w-[60%] ">
+                <motion.div
+                  initial={{
+                    x: -200,
+                    opacity: 0,
+                  }}
+                  viewport={{ once: true }}
+                  whileInView={{
+                    x: 0,
+                    opacity: 1,
+                  }}
+                  transition={{
+                    duration: 1.5,
+                  }}
+                  className="flex h-full w-full items-center justify-center lg:h-[60%] lg:w-[60%] "
+                >
                   <iframe
                     src="/polygonanimation/demo/data.html"
                     height="60%"
@@ -191,7 +206,7 @@ const NFTMint = () => {
                   >
                     LOGO
                   </iframe>
-                </div>
+                </motion.div>
 
                 {paused ? (
                   <div>
@@ -214,7 +229,21 @@ const NFTMint = () => {
                     </a>
                   </div>
                 ) : (
-                  <div className="flex w-full flex-col justify-center lg:w-[60%]">
+                  <motion.div
+                    initial={{
+                      x: 200,
+                      opacity: 0,
+                    }}
+                    viewport={{ once: true }}
+                    whileInView={{
+                      x: 0,
+                      opacity: 1,
+                    }}
+                    transition={{
+                      duration: 1.5,
+                    }}
+                    className="flex w-full flex-col justify-center lg:w-[60%]"
+                  >
                     <p className="mb-1 text-4xl font-black text-cyan-600 underline underline-offset-2">
                       {publicSale ? 'MINT LIVE' : 'PUBLIC SALE NOT LIVE'}
                     </p>
@@ -318,7 +347,7 @@ const NFTMint = () => {
                       <div className="flex items-center gap-4">
                         <button
                           disabled={disabled}
-                          className="rounded-lg border p-3 "
+                          className="rounded-lg border p-2 "
                           onClick={(e) => decrement(e)}
                         >
                           <svg
@@ -342,7 +371,7 @@ const NFTMint = () => {
                         <button
                           disabled={disabled}
                           onClick={(e) => increment(e)}
-                          className="rounded-lg border p-3"
+                          className="rounded-lg border p-2"
                         >
                           <svg
                             stroke="currentColor"
@@ -378,7 +407,7 @@ const NFTMint = () => {
                         </>
                       )}
                     </div>
-                  </div>
+                  </motion.div>
                 )}
               </div>
             )}

@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion'
+
 const Tokenomics = () => {
   return (
     <div
@@ -6,12 +8,55 @@ const Tokenomics = () => {
     >
       <div className="flex min-h-fit w-full flex-col items-start justify-center">
         <div className="relative flex w-full flex-row items-end justify-center md:justify-start">
-          <div className="font-marker text-4xl font-black">
-            TOKENOMICS
-            <hr aria-orientation="horizontal" className="my-5" />
+          <div>
+            <motion.p
+              initial={{
+                x: 200,
+                opacity: 0,
+              }}
+              viewport={{ once: true }}
+              whileInView={{
+                x: 0,
+                opacity: 1,
+              }}
+              transition={{
+                duration: 1.5,
+              }}
+              className="font-marker text-4xl font-black"
+            >
+              TOKENOMICS
+            </motion.p>
+            <motion.hr
+              initial={{
+                x: 200,
+                opacity: 0,
+              }}
+              viewport={{ once: true }}
+              whileInView={{
+                x: 0,
+                opacity: 1,
+              }}
+              transition={{
+                duration: 1.5,
+              }}
+              aria-orientation="horizontal"
+              className="my-5"
+            />
           </div>
 
-          <img
+          <motion.img
+            initial={{
+              y: -100,
+              opacity: 0,
+            }}
+            viewport={{ once: true }}
+            whileInView={{
+              y: 0,
+              opacity: 1,
+            }}
+            transition={{
+              duration: 1.5,
+            }}
             src="images\transparentBg\23bgt.png"
             alt=""
             loading="lazy"
