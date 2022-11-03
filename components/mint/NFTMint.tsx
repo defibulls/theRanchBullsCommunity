@@ -255,7 +255,10 @@ const NFTMint = () => {
                       EACH{' '}
                       <span className="font-marker text-purple-600">BULL</span>{' '}
                       COSTS {price}
-                      <span className="font-marker text-purple-600"> USD</span>
+                      <span className="font-marker text-purple-600">
+                        {' '}
+                        USDC.e
+                      </span>
                       <br />
                       <br />
                     </p>
@@ -267,14 +270,13 @@ const NFTMint = () => {
                       {disabled ? (
                         `You can only mint upto ${maxMintPerWallet} NFTs per Wallet Address!`
                       ) : (
-                        <p className="font-marker">
-                          BUY A SINGLE BULL OR GET A PRIME NUMBER BUNDLE <br />
-                          DISCOUNT WITH 2, 3, 5, 7 OR 11 BULLS.
+                        <p className="font-marker uppercase tracking-widest">
+                          Max. 5 bulls per transaction
                         </p>
                       )}
                       <br />
                     </p>
-                    <div className="mb-8 flex w-full items-center">
+                    <div className="mb-8 flex h-full w-full items-center">
                       <label
                         htmlFor="toggleB"
                         className="flex cursor-pointer items-center"
@@ -294,10 +296,10 @@ const NFTMint = () => {
                           <div className="dot absolute left-1 top-1 h-6 w-6 rounded-full bg-white transition"></div>
                         </div>
                         <div className="ml-3 text-lg font-bold tracking-widest text-gray-600">
-                          CYCLE RAFFLE
+                          MINTING RAFFLE
                         </div>
                       </label>
-                      <div className="relative m-auto ml-2 h-12 w-12 cursor-pointer">
+                      <div className="group relative m-auto ml-2 flex h-12 w-12 cursor-pointer">
                         <svg className="h-full w-full rotate-180">
                           <circle
                             className=""
@@ -339,7 +341,11 @@ const NFTMint = () => {
                           }}
                           src="gauge-needle.svg"
                           alt=""
-                        ></img>
+                        />
+                        <div className="absolute right-[-200px] top-6 hidden min-w-fit flex-col items-center justify-center rounded-xl rounded-tl-none bg-gray-700 p-4 text-center text-xs font-medium text-white group-hover:flex">
+                          <h1>Total number of Raffle Player</h1>
+                          {rafflePlayers}/100
+                        </div>
                       </div>
                     </div>
 
