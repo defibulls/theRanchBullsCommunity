@@ -49,14 +49,11 @@ const NFTMint = () => {
     setloading(true)
     const account = user?.get('ethAddress')
 
-    const gasPrice = await getGasPrice()
-
     await tokenContract.methods
       .approve(contractAddress, String(totalPrice + '000000'))
       .send(
         {
           from: account,
-          gasPrice: gasPrice,
         },
         (err: any) => {
           if (err) {
@@ -69,11 +66,10 @@ const NFTMint = () => {
         await contract.methods.mint(count, enterRaffle).send(
           {
             from: account,
-            gasPrice: gasPrice,
           },
           (err: any) => {
             if (err) {
-              toast.error(err.message.toLocaleString())
+              toast.error('Something went wrong!')
               setloading(false)
             }
           }
@@ -335,7 +331,7 @@ const NFTMint = () => {
                           className="transform-origin absolute left-0 right-0 top-[10%] m-auto h-[40%]"
                           style={{
                             transform: `rotate(${
-                              270 + (rafflePlayers * 180) / 100
+                              270 + (rafflePlayers * 180) / 5
                             }deg)`,
                           }}
                           src="gauge-needle.svg"

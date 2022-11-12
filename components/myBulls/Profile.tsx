@@ -82,23 +82,32 @@ const Profile = () => {
     })
 
     setNftOwned(data.result?.length!)
-    data.result?.map((nft) => {
-      console.log(nft)
-      // fetch(nft.resu)
-      //   .then(
-      //     (res: any) => {
-      //       res.json().then((data: any) => {
-      //         nftsr.push(data)
-      //       })
-      //     },
-      //     (err) => {
-      //       toast.error(err.message)
-      //     }
-      //   )
-      //   .catch((err) => alert(err.message))
-    })
 
     const nftsr: any[] = []
+
+    // for (let i = 0; i < data.result?.length!; i++) {
+    //   await fetch(data.result?.[i]?.token_uri!)
+    //     .then(
+    //       (res: any) => {
+    //         res.json().then((data: any) => {
+    //           nftsr?.push(data)
+    //         nftsr?.push(data)
+    //       },
+    //       (err) => {
+    //         toast.error(err.message)
+    //       }
+    //     )
+    //     .catch((err) => alert(err.message))
+    // }
+
+    data.result?.forEach(async (nft) => {
+      await fetch(nft.token_uri!).then((res: any) =>
+        res
+          .json()
+          .then((data: any) => nftsr.push(data))
+          .catch((err: any) => toast.error(err.message))
+      )
+    })
 
     setNfts(nftsr)
     setLoading(false)
@@ -173,6 +182,10 @@ const Profile = () => {
             <p className="pr-3 text-sm tracking-wide text-gray-400">
               {buddyAddress}
             </p>
+            <PencilIcon
+              className="h-5 cursor-pointer"
+              onClick={() => setOpen(true)}
+            />
           </div>
         </div>
       )
@@ -306,7 +319,7 @@ const Profile = () => {
             </div>
           </div>
           <div className="mt-32 flex h-fit w-[70%] flex-col rounded-xl bg-black bg-opacity-50 p-5 md:mr-10 md:w-[24rem]">
-            {nfts.length > 0 ? (
+            {nfts.length < 0 ? (
               <Carousel
                 autoPlay
                 showStatus={false}
@@ -325,7 +338,9 @@ const Profile = () => {
                 ))}
               </Carousel>
             ) : (
-              <div></div>
+              <div className="w-fit text-center text-sm font-normal text-white">
+                The address {user?.get('ethAddress')} doesn't own any Bulls.
+              </div>
             )}
           </div>
         </div>

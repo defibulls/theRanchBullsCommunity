@@ -48,7 +48,7 @@ function Modaluser() {
         onClick={() => updateBuddyAddress()}
         className="inline-flex w-1/2 justify-center rounded-md bg-cyan-500 px-4 py-2 text-base font-medium uppercase tracking-wide text-white shadow-sm focus:outline-none disabled:cursor-not-allowed disabled:bg-gray-300 disabled:hover:bg-gray-600 sm:text-sm"
       >
-        {updating ? 'Updating. . .' : 'Update'}
+        {updating ? 'Updating...' : 'Update'}
       </button>
       <div
         onClick={() => setOpen(false)}
