@@ -306,23 +306,27 @@ const Profile = () => {
             </div>
           </div>
           <div className="mt-32 flex h-fit w-[70%] flex-col rounded-xl bg-black bg-opacity-50 p-5 md:mr-10 md:w-[24rem]">
-            <Carousel
-              autoPlay
-              showStatus={false}
-              infiniteLoop
-              showIndicators={false}
-              showThumbs={false}
-              interval={2000}
-            >
-              {nfts?.map((nft: NFTprops, index: number) => (
-                <Card
-                  name={nft.name}
-                  image={nft.image}
-                  id={index}
-                  key={index}
-                />
-              ))}
-            </Carousel>
+            {nfts.length > 0 ? (
+              <Carousel
+                autoPlay
+                showStatus={false}
+                infiniteLoop
+                showIndicators={false}
+                showThumbs={false}
+                interval={2000}
+              >
+                {nfts?.map((nft: NFTprops, index: number) => (
+                  <Card
+                    name={nft.name}
+                    image={nft.image}
+                    id={index}
+                    key={index}
+                  />
+                ))}
+              </Carousel>
+            ) : (
+              <div></div>
+            )}
           </div>
         </div>
       </div>

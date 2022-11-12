@@ -116,7 +116,7 @@ const NFTMint = () => {
   }
 
   const disable = () => {
-    if (Number(mintedByWallet) < Number(maxMintPerWallet)) {
+    if (Number(mintedByWallet) <= Number(maxMintPerWallet)) {
       setDisabled(false)
     } else {
       setDisabled(true)
