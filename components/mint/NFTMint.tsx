@@ -339,7 +339,7 @@ const NFTMint = () => {
                         />
                         <div className="absolute right-[-200px] top-6 hidden min-w-fit flex-col items-center justify-center rounded-xl rounded-tl-none bg-gray-700 p-4 text-center text-xs font-medium text-white group-hover:flex">
                           <h1>Total number of Raffle Player</h1>
-                          {rafflePlayers}/100
+                          {rafflePlayers}/5
                         </div>
                       </div>
                     </div>
