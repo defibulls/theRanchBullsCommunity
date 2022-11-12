@@ -126,7 +126,6 @@ const NFTMint = () => {
   useEffect(() => {
     if (contract) {
       fetchData()
-      console.log(contract)
     }
   }, [contract, mint])
 

@@ -5,7 +5,7 @@ import {
   CurrencyContract,
   currencyContractABI,
 } from '../lib/constants'
-import getWeb3 from '../lib/getWeb3'
+const { createAlchemyWeb3 } = require('@alch/alchemy-web3')
 
 export const ContractContext = createContext()
 
@@ -16,8 +16,7 @@ export const ContractProvider = ({ children }) => {
 
   useEffect(() => {
     const loadTokenContract = async () => {
-      const web3 = await getWeb3()
-
+      const web3 = createAlchemyWeb3(process.env.NEXT_PUBLIC_ALCHEMY_KEY)
       const web3Contract = await new web3.eth.Contract(
         currencyContractABI,
         CurrencyContract
@@ -26,7 +25,7 @@ export const ContractProvider = ({ children }) => {
     }
 
     const loadMintContract = async () => {
-      const web3 = await getWeb3()
+      const web3 = createAlchemyWeb3(process.env.NEXT_PUBLIC_ALCHEMY_KEY)
       const web3Contract = await new web3.eth.Contract(
         contractABI,
         contractAddress

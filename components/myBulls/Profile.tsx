@@ -82,23 +82,23 @@ const Profile = () => {
     })
 
     setNftOwned(data.result?.length!)
+    data.result?.map((nft) => {
+      console.log(nft)
+      // fetch(nft.resu)
+      //   .then(
+      //     (res: any) => {
+      //       res.json().then((data: any) => {
+      //         nftsr.push(data)
+      //       })
+      //     },
+      //     (err) => {
+      //       toast.error(err.message)
+      //     }
+      //   )
+      //   .catch((err) => alert(err.message))
+    })
 
     const nftsr: any[] = []
-
-    for (let i = 0; i < data.result?.length!; i++) {
-      await fetch(data.result?.[i]?.token_uri!)
-        .then(
-          (res: any) => {
-            res.json().then((data: any) => {
-              nftsr.push(data)
-            })
-          },
-          (err) => {
-            toast.error(err.message)
-          }
-        )
-        .catch((err) => alert(err.message))
-    }
 
     setNfts(nftsr)
     setLoading(false)
