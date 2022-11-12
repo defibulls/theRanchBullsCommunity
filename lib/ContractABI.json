@@ -4,6 +4,11 @@
   { "inputs": [], "name": "Blacklisted", "type": "error" },
   {
     "inputs": [],
+    "name": "Contract_CurrentlyDoingMintRaffle",
+    "type": "error"
+  },
+  {
+    "inputs": [],
     "name": "Contract_CurrentlyPaused_CheckSocials",
     "type": "error"
   },
@@ -20,7 +25,7 @@
     "type": "error"
   },
   { "inputs": [], "name": "Minting_ExceedsTotalBulls", "type": "error" },
-  { "inputs": [], "name": "Minting_IsZeroOrBiggerThanTen", "type": "error" },
+  { "inputs": [], "name": "Minting_IsZeroOrBiggerThanFive", "type": "error" },
   { "inputs": [], "name": "Minting_PublicSaleNotLive", "type": "error" },
   { "inputs": [], "name": "Partner_NotAllowed", "type": "error" },
   { "inputs": [], "name": "Pause_BaseURIMustBeSetFirst", "type": "error" },
@@ -33,6 +38,11 @@
   },
   { "inputs": [], "name": "Rewarding_NoBalanceToWithdraw", "type": "error" },
   { "inputs": [], "name": "Rewarding_NotReady", "type": "error" },
+  {
+    "inputs": [],
+    "name": "Rewarding_SatoshiRoundingErrorWillHappen",
+    "type": "error"
+  },
   {
     "inputs": [],
     "name": "Rewarding_SkippingOrDoubleRewarding",
@@ -379,6 +389,13 @@
   },
   {
     "inputs": [],
+    "name": "ChainLinkVRFContract",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "USDCRewardsBalance",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
@@ -534,15 +551,6 @@
     "type": "function"
   },
   {
-    "inputs": [
-      { "internalType": "address", "name": "_adressToCheck", "type": "address" }
-    ],
-    "name": "getHaveTheyMintedBefore",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [],
     "name": "getLiquidatedArrayLength",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
@@ -564,15 +572,6 @@
     "type": "function"
   },
   {
-    "inputs": [
-      { "internalType": "address", "name": "_address", "type": "address" }
-    ],
-    "name": "getMintCountForAddress",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [],
     "name": "getNumberOfRafflePlayers",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
@@ -583,15 +582,6 @@
     "inputs": [],
     "name": "getPartnerNetworkTeamCount",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "uint256", "name": "index", "type": "uint256" }
-    ],
-    "name": "getRafflePlayer",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -659,13 +649,6 @@
   {
     "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "name": "isBlacklisted",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "name": "isChainLinkVRFRole",
     "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "view",
     "type": "function"
@@ -809,6 +792,13 @@
   },
   {
     "inputs": [],
+    "name": "raffleLive",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "readyToReward",
     "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "view",
@@ -838,7 +828,7 @@
     ],
     "name": "rewardBulls",
     "outputs": [],
-    "stateMutability": "payable",
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -918,10 +908,9 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_address", "type": "address" },
-      { "internalType": "bool", "name": "value", "type": "bool" }
+      { "internalType": "address", "name": "_address", "type": "address" }
     ],
-    "name": "setChainlinkVrfRole",
+    "name": "setChainlinkVrfContractAddress",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -952,15 +941,6 @@
       { "internalType": "bool", "name": "value", "type": "bool" }
     ],
     "name": "setEcosystemRole",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "uint256", "name": "_price", "type": "uint256" }
-    ],
-    "name": "setMintingCost",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1197,7 +1177,7 @@
     ],
     "name": "updateUsdcBonusFromAnotherContract",
     "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -1218,13 +1198,6 @@
     "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "name": "userInDailyRaffle",
     "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "name": "userMintCount",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -1255,13 +1228,6 @@
   },
   {
     "inputs": [],
-    "name": "withdraw",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "withdrawBtcMinersSafeBalance",
     "outputs": [],
     "stateMutability": "nonpayable",
@@ -1275,13 +1241,15 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "withdrawNativeToken",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "_tokenContract",
-        "type": "address"
-      },
-      { "internalType": "uint256", "name": "_amount", "type": "uint256" }
+      { "internalType": "address", "name": "_tokenContract", "type": "address" }
     ],
     "name": "withdrawToken",
     "outputs": [],

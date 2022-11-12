@@ -98,7 +98,7 @@ const NFTMint = () => {
     setMinted(mintedNFTs)
     const account = user?.get('ethAddress')
     const _mintedByWallet = await contract.methods
-      .getMintCountForAddress(account)
+      .addressMintCount(account)
       .call()
     setMintedByWallet(_mintedByWallet)
     const _maxMintByWallet = await contract.methods.nftPerAddressLimit().call()
@@ -262,7 +262,7 @@ const NFTMint = () => {
                       <br />
                       <br />
                     </p>
-                    <p
+                    <div
                       className={`pb-4 text-lg font-normal text-cyan-600 ${
                         disabled && 'text-red-500'
                       }`}
@@ -275,7 +275,7 @@ const NFTMint = () => {
                         </p>
                       )}
                       <br />
-                    </p>
+                    </div>
                     <div className="mb-8 flex h-full w-full items-center">
                       <label
                         htmlFor="toggleB"
@@ -327,8 +327,8 @@ const NFTMint = () => {
                             cx="50%"
                             cy="50%"
                             stroke="#E04644"
-                            stroke-width="4"
-                            stroke-dasharray="20, 943"
+                            strokeWidth="4"
+                            strokeDasharray="20, 943"
                             fill="none"
                           ></circle>
                         </svg>

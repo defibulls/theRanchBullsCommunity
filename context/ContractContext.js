@@ -14,28 +14,30 @@ export const ContractProvider = ({ children }) => {
   const [tokenContract, setTokenContract] = useState(null)
   const [open, setOpen] = useState(false)
 
-  const loadTokenContract = async () => {
-    const web3 = await getWeb3()
-
-    const web3Contract = await new web3.eth.Contract(
-      currencyContractABI,
-      CurrencyContract
-    )
-    setTokenContract(web3Contract)
-  }
-
-  const loadMintContract = async () => {
-    const web3 = await getWeb3()
-    const web3Contract = await new web3.eth.Contract(
-      contractABI,
-      contractAddress
-    )
-    setContract(web3Contract)
-  }
-
   useEffect(() => {
-    loadMintContract()
-    loadTokenContract()
+    const loadTokenContract = async () => {
+      const web3 = await getWeb3()
+
+      const web3Contract = await new web3.eth.Contract(
+        currencyContractABI,
+        CurrencyContract
+      )
+      setTokenContract(web3Contract)
+    }
+
+    const loadMintContract = async () => {
+      const web3 = await getWeb3()
+      const web3Contract = await new web3.eth.Contract(
+        contractABI,
+        contractAddress
+      )
+      setContract(web3Contract)
+    }
+
+    return () => {
+      loadMintContract()
+      loadTokenContract()
+    }
   }, [])
 
   console.log(contract)

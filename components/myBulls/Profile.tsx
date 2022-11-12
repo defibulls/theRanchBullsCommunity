@@ -173,10 +173,6 @@ const Profile = () => {
             <p className="pr-3 text-sm tracking-wide text-gray-400">
               {buddyAddress}
             </p>
-            <PencilIcon
-              className="h-5 cursor-pointer"
-              onClick={() => setOpen(true)}
-            />
           </div>
         </div>
       )
