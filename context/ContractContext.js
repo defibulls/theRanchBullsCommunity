@@ -33,10 +33,8 @@ export const ContractProvider = ({ children }) => {
       setContract(web3Contract)
     }
 
-    return () => {
-      loadMintContract()
-      loadTokenContract()
-    }
+    loadMintContract()
+    loadTokenContract()
   }, [])
 
   console.log(contract)
