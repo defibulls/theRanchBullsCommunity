@@ -1,7 +1,11 @@
 import { useContext, useEffect, useState } from 'react'
 import { useChain, useMoralis } from 'react-moralis'
 import Header from '../Header'
-import { contractAddress, customStyles } from '../../lib/constants'
+import {
+  contractAddress,
+  CurrencyContract,
+  customStyles,
+} from '../../lib/constants'
 import ChainNotSupported from './ChainNotSupported'
 import Modal from 'react-modal'
 import Loader from '../modals/Loader'
@@ -28,6 +32,7 @@ const NFTMint = () => {
   const [maxBulls, setMaxBulls] = useState<number>(0)
   const [enterRaffle, setEnterRaffle] = useState<boolean>(false)
   const [rafflePlayers, setRafflePlayers] = useState<number>(0)
+  const [raffleLive, setRaffleLive] = useState<boolean>(false)
 
   const getGasPrice = async () => {
     const web3Provider = await Moralis.enableWeb3() // Get ethers.js web3Provider
@@ -46,8 +51,20 @@ const NFTMint = () => {
         `You can only mint up to ${maxMintPerWallet} NFTs per Wallet Address`
       )
 
-    setloading(true)
     const account = user?.get('ethAddress')
+    const _usdcBalance = await Moralis.Web3API.account.getTokenBalances({
+      chain: 'mumbai',
+      token_addresses: [CurrencyContract],
+      address: user?.get('ethaddress'),
+    })
+
+    //@ts-ignore
+    if (_usdcBalance[0].balance / 1000000 < totalPrice) {
+      return toast.error(`You don't have enough USDC.e`)
+    }
+    setloading(true)
+
+    const gasPrice = await getGasPrice()
 
     await tokenContract.methods
       .approve(contractAddress, String(totalPrice + '000000'))
@@ -63,24 +80,17 @@ const NFTMint = () => {
         }
       )
       .then(async () => {
-        await contract.methods.mint(count, enterRaffle).send(
-          {
-            from: account,
-          },
-          (err: any) => {
-            if (err) {
-              toast.error('Something went wrong!')
-              setloading(false)
-            }
-          }
-        )
+        await contract.methods.mint(count, enterRaffle).send({
+          from: account,
+          gasPrice: gasPrice,
+        })
       })
       .catch((err: any) => {
-        toast.error(err.message)
+        toast.error('Something went wrong! Please Try Again Later')
+        setloading(false)
       })
 
     const minted = count
-
     toast.success(`You've sucessfully minted ${minted} Bull!`)
     setloading(false)
   }
@@ -109,13 +119,18 @@ const NFTMint = () => {
       .getNumberOfRafflePlayers()
       .call()
     setRafflePlayers(_rafflePlayers)
+    const _raffleLive = await contract.methods.raffleLive().call()
+    setRaffleLive(_raffleLive)
   }
 
   const disable = () => {
-    if (Number(mintedByWallet) <= Number(maxMintPerWallet)) {
-      setDisabled(false)
-    } else {
+    if (
+      Number(mintedByWallet) > Number(maxMintPerWallet) ||
+      raffleLive == true
+    ) {
       setDisabled(true)
+    } else {
+      setDisabled(false)
     }
   }
 
@@ -398,9 +413,9 @@ const NFTMint = () => {
                           <button
                             disabled={disabled}
                             onClick={mint}
-                            className="w-full rounded-md bg-cyan-600 px-4 py-2 disabled:cursor-not-allowed disabled:bg-gray-600"
+                            className="w-full rounded-md bg-cyan-600 px-4 py-2 uppercase tracking-wider disabled:cursor-not-allowed disabled:bg-gray-600"
                           >
-                            MINT
+                            {raffleLive ? 'Raffle is Live' : 'Mint'}
                           </button>
                           <p>
                             TOTAL PRICE: <b>{totalPrice} USD</b>

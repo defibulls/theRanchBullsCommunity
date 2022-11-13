@@ -6,6 +6,7 @@ import {
   currencyContractABI,
 } from '../lib/constants'
 import { createAlchemyWeb3 } from '@alch/alchemy-web3'
+import web3 from 'web3'
 
 export const ContractContext = createContext()
 
