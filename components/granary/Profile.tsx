@@ -40,7 +40,6 @@ const Profile = () => {
   const [buddyAddress, setBuddyAddress] = useState(
     '0x0000000000000000000000000000000000000000'
   )
-  console.log(contract)
 
   const getRewardsData = async () => {
     const btcBullOwner = await contract.methods
