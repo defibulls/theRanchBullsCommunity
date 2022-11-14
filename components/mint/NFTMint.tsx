@@ -419,7 +419,7 @@ const NFTMint = () => {
                             {raffleLive ? 'Raffle is Live' : 'Mint'}
                           </button>
                           <p>
-                            TOTAL PRICE: <b>{totalPrice} USD</b>
+                            TOTAL PRICE: <b>{totalPrice} USDC.e</b>
                           </p>
                         </>
                       )}

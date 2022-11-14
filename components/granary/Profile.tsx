@@ -43,15 +43,11 @@ const Profile = () => {
   console.log(contract)
 
   const getRewardsData = async () => {
-    const _usdcRewards = await contract.methods
-      .getUsdcBalanceForAddress()
+    const btcBullOwner = await contract.methods
+      .btcBullOwners(user?.get('ethAddress'))
       .call()
-    console.log(_usdcRewards)
-    setUsdcRewards(_usdcRewards / 1000000)
-    const _wbtcRewards = await contract.methods
-      .getWbtcBalanceForAddress()
-      .call()
-    setWbtcRewards(_wbtcRewards / 100000000)
+    setUsdcRewards(btcBullOwner.USDC_Balance / 1000000)
+    setWbtcRewards(btcBullOwner.WBTC_Balance / 100000000)
 
     const _rewardDate = await contract.methods.currentRewardingDate().call()
     setRewardDate(_rewardDate)
