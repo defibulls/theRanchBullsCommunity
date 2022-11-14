@@ -37,12 +37,16 @@ const Profile = () => {
   const [standingMaintenanceFee, setStandingMaintenanceFee] =
     useState<number>(0)
   const [rewardDate, setRewardDate] = useState(0)
-  const [buddyAddress, setBuddyAddress] = useState(0)
+  const [buddyAddress, setBuddyAddress] = useState(
+    '0x0000000000000000000000000000000000000000'
+  )
+  console.log(contract)
 
   const getRewardsData = async () => {
     const _usdcRewards = await contract.methods
       .getUsdcBalanceForAddress()
       .call()
+    console.log(_usdcRewards)
     setUsdcRewards(_usdcRewards / 1000000)
     const _wbtcRewards = await contract.methods
       .getWbtcBalanceForAddress()
@@ -85,21 +89,6 @@ const Profile = () => {
 
     const nftsr: any[] = []
 
-    // for (let i = 0; i < data.result?.length!; i++) {
-    //   await fetch(data.result?.[i]?.token_uri!)
-    //     .then(
-    //       (res: any) => {
-    //         res.json().then((data: any) => {
-    //           nftsr?.push(data)
-    //         nftsr?.push(data)
-    //       },
-    //       (err) => {
-    //         toast.error(err.message)
-    //       }
-    //     )
-    //     .catch((err) => alert(err.message))
-    // }
-
     data.result?.forEach(async (nft) => {
       await fetch(nft.token_uri!).then((res: any) =>
         res
@@ -141,11 +130,11 @@ const Profile = () => {
         <div className="flex w-full flex-col justify-between space-y-4  pr-10 scrollbar-thin scrollbar-thumb-cyan-600">
           <div className="flex flex-col space-y-5">
             <h1 className="text-left text-xl font-semibold uppercase tracking-wider  text-gray-500">
-              TOTAL USDC REWARDS
+              TOTAL USDC.e REWARDS
             </h1>
           </div>
           <div className=" flex w-full items-center justify-between">
-            <h2 className="text-lg font-medium">{usdcRewards} USDC</h2>
+            <h2 className="text-lg font-medium">{usdcRewards} USDC.e</h2>
             <button
               onClick={(e) => withdrawUsdcReward(e)}
               className="flex h-10 w-20 items-center justify-center rounded-lg bg-teal-500  px-3 text-base font-medium"
@@ -182,10 +171,12 @@ const Profile = () => {
             <p className="pr-3 text-sm tracking-wide text-gray-400">
               {buddyAddress}
             </p>
-            <PencilIcon
-              className="h-5 cursor-pointer"
-              onClick={() => setOpen(true)}
-            />
+            {buddyAddress == '0x0000000000000000000000000000000000000000' && (
+              <PencilIcon
+                className="h-5 cursor-pointer"
+                onClick={() => setOpen(true)}
+              />
+            )}
           </div>
         </div>
       )
@@ -319,7 +310,7 @@ const Profile = () => {
             </div>
           </div>
           <div className="mt-32 flex h-fit w-[70%] flex-col rounded-xl bg-black bg-opacity-50 p-5 md:mr-10 md:w-[24rem]">
-            {nfts.length < 0 ? (
+            {nfts.length > 0 ? (
               <Carousel
                 autoPlay
                 showStatus={false}

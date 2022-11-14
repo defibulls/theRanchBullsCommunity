@@ -1,12 +1,12 @@
 import Head from 'next/head'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import toast from 'react-hot-toast'
 import { useMoralis } from 'react-moralis'
+import Profile from '../components/granary/Profile'
 import Header from '../components/Header'
 import ConnectWallet from '../components/mint/ConnectWallet'
-import Profile from '../components/myBulls/Profile'
 
-const Mybulls = () => {
+const Granary = () => {
   const { isAuthenticated, userError, authError } = useMoralis()
 
   useEffect(() => {
@@ -41,4 +41,4 @@ const Mybulls = () => {
   )
 }
 
-export default Mybulls
+export default Granary

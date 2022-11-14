@@ -6,7 +6,6 @@ import ConnectWallet from '../components/mint/ConnectWallet'
 import NFTMint from '../components/mint/NFTMint'
 
 const Mint = () => {
-  
   const { isAuthenticated, authError, userError } = useMoralis()
 
   useEffect(() => {
