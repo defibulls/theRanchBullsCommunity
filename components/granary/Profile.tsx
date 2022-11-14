@@ -212,17 +212,23 @@ const Profile = () => {
 
   const withdrawUsdcReward = async (e: any) => {
     e.preventDefault()
+    const account = user?.get('ethAddress')
     if (usdcRewards == 0)
       return toast.error('You have no USDC reward to withdraw')
-    await contract.methods.withdrawUsdcBalance().send()
+    await contract.methods.withdrawUsdcBalance().send({
+      from: account,
+    })
   }
 
   const withdrawWbtcReward = async (e: any) => {
     e.preventDefault()
+    const account = user?.get('ethAddress')
     if (wbtcRewards == 0)
       return toast.error('You have no WBTC reward to withdraw')
 
-    await contract.methods.withdrawWbtcBalance().send()
+    await contract.methods.withdrawWbtcBalance().send({
+      from: account,
+    })
   }
 
   const image = nfts?.[nfts.length - 1]?.image
