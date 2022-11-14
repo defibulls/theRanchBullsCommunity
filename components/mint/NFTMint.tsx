@@ -85,14 +85,15 @@ const NFTMint = () => {
           gasPrice: gasPrice,
         })
       })
+      .then(() => {
+        const minted = count
+        toast.success(`You've sucessfully minted ${minted} Bull!`)
+        setloading(false)
+      })
       .catch((err: any) => {
         toast.error('Something went wrong! Please Try Again Later')
         setloading(false)
       })
-
-    const minted = count
-    toast.success(`You've sucessfully minted ${minted} Bull!`)
-    setloading(false)
   }
 
   const fetchPrice = async () => {

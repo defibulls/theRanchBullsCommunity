@@ -27,6 +27,11 @@
   { "inputs": [], "name": "Minting_ExceedsTotalBulls", "type": "error" },
   { "inputs": [], "name": "Minting_IsZeroOrBiggerThanFive", "type": "error" },
   { "inputs": [], "name": "Minting_PublicSaleNotLive", "type": "error" },
+  {
+    "inputs": [],
+    "name": "Partner_MutliplePartnerSwitchesNotAllowed",
+    "type": "error"
+  },
   { "inputs": [], "name": "Partner_NotAllowed", "type": "error" },
   { "inputs": [], "name": "Pause_BaseURIMustBeSetFirst", "type": "error" },
   { "inputs": [], "name": "Pause_MustBePaused", "type": "error" },
