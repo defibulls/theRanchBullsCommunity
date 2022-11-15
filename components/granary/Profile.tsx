@@ -66,7 +66,7 @@ const Profile = () => {
     const wbtcRewards = await contract.methods
       .getWbtcBalanceForAddress(user?.get('ethAddress'))
       .call()
-    setUsdcRewards(wbtcRewards / 100000000)
+    setWbtcRewards(wbtcRewards / 100000000)
   }
   
   
