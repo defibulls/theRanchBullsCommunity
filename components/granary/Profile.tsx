@@ -41,32 +41,15 @@ const Profile = () => {
     '0x0000000000000000000000000000000000000000'
   )
 
-//   const getRewardsData = async () => {
-//     const btcBullOwner = await contract.methods
-//       .btcBullOwners(user?.get('ethAddress'))
-//       .call()
-//     setUsdcRewards(btcBullOwner.USDC_Balance / 1000000)
-//     setWbtcRewards(btcBullOwner.WBTC_Balance / 100000000)
-
-//     const _rewardDate = await contract.methods.currentRewardingDate().call()
-//     setRewardDate(_rewardDate)
-//   }
-  
-  const getRewardsUSDC = async () => {
-    const usdcRewards = await contract.methods
-      .getUsdcBalanceForAddress(user?.get('ethAddress'))
+  const getRewardsData = async () => {
+    const btcBullOwner = await contract.methods
+      .btcBullOwners(user?.get('ethAddress'))
       .call()
-    setUsdcRewards(usdcRewards / 1000000)
+    setUsdcRewards(btcBullOwner.USDC_Balance / 1000000)
+    setWbtcRewards(btcBullOwner.WBTC_Balance / 100000000)
 
     const _rewardDate = await contract.methods.currentRewardingDate().call()
     setRewardDate(_rewardDate)
-  }
-  
-  const getRewardsWBTC = async () => {
-    const wbtcRewards = await contract.methods
-      .getWbtcBalanceForAddress(user?.get('ethAddress'))
-      .call()
-    setWbtcRewards(wbtcRewards / 100000000)
   }
   
   
@@ -79,8 +62,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (contract) {
-      getRewardsUSDC()
-      getRewardsWBTC()
+      getRewardsData()
       getMaintenanceFeeInfo()
       getBuddyAddress()
     }
