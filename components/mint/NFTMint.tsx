@@ -87,7 +87,7 @@ const NFTMint = () => {
       })
       .then(() => {
         const minted = count
-        toast.success(`You've sucessfully minted ${minted} Bull!`)
+        toast.success(`BTC Bulls minted: ${minted}`)
         setloading(false)
       })
       .catch((err: any) => {
