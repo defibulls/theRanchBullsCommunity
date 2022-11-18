@@ -180,7 +180,7 @@ const Profile = () => {
                 <div className="w-full space-y-5 pr-10">
                     <div className="flex flex-col space-y-5">
                         <h1 className="text-left text-xl font-semibold uppercase tracking-wider  text-gray-500">
-                            TOTAL Maintenance fee pending
+                            Maintenance fee balance
                         </h1>
                     </div>
                     <div className=" flex w-full items-center justify-between">
@@ -196,10 +196,10 @@ const Profile = () => {
                     </div>
                     <div className="flex flex-col space-y-5">
                         <h1 className="text-left text-xl font-semibold uppercase tracking-wider  text-gray-500">
-                            Standing Maintenance fee
+                            Maintenance fee standing
                         </h1>
                     </div>
-                    <div className=" flex w-full items-center justify-between text-red-500">
+                    <div className=" flex w-full items-center justify-between text-white-500">
                         <h2 className="text-lg font-medium">
                             {MaintenanceFeeStanding} USDC
                         </h2>
