@@ -201,7 +201,7 @@ const Profile = () => {
                     </div>
                     <div className=" flex w-full items-center justify-between text-white-500">
                         <h2 className="text-lg font-medium">
-                            {MaintenanceFeeStanding}   MONTHS
+                            {MaintenanceFeeStanding}   MONTH(S)
                         </h2>
                     </div>
                 </div>
