@@ -152,9 +152,6 @@ const Profile = () => {
               Claim
             </button>
           </div>
-          <h1 className="text-base font-semibold uppercase tracking-wider text-gray-500">
-            Next Reward Date - {rewardDate == 0 ? 'TBD' : rewardDate}
-          </h1>
         </div>
       )
     } else if (modal == 'buddy') {
