@@ -132,7 +132,7 @@ const Profile = () => {
                         </h1>
                     </div>
                     <div className=" flex w-full items-center justify-between">
-                        <h2 className="text-lg font-medium">{usdcRewards} USDC.e</h2>
+                        <h2 className="text-lg font-medium">{usdcRewards} </h2>
                         <button
                             onClick={(e) => withdrawUsdcReward(e)}
                             className="flex h-10 w-20 items-center justify-center rounded-lg bg-teal-500  px-3 text-base font-medium"
@@ -146,7 +146,7 @@ const Profile = () => {
                         </h1>
                     </div>
                     <div className=" flex w-full items-center justify-between">
-                        <h2 className="text-lg font-medium">{wbtcRewards} WBTC</h2>
+                        <h2 className="text-lg font-medium">{wbtcRewards} </h2>
                         <button
                             onClick={(e) => withdrawWbtcReward(e)}
                             className="flex h-10 w-20 items-center justify-center rounded-lg bg-teal-500  px-3 text-base font-medium"
@@ -185,7 +185,7 @@ const Profile = () => {
                     </div>
                     <div className=" flex w-full items-center justify-between">
                         <h2 className="text-lg font-medium">
-                            {totalmaintenanceFeeBalance} USDC.e
+                            {totalmaintenanceFeeBalance}   USDC.e
                         </h2>
                         <button
                             onClick={() => paytotalMaintenanceFee()}
@@ -201,7 +201,7 @@ const Profile = () => {
                     </div>
                     <div className=" flex w-full items-center justify-between text-white-500">
                         <h2 className="text-lg font-medium">
-                            {MaintenanceFeeStanding} MONTHS
+                            {MaintenanceFeeStanding}   MONTHS
                         </h2>
                     </div>
                 </div>
