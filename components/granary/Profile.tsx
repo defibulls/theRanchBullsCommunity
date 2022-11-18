@@ -185,7 +185,7 @@ const Profile = () => {
                     </div>
                     <div className=" flex w-full items-center justify-between">
                         <h2 className="text-lg font-medium">
-                            {totalmaintenanceFeeBalance} USDC
+                            {totalmaintenanceFeeBalance} USDC.e
                         </h2>
                         <button
                             onClick={() => paytotalMaintenanceFee()}
@@ -201,7 +201,7 @@ const Profile = () => {
                     </div>
                     <div className=" flex w-full items-center justify-between text-white-500">
                         <h2 className="text-lg font-medium">
-                            {MaintenanceFeeStanding} USDC
+                            {MaintenanceFeeStanding} MONTHS
                         </h2>
                     </div>
                 </div>
