@@ -10,6 +10,7 @@ import { ContractContext } from '../../context/ContractContext'
 import toast from 'react-hot-toast'
 import { PencilIcon } from '@heroicons/react/24/solid'
 import SetPartnerModal from '../modals/SetPartnerModal'
+import { access } from 'fs'
 
 interface NFTprops {
   name: string
@@ -28,7 +29,7 @@ const Profile = () => {
   const { isAuthenticated, user, Moralis } = useMoralis()
   const [loading, setLoading] = useState<boolean>(false)
   const [usdcRewards, setUsdcRewards] = useState<number>(0)
-  const { contract, open, setOpen } = useContext(ContractContext)
+  const { contract, open, setOpen, tokenContract } = useContext(ContractContext)
   const [nftOwned, setNftOwned] = useState<number>(0)
   const [modal, setModal] = useState<string>('rewards')
   const [wbtcRewards, setWbtcRewards] = useState<number>(0)
@@ -36,7 +37,6 @@ const Profile = () => {
     useState<number>(0)
   const [standingMaintenanceFee, setStandingMaintenanceFee] =
     useState<number>(0)
-  const [rewardDate, setRewardDate] = useState(0)
   const [buddyAddress, setBuddyAddress] = useState(
     '0x0000000000000000000000000000000000000000'
   )
@@ -47,9 +47,6 @@ const Profile = () => {
       .call()
     setUsdcRewards(btcBullOwner.USDC_Balance / 1000000)
     setWbtcRewards(btcBullOwner.WBTC_Balance / 100000000)
-
-    const _rewardDate = await contract.methods.currentRewardingDate().call()
-    setRewardDate(_rewardDate)
   }
 
   const getBuddyAddress = async () => {
@@ -98,22 +95,42 @@ const Profile = () => {
   }
 
   const getMaintenanceFeeInfo = async () => {
-    const _maintenanceFeePending = await contract.methods
-      .getMaintenanceFeeBalanceForAddress()
+    const btcBullOwner = await contract.methods
+      .btcBullOwners(user?.get('ethAddress'))
       .call()
 
-    setTotalMaintenanceFeePending(_maintenanceFeePending / 1000000)
-
-    const _standingMaintenanceFee = await contract.methods
-      .getMaintenanceFeeStandingForAddress()
-      .call()
-
-    setStandingMaintenanceFee(_standingMaintenanceFee / 1000000)
+    setTotalMaintenanceFeePending(btcBullOwner.maintenanceFeeBalance)
+    setStandingMaintenanceFee(btcBullOwner.maintenanceFeesStanding)
+  }
+  const setColor = (time: any) => {
+    if (time == 0) {
+      return 'text-green-500'
+    } else if (time == 1) {
+      return 'text-yellow-500'
+    } else if (time == 2) {
+      return 'text-orange-400'
+    } else if (time == 3) {
+      return 'text-red-500'
+    }
   }
 
   const paytotalMaintenanceFee = async () => {
     if (totalMaintenanceFeePending == 0)
       return toast.error('You have already payed the maintenance fee')
+
+    const balance = await tokenContract.methods
+      .balanceOf(user?.get('ethAddress'))
+      .call()
+
+    if (balance < totalMaintenanceFeePending)
+      return toast.error("You don't have enough USDC.e in your wallet!")
+
+    await tokenContract.methods
+      .approve(contractAddress, String(totalMaintenanceFeePending + '000000'))
+      .send({
+        from: user?.get('ethAddress'),
+      })
+
     await contract.methods
       .payMaintanenceFees()
       .send({ from: user?.get('ethAddress') })
@@ -151,9 +168,6 @@ const Profile = () => {
               Claim
             </button>
           </div>
-          <h1 className="text-base font-semibold uppercase tracking-wider text-gray-500">
-            Next Reward Date - {rewardDate == 0 ? 'TBD' : rewardDate}
-          </h1>
         </div>
       )
     } else if (modal == 'buddy') {
@@ -199,9 +213,14 @@ const Profile = () => {
               Standing Maintenance fee
             </h1>
           </div>
-          <div className=" flex w-full items-center justify-between text-red-500">
+          <div
+            className={`flex w-full items-center justify-between ${setColor(
+              standingMaintenanceFee
+            )}`}
+          >
             <h2 className="text-lg font-medium">
-              {standingMaintenanceFee} USDC
+              {standingMaintenanceFee}{' '}
+              {standingMaintenanceFee <= 1 ? 'MONTH' : 'MONTHS'}
             </h2>
           </div>
         </div>

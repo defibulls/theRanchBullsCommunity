@@ -1,25 +1,24 @@
 import { useContext, useEffect, useState } from 'react'
 import { useChain, useMoralis } from 'react-moralis'
 import Header from '../Header'
-import {
-  contractAddress,
-  CurrencyContract,
-  customStyles,
-} from '../../lib/constants'
+import { customStyles } from '../../lib/constants'
 import ChainNotSupported from './ChainNotSupported'
 import Modal from 'react-modal'
 import Loader from '../modals/Loader'
 import { ContractContext } from '../../context/ContractContext'
 import toast from 'react-hot-toast'
 import { motion } from 'framer-motion'
+import Paused from './Paused'
+import PublicSale from './PublicSale'
+import RaffleLive from './RaffleLive'
+import MintSection from './MintSection'
 
 Modal.setAppElement('#__next')
 
 const NFTMint = () => {
-  const { user, Moralis } = useMoralis()
-  const { contract, tokenContract } = useContext(ContractContext)
+  const { user } = useMoralis()
+  const { contract } = useContext(ContractContext)
   const { chainId } = useChain()
-  const [count, setCount] = useState<number>(1)
   const [loading, setloading] = useState<boolean>(false)
   const [minted, setMinted] = useState<number>(0)
   const [price, setPrice] = useState<any>(0)
@@ -27,78 +26,10 @@ const NFTMint = () => {
   const [maxMintPerWallet, setMaxMintPerWallet] = useState<number>(0)
   const [paused, setPaused] = useState<boolean>(false)
   const [publicSale, setPublicSale] = useState<boolean>(false)
-  const [disabled, setDisabled] = useState<boolean>(false)
-  const [totalPrice, setTotalPrice] = useState<number>()
   const [maxBulls, setMaxBulls] = useState<number>(0)
-  const [enterRaffle, setEnterRaffle] = useState<boolean>(false)
   const [rafflePlayers, setRafflePlayers] = useState<number>(0)
+  const totalPrice = 0
   const [raffleLive, setRaffleLive] = useState<boolean>(false)
-
-  const getGasPrice = async () => {
-    const web3Provider = await Moralis.enableWeb3() // Get ethers.js web3Provider
-    const gasPrice = await web3Provider.getGasPrice()
-
-    return gasPrice
-  }
-
-  const mint = async () => {
-    if (count === 0) return toast.error('Please enter a valid amount')
-    if (count > 5)
-      return toast.error('You can only mint up to 5 NFTs at a time')
-    const totalQuantity = Number(count) + Number(mintedByWallet)
-    if (totalQuantity > maxMintPerWallet)
-      return toast.error(
-        `You can only mint up to ${maxMintPerWallet} NFTs per Wallet Address`
-      )
-
-    const account = user?.get('ethAddress')
-    const _usdcBalance = await Moralis.Web3API.account.getTokenBalances({
-      chain: 'mumbai',
-      token_addresses: [CurrencyContract],
-      address: user?.get('ethaddress'),
-    })
-
-    //@ts-ignore
-    if (_usdcBalance[0].balance / 1000000 < totalPrice) {
-      return toast.error(`You don't have enough USDC.e`)
-    }
-    setloading(true)
-
-    const gasPrice = await getGasPrice()
-
-    await tokenContract.methods
-      .approve(contractAddress, String(totalPrice + '000000'))
-      .send(
-        {
-          from: account,
-        },
-        (err: any) => {
-          if (err) {
-            toast.error(err.message.toLocaleString())
-            setloading(false)
-          }
-        }
-      )
-      .then(async () => {
-        await contract.methods.mint(count, enterRaffle).send({
-          from: account,
-          gasPrice: gasPrice,
-        })
-      })
-      .then(() => {
-        const minted = count
-        toast.success(`You've sucessfully minted ${minted} Bull!`)
-        setloading(false)
-      })
-      .catch((err: any) => {
-        toast.error('Something went wrong! Please Try Again Later')
-        setloading(false)
-      })
-  }
-
-  const fetchPrice = async () => {
-    setPrice(await contract.methods.mintingCost().call())
-  }
 
   const fetchData = async () => {
     const mintedNFTs = await contract.methods.totalSupply().call()
@@ -124,66 +55,47 @@ const NFTMint = () => {
     setRaffleLive(_raffleLive)
   }
 
-  const disable = () => {
-    if (
-      Number(mintedByWallet) > Number(maxMintPerWallet) ||
-      raffleLive == true
-    ) {
-      setDisabled(true)
-    } else {
-      setDisabled(false)
-    }
-  }
-
   useEffect(() => {
     if (contract) {
       fetchData()
     }
-  }, [contract, mint])
+  }, [contract])
 
-  useEffect(() => {
-    if (contract) {
-      fetchPrice()
-      calculateTotalPrice(count)
+  const renderSection = () => {
+    if (paused) {
+      return <Paused />
+    } else if (!publicSale) {
+      return (
+        <PublicSale
+          maxbulls={maxBulls}
+          minted={minted}
+          price={price}
+          rafflePlayers={rafflePlayers}
+          totalPrice={totalPrice}
+        />
+      )
+    } else if (raffleLive) {
+      return (
+        <RaffleLive
+          maxbulls={maxBulls}
+          minted={minted}
+          rafflePlayers={rafflePlayers}
+        />
+      )
+    } else {
+      return (
+        <MintSection
+          setMinted={setMinted}
+          maxbulls={maxBulls}
+          maxMintPerWallet={maxMintPerWallet}
+          minted={minted}
+          rafflePlayers={rafflePlayers}
+          mintedByWallet={mintedByWallet}
+          setLoading={setloading}
+        />
+      )
     }
-  }, [contract, count, fetchPrice])
-
-  useEffect(() => {
-    if (contract) {
-      calculateTotalPrice(count)
-    }
-  }, [fetchPrice])
-
-  useEffect(() => {
-    setCount(1)
-  }, [])
-
-  const calculateTotalPrice = (count: number) => {
-    const pricet = count * price
-    setTotalPrice(pricet)
   }
-
-  const decrement = (e: any) => {
-    e.preventDefault()
-    if (count == 1) return
-    setCount(count - 1)
-  }
-
-  const increment = (e: any) => {
-    e.preventDefault()
-    if (count == 5) return
-    setCount(count + 1)
-  }
-
-  const checkHandler = () => {
-    setEnterRaffle(!enterRaffle)
-  }
-
-  useEffect(() => {
-    if (contract) {
-      disable()
-    }
-  }, [mintedByWallet, contract, maxMintPerWallet])
 
   return (
     <div className="h-full overflow-y-scroll lg:overflow-hidden">
@@ -219,27 +131,9 @@ const NFTMint = () => {
                   </iframe>
                 </motion.div>
 
-                {paused ? (
-                  <div>
-                    <p className="mb-1 font-marker text-4xl font-black text-cyan-600 underline underline-offset-2">
-                      CONTRACT PAUSED
-                    </p>
-                    <p className="mt-4 text-xl font-bold ">
-                      Contract Paused. Please Check Discord.
-                      <br />
-                      <br />
-                    </p>
-                    <a
-                      href="https://discord.gg/URMH4bSAht"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <button className=" font-sansw-full rounded-md bg-cyan-600 px-4 py-2 font-bold ">
-                        CLICK HERE TO JOIN DISCORD
-                      </button>
-                    </a>
-                  </div>
-                ) : (
+                {renderSection()}
+
+                {/*
                   <motion.div
                     initial={{
                       x: 200,
@@ -413,7 +307,6 @@ const NFTMint = () => {
                         <>
                           <button
                             disabled={disabled}
-                            onClick={mint}
                             className="w-full rounded-md bg-cyan-600 px-4 py-2 uppercase tracking-wider disabled:cursor-not-allowed disabled:bg-gray-600"
                           >
                             {raffleLive ? 'Raffle is Live' : 'Mint'}
@@ -425,7 +318,7 @@ const NFTMint = () => {
                       )}
                     </div>
                   </motion.div>
-                )}
+                )} */}
               </div>
             )}
           </div>
