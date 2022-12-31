@@ -2,6 +2,7 @@ import React from "react";
 import About from "./About";
 import Banner from "./Banner";
 import Slider from "./Slider";
+import Tokenomics from "./Tokenomics";
 
 type Props = {};
 
@@ -11,6 +12,7 @@ const Home = (props: Props) => {
       <Banner />
       <About />
       <Slider />
+      <Tokenomics />
     </div>
   );
 };
