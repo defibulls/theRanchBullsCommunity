@@ -214,17 +214,15 @@ function Header() {
 
             {!isActive && (
               <>
-                {status == "authenticated" ? (
-                  <div
+                {/* {status == "authenticated" ? (
+                  {/* <div
                     className={`mx-2 flex cursor-pointer items-center justify-between rounded-2xl bg-[#191B1F] text-[1rem] font-semibold`}
                   >
                     <div
                       // onClick={() => router.push(`/${section}/exchange`)}
                       className={`z-50 mr-2 flex h-8 cursor-pointer items-center rounded-2xl border-[#163256] bg-[#172A42] p-2`}
                     >
-                      {/* @ts-ignore */}
                       {data.user?.address.slice(0, 5)}...
-                      {/* @ts-ignore */}
                       {data.user?.address.slice(-4)}
                     </div>
                     <div
@@ -247,13 +245,13 @@ function Header() {
                       </svg>
                     </div>
                   </div>
-                ) : (
-                  <div
-                    className={`flex  items-center justify-center py-2 px-4 bg-cyan-400 rounded-full text-white cursor-pointer uppercase tracking-widest font-semibold`}
-                  >
-                    Connect Wallet
-                  </div>
-                )}
+                ) : ( */}
+                <div
+                  className={`flex  items-center justify-center py-2 px-4 bg-cyan-400 rounded-full text-white cursor-pointer uppercase tracking-widest font-semibold`}
+                >
+                  Connect Wallet
+                </div>
+                {/* // )} */}
               </>
             )}
           </div>
