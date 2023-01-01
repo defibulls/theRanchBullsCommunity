@@ -4,7 +4,7 @@ const Tokenomics = () => {
   return (
     <div
       id="tokenomics"
-      className="flex h-full min-h-fit pb-36 text-white flex-col items-center justify-center gap-4 bg-black px-[5%]"
+      className="flex h-full min-h-fit pb-36 max-w-[90rem] mx-auto text-white flex-col items-center justify-center gap-4 bg-black px-[5%]"
     >
       <div className="flex min-h-min w-full flex-col items-start justify-center lg:p-10">
         <div className="relative flex w-full flex-row items-end justify-center md:justify-start">

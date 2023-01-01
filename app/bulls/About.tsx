@@ -4,7 +4,7 @@ const About = () => {
   return (
     <div
       id="about"
-      className="flex max-h-fit w-full flex-col items-center justify-around gap-4 bg-black md:h-screen snap-center md:flex-row px-10 md:px-[10%]"
+      className="flex max-h-fit w-full max-w-[90rem] mx-auto flex-col items-center justify-around gap-4 bg-black md:h-screen snap-center md:flex-row px-10 md:px-[10%]"
     >
       <div className="grid-template grid h-fit w-full gap-4 md:w-[30%]">
         <Image

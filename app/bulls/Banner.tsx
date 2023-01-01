@@ -43,7 +43,7 @@ const Banner = (props: Props) => {
           <button
             type="button"
             // onClick={() => toast.error("Mint not live!")}
-            className="z-10 rounded-lg bg-purple-600 py-2 px-12 font-marker font-light"
+            className="z-10 rounded-lg bg-purple-600 hover:bg-white hover:text-purple-600 transition-all duration-200 ease-in py-2 px-12 font-marker font-light"
           >
             MINT
           </button>

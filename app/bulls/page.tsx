@@ -1,6 +1,7 @@
 import React from "react";
 import About from "./About";
 import Banner from "./Banner";
+import Roadmap from "./Roadmap";
 import Slider from "./Slider";
 import Tokenomics from "./Tokenomics";
 
@@ -12,6 +13,7 @@ const Home = (props: Props) => {
       <Banner />
       <About />
       <Slider />
+      <Roadmap />
       <Tokenomics />
     </div>
   );
