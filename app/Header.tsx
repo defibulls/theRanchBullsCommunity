@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 // import { useMoralis } from "react-moralis";
 import { itemVar, parentVar } from "../animations/headerVariant";
@@ -18,7 +19,7 @@ function Header() {
       drag="y"
       draggable={true}
       dragConstraints={{ top: 0, bottom: 0 }}
-      dragElastic={0.01}
+      dragElastic={0.5}
       onDragEnd={(_, info) => {
         if (info.offset.y > 20) {
           setDirection(0);
@@ -52,7 +53,7 @@ function Header() {
             initial="from"
             animate="to"
             exit="exit"
-            className="relative grid grid-cols-5 lg:grid-cols-6  "
+            className="relative grid grid-cols-5 lg:grid-cols-6"
           >
             <motion.div
               variants={itemVar}
@@ -66,6 +67,22 @@ function Header() {
             </motion.div>
 
             <div className="col-span-4 flex w-full h-full justify-center space-x-20">
+              <motion.div variants={itemVar} className="text-left text-white">
+                <h1 className="text-lg font-bold uppercase tracking-wider text-gray-500">
+                  Sitemap
+                </h1>
+                <div className="ml-4 mt-4 flex flex-col space-y-2">
+                  <Link target="_blank" href="/mint" className="as">
+                    Mint
+                  </Link>
+                  <Link href="/exchange" target="_blank">
+                    Exchange
+                  </Link>
+                  <Link href="/support" target="_blank">
+                    Support
+                  </Link>
+                </div>
+              </motion.div>
               <motion.div variants={itemVar} className="text-left text-white">
                 <h1 className="text-lg font-bold uppercase tracking-wider text-gray-500">
                   Information
