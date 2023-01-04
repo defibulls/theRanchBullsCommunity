@@ -4,9 +4,9 @@ const Tokenomics = () => {
   return (
     <div
       id="tokenomics"
-      className="flex h-full min-h-fit pb-36 max-w-[90rem] mx-auto text-white flex-col items-center justify-center gap-4 bg-black px-[5%]"
+      className="flex min-h-fit max-w-[90rem] md:pb-64 px-[5%] mx-auto text-white flex-col items-center justify-center gap-4 bg-black "
     >
-      <div className="flex min-h-min w-full flex-col items-start justify-center lg:p-10">
+      <div className="flex h-full w-full flex-col items-start justify-center lg:p-10">
         <div className="relative flex w-full flex-row items-end justify-center md:justify-start">
           <div>
             <p className="font-marker text-4xl font-black">HANDBOOK OVERVIEW</p>
@@ -14,7 +14,7 @@ const Tokenomics = () => {
           </div>
         </div>
         <div
-          className={`mt-[2rem] grid h-fit w-full grid-cols-1 gap-y-0 md:gap-y-[5%] lg:grid-cols-2`}
+          className={`mt-[2rem] min-h-fit grid w-full grid-cols-1 gap-y-0 md:gap-y-[5%] lg:grid-cols-2`}
         >
           {data.bulls.tokenomics.map((tokenomic, i) => (
             <div
