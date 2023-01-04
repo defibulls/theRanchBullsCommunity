@@ -81,7 +81,6 @@ export const ContractProvider = ({ children }) => {
       value={{
         contract,
         tokenContract,
-        contractAddress,
         open,
         setOpen,
         setRawNfts,

@@ -1,4 +1,5 @@
 import React from "react";
+import Header from "../Header";
 import About from "./About";
 import Banner from "./Banner";
 import PresaleDetail from "./PresaleDetail";
@@ -11,6 +12,7 @@ type Props = {};
 const Home = (props: Props) => {
   return (
     <div className="h-full w-full overflow-x-hidden ">
+      <Header notLanding={true} />
       <Banner />
       <About />
       <Slider />
