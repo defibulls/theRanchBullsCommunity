@@ -12,7 +12,7 @@ const Roadmap = () => {
           <hr aria-orientation="horizontal" className="my-5" />
         </div>
       </div>
-      <img src="/images/roadmap.psd" alt="" />
+      <img src="/images/roadmap.svg" alt="" />
     </div>
   );
 };
