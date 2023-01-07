@@ -9,7 +9,9 @@ const Tokenomics = () => {
       <div className="flex h-full w-full flex-col items-start justify-center lg:p-10">
         <div className="relative flex w-full flex-row items-end justify-center md:justify-start">
           <div>
-            <p className="font-marker text-4xl font-black">HANDBOOK OVERVIEW</p>
+            <p className="font-marker text-4xl font-black">
+              WHITEPAPER OVERVIEW
+            </p>
             <hr aria-orientation="horizontal" className="my-5" />
           </div>
         </div>
