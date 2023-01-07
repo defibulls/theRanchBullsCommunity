@@ -1,9 +1,12 @@
 {
+  "name": "theranch",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "@alch/alchemy-web3": "^1.4.7",
@@ -29,14 +32,15 @@
     "wagmi": "^0.10.3"
   },
   "devDependencies": {
-    "@types/node": "18.11.3",
-    "@types/react": "18.0.21",
+    "@types/node": "18.7.18",
+    "@types/react": "18.0.20",
     "@types/react-dom": "18.0.6",
-    "@types/react-modal": "^3.13.1",
-    "autoprefixer": "^10.4.12",
+    "autoprefixer": "^10.4.11",
     "flow-babel-webpack-plugin": "^1.1.1",
-    "postcss": "^8.4.18",
-    "tailwindcss": "^3.2.4",
-    "typescript": "4.9.4"
+    "eslint": "8.23.1",
+    "eslint-config-next": "12.3.1",
+    "postcss": "^8.4.16",
+    "tailwindcss": "^3.1.8",
+    "typescript": "4.8.3"
   }
 }
