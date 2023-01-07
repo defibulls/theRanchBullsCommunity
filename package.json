@@ -8,9 +8,6 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "engines": {
-    "node": "18.x"
-  },
   "dependencies": {
     "@alch/alchemy-web3": "^1.4.7",
     "@headlessui/react": "^1.7.7",
