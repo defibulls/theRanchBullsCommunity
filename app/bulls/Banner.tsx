@@ -38,15 +38,15 @@ const Banner = (props: Props) => {
           </p>
           <hr className="z-10 mb-2 w-full border-gray-400" />
           <p className="z-10 mb-4 w-full text-center text-xl font-light md:text-4xl">
-            FEB 1 @ 7 PM EST
+            {/* FEB 1 @ 7 PM EST */}Q1 2023
           </p>
-          <button
+          {/* <button
             type="button"
             // onClick={() => toast.error("Mint not live!")}
             className="z-10 rounded-lg bg-purple-600 hover:bg-white hover:text-purple-600 transition-all duration-200 ease-in py-2 px-12 font-marker font-light"
           >
             MINT
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

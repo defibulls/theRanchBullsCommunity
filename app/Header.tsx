@@ -136,13 +136,20 @@ const Header = ({ notLanding, setLanding }: props) => {
                 EXCHANGE
               </div>
               <Link href="/bulls/support" className={`${style.navItem}`}>
-                SUPPORT
+                FAQs
               </Link>
-              <Link
+              {/* <Link
                 href="/bulls"
                 className={`${selectedNav === "mint" && style.activeNavItem}`}
               >
                 <div className={style.navItem}>MINT</div>
+              </Link> */}
+              <Link
+                href="/bulls/team"
+                // target="_blank"
+                className={`${selectedNav === "team" && style.activeNavItem}`}
+              >
+                <div className={style.navItem}>TEAM</div>
               </Link>
               <Link
                 href="https://theranch.gitbook.io/"
@@ -172,7 +179,7 @@ const Header = ({ notLanding, setLanding }: props) => {
           className="flex cursor-pointer text-white items-center justify-center "
         >
           {/* {section != "" && ( */}
-          <>
+          {/* <>
             <div className="mx-1 rounded-2xl bg-[#191B1F] px-2 py-1 text-[0.9rem] font-semibold">
               <div className="z-50 mx-1 flex h-8 cursor-pointer items-center rounded-2xl border-[#163256] bg-[#172A42] px-3 py-3">
                 <Link
@@ -182,9 +189,9 @@ const Header = ({ notLanding, setLanding }: props) => {
                   Mint with Card
                 </Link>
               </div>
-            </div>
-            <div className="mx-1 flex cursor-pointer items-center justify-center rounded-2xl bg-[#191B1F] px-1 py-1 text-[0.9rem] font-semibold">
-              <>
+            </div> */}
+          {/* <div className="mx-1 flex cursor-pointer items-center justify-center rounded-2xl bg-[#191B1F] px-1 py-1 text-[0.9rem] font-semibold"> */}
+          {/* <>
                 {status == "authenticated" ? (
                   <div
                     className={`mx-2 flex cursor-pointer items-center justify-between rounded-2xl bg-[#191B1F] text-[1rem] font-semibold`}
@@ -193,9 +200,8 @@ const Header = ({ notLanding, setLanding }: props) => {
                       // onClick={() => router.push(`/${section}/exchange`)}
                       className={`z-50 mr-2 flex h-8 cursor-pointer items-center rounded-2xl border-[#163256] bg-[#172A42] p-2`}
                     >
-                      {/* @ts-ignore */}
                       {data.user?.address.slice(0, 5)}...
-                      {/* @ts-ignore */}
+                      
                       {data.user?.address.slice(-4)}
                     </div>
                     <div
@@ -232,7 +238,7 @@ const Header = ({ notLanding, setLanding }: props) => {
                 )}
               </>
             </div>
-          </>
+          </> */}
           {/* // )} */}
           <div className="mx-1 rounded-2xl bg-[#191B1F] px-2 py-1 text-[0.9rem] font-semibold">
             <Menu>

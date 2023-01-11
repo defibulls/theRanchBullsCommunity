@@ -17,6 +17,10 @@ const PresaleDetail = () => {
           <p className="text-lg">1 FEB @ 7PM</p>
         </div>
         <div className="flex justify-center space-x-2 items-center">
+          <CurrencyDollarIcon className="h-6 text-gray-500" />
+          <p className="text-lg">400</p>
+        </div>
+        <div className="flex justify-center space-x-2 items-center">
           <TicketIcon className="h-6 text-gray-500" />
           <p className="text-lg">250</p>
         </div>
@@ -27,10 +31,6 @@ const PresaleDetail = () => {
         <div className="flex justify-center space-x-2 items-center">
           <img src="/frog.png" alt="" className="h-6 grayscale mt-1" />
           <p className="text-lg">1</p>
-        </div>
-        <div className="flex justify-center space-x-2 items-center">
-          <CurrencyDollarIcon className="h-6 text-gray-500" />
-          <p className="text-lg">400</p>
         </div>
       </div>
       <div className="flex flex-col justify-center items-center space-y-2">
@@ -43,6 +43,10 @@ const PresaleDetail = () => {
           <p className="text-lg">TBA</p>
         </div>
         <div className="flex justify-center space-x-2 items-center">
+          <CurrencyDollarIcon className="h-6 text-gray-500" />
+          <p className="text-lg">425</p>
+        </div>
+        <div className="flex justify-center space-x-2 items-center">
           <TicketIcon className="h-6 text-gray-500" />
           <p className="text-lg">400</p>
         </div>
@@ -54,10 +58,6 @@ const PresaleDetail = () => {
           <img src="/frog.png" alt="" className="h-6 grayscale mt-1" />
           <p className="text-lg">1</p>
         </div>
-        <div className="flex justify-center space-x-2 items-center">
-          <CurrencyDollarIcon className="h-6 text-gray-500" />
-          <p className="text-lg">425</p>
-        </div>
       </div>
       <div className="flex flex-col justify-center items-center space-y-2">
         <h1 className="text-gray-500 text-xl font-bold tracking-widest uppercase">
@@ -67,6 +67,10 @@ const PresaleDetail = () => {
         <div className="flex justify-center space-x-2 items-center">
           <CalendarIcon className="h-6 text-gray-500" />
           <p className="text-lg">TBA</p>
+        </div>
+        <div className="flex justify-center space-x-2 items-center">
+          <CurrencyDollarIcon className="h-6 text-gray-500" />
+          <p className="text-lg">450</p>
         </div>
         <div className="flex justify-center space-x-2 items-center">
           <TicketIcon className="h-6 text-gray-500" />
@@ -80,10 +84,6 @@ const PresaleDetail = () => {
           <img src="/frog.png" alt="" className="h-6 grayscale mt-1" />
           <p className="text-lg">1</p>
         </div>
-        <div className="flex justify-center space-x-2 items-center">
-          <CurrencyDollarIcon className="h-6 text-gray-500" />
-          <p className="text-lg">450</p>
-        </div>
       </div>
       <div className="flex flex-col justify-center items-center space-y-2">
         <h1 className="text-gray-500 text-xl font-bold tracking-widest uppercase">
@@ -92,6 +92,10 @@ const PresaleDetail = () => {
         <div className="flex justify-center space-x-2 items-center">
           <CalendarIcon className="h-6 text-gray-500" />
           <p className="text-lg">TBA</p>
+        </div>
+        <div className="flex justify-center space-x-2 items-center">
+          <CurrencyDollarIcon className="h-6 text-gray-500" />
+          <p className="text-lg">475</p>
         </div>
         <div className="flex justify-center space-x-2 items-center">
           <TicketIcon className="h-6 text-gray-500" />
@@ -104,10 +108,6 @@ const PresaleDetail = () => {
         <div className="flex justify-center space-x-2 items-center">
           <img src="/frog.png" alt="" className="h-6 grayscale mt-1" />
           <p className="text-lg">2</p>
-        </div>
-        <div className="flex justify-center space-x-2 items-center">
-          <CurrencyDollarIcon className="h-6 text-gray-500" />
-          <p className="text-lg">475</p>
         </div>
       </div>
     </div>
