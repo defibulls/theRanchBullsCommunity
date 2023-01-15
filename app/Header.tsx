@@ -82,7 +82,7 @@ const Header = ({ notLanding, setLanding }: props) => {
 
   return (
     <div
-      className={`fixed top-0 z-50 h-24 w-full p-[20px] transition-all duration-500 ease-in`}
+      className={`fixed top-0 z-50 h-24 w-full p-[20px] transition-all text-white duration-500 ease-in`}
     >
       <div className="flex justify-between">
         <motion.div
