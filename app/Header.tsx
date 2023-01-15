@@ -59,10 +59,10 @@ const Header = ({ notLanding, setLanding }: props) => {
       chainId: chain.id,
     });
 
-    console.log(message);
+    // console.log(message);
 
     const signature = await signMessageAsync({ message });
-    console.log(signature);
+    // console.log(signature);
 
     // redirect user after success authentication to '/user' page
     await signIn("moralis-auth", {

@@ -9,7 +9,9 @@ export default function RootLayout({
   return (
     <html className="bg-black scrollbar-thin text-white scrollbar-thumb-purple-600 scrollbar-thumb-rounded-xl">
       <head />
-      <body className="">{children}</body>
+      <body className="bg-black scrollbar-thin text-white scrollbar-thumb-purple-600 scrollbar-thumb-rounded-xl">
+        {children}
+      </body>
     </html>
   );
 }
