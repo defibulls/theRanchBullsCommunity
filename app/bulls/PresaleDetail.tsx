@@ -95,7 +95,7 @@ const PresaleDetail = () => {
         </div>
         <div className="flex justify-center space-x-2 items-center">
           <CurrencyDollarIcon className="h-6 text-gray-500" />
-          <p className="text-lg">475</p>
+          <p className="text-lg">500</p>
         </div>
         <div className="flex justify-center space-x-2 items-center">
           <TicketIcon className="h-6 text-gray-500" />
