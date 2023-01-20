@@ -26,7 +26,7 @@ const PresaleDetail = () => {
         </div>
         <div className="flex justify-center space-x-2 items-center">
           <img src="/turtle.png" alt="" className="h-6 grayscale mt-1" />
-          <p className="text-lg">1</p>
+          <p className="text-lg">2</p>
         </div>
         <div className="flex justify-center space-x-2 items-center">
           <img src="/frog.png" alt="" className="h-6 grayscale mt-1" />
@@ -52,7 +52,7 @@ const PresaleDetail = () => {
         </div>
         <div className="flex justify-center space-x-2 items-center">
           <img src="/turtle.png" alt="" className="h-6 grayscale mt-1" />
-          <p className="text-lg">1</p>
+          <p className="text-lg">2</p>
         </div>
         <div className="flex justify-center space-x-2 items-center">
           <img src="/frog.png" alt="" className="h-6 grayscale mt-1" />
@@ -78,7 +78,7 @@ const PresaleDetail = () => {
         </div>
         <div className="flex justify-center space-x-2 items-center">
           <img src="/turtle.png" alt="" className="h-6 grayscale mt-1" />
-          <p className="text-lg">1</p>
+          <p className="text-lg">2</p>
         </div>
         <div className="flex justify-center space-x-2 items-center">
           <img src="/frog.png" alt="" className="h-6 grayscale mt-1" />
@@ -103,11 +103,11 @@ const PresaleDetail = () => {
         </div>
         <div className="flex justify-center space-x-2 items-center">
           <img src="/turtle.png" alt="" className="h-6 grayscale mt-1" />
-          <p className="text-lg">2</p>
+          <p className="text-lg">5</p>
         </div>
         <div className="flex justify-center space-x-2 items-center">
           <img src="/frog.png" alt="" className="h-6 grayscale mt-1" />
-          <p className="text-lg">2</p>
+          <p className="text-lg">5</p>
         </div>
       </div>
     </div>
