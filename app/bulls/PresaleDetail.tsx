@@ -99,7 +99,7 @@ const PresaleDetail = () => {
         </div>
         <div className="flex justify-center space-x-2 items-center">
           <TicketIcon className="h-6 text-gray-500" />
-          <p className="text-lg">2800</p>
+          <p className="text-lg">3800</p>
         </div>
         <div className="flex justify-center space-x-2 items-center">
           <img src="/turtle.png" alt="" className="h-6 grayscale mt-1" />

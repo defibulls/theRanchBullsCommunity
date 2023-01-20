@@ -1,9 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import Link from "next/link";
 
-type Props = {};
-
-const Banner = (props: Props) => {
+const Banner = () => {
   return (
     <header
       className="relative flex h-screen w-full flex-col items-center justify-center scrollbar-hide"
@@ -49,4 +47,4 @@ const Banner = (props: Props) => {
   );
 };
 
-export default Banner;
+export default memo(Banner);
