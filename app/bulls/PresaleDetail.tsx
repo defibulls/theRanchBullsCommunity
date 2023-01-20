@@ -14,7 +14,7 @@ const PresaleDetail = () => {
 
         <div className="flex justify-center space-x-2 items-center">
           <CalendarIcon className="h-6 text-gray-500" />
-          <p className="text-lg">1 FEB @ 7PM</p>
+          <p className="text-lg">MAR 30 @ 7PM</p>
         </div>
         <div className="flex justify-center space-x-2 items-center">
           <CurrencyDollarIcon className="h-6 text-gray-500" />
