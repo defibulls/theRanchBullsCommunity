@@ -33,7 +33,7 @@ const Member = ({ name, designation, image, about, linkedIn }: Props) => {
         className="rounded-full h-60 w-60 object-contain"
       />
       {/* </div> */}
-      <div className=" z-20 flex flex-col justify-center text-left px-10 items-start">
+      <div className=" z-20 flex flex-col space-y-5 justify-center text-left px-10 items-start">
         <h1 className="text-2xl text-left  font-semibold uppercase tracking-widest">
           {name}
         </h1>
