@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-// import { SocialIcon } from "react-social-icons";
+import { SocialIcon } from "react-social-icons";
 
 type Props = {
   name: string;
@@ -41,12 +41,12 @@ const Member = ({ name, designation, image, about, linkedIn }: Props) => {
           {designation}
         </h2>
         <p className=" text-md mt-2">{about}</p>
-        {/* <SocialIcon
+        <SocialIcon
           target="_blank"
           url={linkedIn}
           fgColor="white"
-          className="h-10 w-10 mt-2"
-        /> */}
+          className="h-8 w-8 pt-4"
+        />
       </div>
     </div>
   );
