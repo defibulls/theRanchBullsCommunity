@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { SocialIcon } from "react-social-icons";
+import Link from "next/link";
 
 type Props = {
   name: string;
@@ -41,12 +42,19 @@ const Member = ({ name, designation, image, about, linkedIn }: Props) => {
           {designation}
         </h2>
         <p className=" text-md mt-2">{about}</p>
-        <SocialIcon
+        <Link href={linkedIn} target="_blank">
+          <img
+            src="https://logos-download.com/wp-content/uploads/2016/03/LinkedIn_Logo_2019-1536x384.png"
+            alt=""
+            className="h-6 object-contain"
+          />
+        </Link>
+        {/* <SocialIcon
           target="_blank"
           url={linkedIn}
           fgColor="white"
           className="h-8 w-8 pt-4"
-        />
+        /> */}
       </div>
     </div>
   );
