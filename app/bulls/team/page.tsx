@@ -15,7 +15,7 @@ const builder = imageUrlBuilder(client);
 
 const getTeam = async () => {
   const query = `
-      *[_type == "team"] | order(DateOfYear asc){
+      *[_type == "team"] | order(DateOfBirth asc){
         name,
         designation,
         image,
@@ -41,7 +41,7 @@ const Team = async () => {
         <h1 className="text-2xl  text-gray-500 font-semibold tracking-widest ml-10">
           TEAM
         </h1>
-        <div className="grid grid-cols-1 w-full px-20 sm:grid-cols-2 place-items-center gap-5 gap-y-10 md:grid-cols-3">
+        <div className="grid grid-cols-1 w-full px-20 place-items-center gap-5 gap-y-10 ">
           {team.map((member: Member, i: number) => (
             <Member
               key={i}
