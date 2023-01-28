@@ -1,8 +1,4 @@
-import {
-  CalendarIcon,
-  CurrencyDollarIcon,
-  TicketIcon,
-} from "@heroicons/react/24/solid";
+import { CalendarIcon, TicketIcon } from "@heroicons/react/24/solid";
 
 const PresaleDetail = () => {
   return (
@@ -17,8 +13,8 @@ const PresaleDetail = () => {
           <p className="text-lg">MAR 30 @ 7PM</p>
         </div>
         <div className="flex justify-center space-x-2 items-center">
-          <CurrencyDollarIcon className="h-6 text-gray-500" />
-          <p className="text-lg">400</p>
+          <img src="/headLogo.png" className="h-6 grayscale text-gray-500" />
+          <p className="text-lg">150</p>
         </div>
         <div className="flex justify-center space-x-2 items-center">
           <TicketIcon className="h-6 text-gray-500" />
@@ -43,8 +39,8 @@ const PresaleDetail = () => {
           <p className="text-lg">TBA</p>
         </div>
         <div className="flex justify-center space-x-2 items-center">
-          <CurrencyDollarIcon className="h-6 text-gray-500" />
-          <p className="text-lg">425</p>
+          <img src="/headLogo.png" className="h-6 grayscale text-gray-500" />
+          <p className="text-lg">150</p>
         </div>
         <div className="flex justify-center space-x-2 items-center">
           <TicketIcon className="h-6 text-gray-500" />
@@ -69,8 +65,8 @@ const PresaleDetail = () => {
           <p className="text-lg">TBA</p>
         </div>
         <div className="flex justify-center space-x-2 items-center">
-          <CurrencyDollarIcon className="h-6 text-gray-500" />
-          <p className="text-lg">450</p>
+          <img src="/headLogo.png" className="h-6 grayscale text-gray-500" />
+          <p className="text-lg">150</p>
         </div>
         <div className="flex justify-center space-x-2 items-center">
           <TicketIcon className="h-6 text-gray-500" />
@@ -94,8 +90,8 @@ const PresaleDetail = () => {
           <p className="text-lg">TBA</p>
         </div>
         <div className="flex justify-center space-x-2 items-center">
-          <CurrencyDollarIcon className="h-6 text-gray-500" />
-          <p className="text-lg">500</p>
+          <img src="/headLogo.png" className="h-6 grayscale text-gray-500" />
+          <p className="text-lg">150</p>
         </div>
         <div className="flex justify-center space-x-2 items-center">
           <TicketIcon className="h-6 text-gray-500" />
