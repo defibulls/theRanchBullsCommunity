@@ -41,7 +41,7 @@ const Banner = () => {
             <div className="absolute inset-0 z-0 bg-purple-600 blur rounded-full"></div>
 
             <Image
-              src="/Images/bulls/34.png"
+              src="/images/bulls/34.png"
               loading="lazy"
               className="rounded-full relative"
               alt=""
