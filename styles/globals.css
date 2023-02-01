@@ -13,6 +13,26 @@
     animation: scroll 50s linear infinite;
 }
 
+@keyframes move-gradient {
+    0% {
+        background-position: 1% 0;
+    }
+
+    50% {
+        background-position: 99% 100%;
+    }
+
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+.button-animation {
+    background-image: linear-gradient(to left, #2d8fe5, #d155b8, #2d8fe5);
+    animation: move-gradient 10s ease infinite;
+    background-size: 400% 400%;
+}
+
 @keyframes scroll {
     0% {
         transform: translateX(0);

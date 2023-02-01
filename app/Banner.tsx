@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { memo, useCallback } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import Particles from "react-particles";
 import type { Container, Engine } from "tsparticles-engine";
 import { loadFull } from "tsparticles";
@@ -51,7 +51,7 @@ const Banner = () => {
           </div>
           <Link
             href="/bulls"
-            className="mt-10 w-fit shadow-xl rounded-full text-white bg-purple-500 px-5 py-3 font-marker uppercase transition-all duration-200 ease-in hover:bg-white hover:text-purple-500"
+            className={`button-animation  mt-10 w-fit shadow-xl rounded-full text-white px-5 py-3 font-marker uppercase `}
           >
             ENTER THE RANCH
           </Link>
