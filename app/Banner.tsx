@@ -42,6 +42,7 @@ const Banner = () => {
 
             <Image
               src="/Images/bulls/34.png"
+              loading="lazy"
               className="rounded-full relative"
               alt=""
               height={250}
