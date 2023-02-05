@@ -1,12 +1,10 @@
 "use client";
-import Link from "next/link";
 import React, { memo, useCallback, useEffect, useState } from "react";
 import Particles from "react-particles";
 import type { Container, Engine } from "tsparticles-engine";
 import { loadFull } from "tsparticles";
 import particleConfig from "../lib/particle-config";
 import Image from "next/image";
-import { useSpring, animated } from "react-spring";
 import { useRouter } from "next/navigation";
 import DApp from "./DApp";
 
