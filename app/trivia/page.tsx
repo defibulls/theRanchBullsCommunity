@@ -1,9 +1,7 @@
 import React from "react";
 import Header from "../Header";
 
-type Props = {};
-
-const Home = async (props: Props) => {
+const Home = async () => {
   return (
     <div className="">
       <Header notLanding={false} />
