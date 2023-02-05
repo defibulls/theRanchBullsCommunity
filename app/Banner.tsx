@@ -89,7 +89,7 @@ const Banner = () => {
 
                 <Image
                   src="/TR.gif"
-                  loading="lazy"
+                  // loading="lazy"
                   className="rounded-full relative"
                   alt=""
                   height={250}
