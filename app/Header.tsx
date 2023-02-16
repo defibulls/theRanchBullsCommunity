@@ -15,6 +15,7 @@ import { useAuthRequestChallengeEvm } from "@moralisweb3/next/lib/hooks/auth/use
 import ReactModal from "react-modal";
 import Modaluser from "./modals/SetPartnerModal";
 import EmailModal from "./modals/EmailModal";
+import { useRouter } from "next/navigation";
 
 const style = {
   wrapper: `p-4 w-screen flex justify-between items-center`,
@@ -37,11 +38,12 @@ const Header = ({ notLanding, setLanding }: props) => {
   const [selectedNav, setSelectedNav] = useState<string>("");
   const { data, status } = useSession();
   const [show, setShow] = useState(false);
-  const { setOpen, open, emailModal, setEmailModal } =
+  const { setOpen, open, emailModal, setEmailModal, handleShow } =
     useContext(ContractContext);
   const { connectAsync } = useConnect();
   const { disconnectAsync } = useDisconnect();
   const { isConnected } = useAccount();
+  const router = useRouter();
   const { signMessageAsync } = useSignMessage();
   const { requestChallengeAsync } = useAuthRequestChallengeEvm();
 
@@ -98,6 +100,10 @@ const Header = ({ notLanding, setLanding }: props) => {
             duration: 1.5,
           }}
           className={style.headerLogo}
+          onClick={() => {
+            router.push("/");
+            handleShow(true);
+          }}
         >
           <img
             src="/logo.png"

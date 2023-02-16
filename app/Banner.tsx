@@ -1,5 +1,11 @@
 "use client";
-import React, { memo, useCallback, useEffect, useState } from "react";
+import React, {
+  memo,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import Particles from "react-particles";
 import type { Container, Engine } from "tsparticles-engine";
 import { loadFull } from "tsparticles";
@@ -7,9 +13,10 @@ import particleConfig from "../lib/particle-config";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import DApp from "./DApp";
+import { ContractContext } from "../context/ContractContext";
 
 const Banner = () => {
-  const [show, handleShow] = useState(false);
+  const { show, handleShow } = useContext(ContractContext);
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadFull(engine);
   }, []);

@@ -24,6 +24,7 @@ export const ContractProvider = ({ children }) => {
   const [nfts, setNfts] = useState();
   const [menuOpen, setMenuOpen] = useState(false);
   const [rawNfts, setRawNfts] = useState();
+  const [show, handleShow] = useState(false);
 
   useEffect(() => {
     const loadTokenContract = async () => {
@@ -89,6 +90,8 @@ export const ContractProvider = ({ children }) => {
         emailModal,
         menuOpen,
         nfts,
+        show,
+        handleShow,
         addUsdcOpen,
         setAddUsdcOpen,
         section,
