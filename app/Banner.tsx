@@ -90,14 +90,16 @@ const Banner = () => {
                 {/* <div className="absolute inset-0 z-0 bg-purple-600 blur rounded-full"></div> */}
 
                 <video
-                  src="/tr.mp4"
-                  controls={false}
-                  loop={true}
-                  autoPlay={true}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
                   height={200}
                   className="rounded-full"
                   width={200}
-                ></video>
+                >
+                  <source src="/tr.mp4" type="video/mp4" />
+                </video>
                 {/* <Image
                   src="/TR.gif"
                   // loading="lazy"
