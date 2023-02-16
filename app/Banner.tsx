@@ -89,14 +89,23 @@ const Banner = () => {
               <div className="relative">
                 {/* <div className="absolute inset-0 z-0 bg-purple-600 blur rounded-full"></div> */}
 
-                <Image
+                <video
+                  src="/tr.mp4"
+                  controls={false}
+                  loop={true}
+                  autoPlay={true}
+                  height={200}
+                  className="rounded-full"
+                  width={200}
+                ></video>
+                {/* <Image
                   src="/TR.gif"
                   // loading="lazy"
                   className="rounded-full relative"
                   alt=""
                   height={250}
                   width={250}
-                />
+                /> */}
               </div>
               <button
                 onClick={() => handleShow(true)}
