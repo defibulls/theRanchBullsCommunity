@@ -11,7 +11,7 @@ type Props = {
 
 const DApp = ({ name, description, image, link }: Props) => {
   return (
-    <div className="text-white z-20 w-fit space-y-4 flex flex-col pb-4 justify-center items-center h-fit rounded-xl bg-[#15202b]">
+    <div className="text-white z-20 w-1/2 space-y-4 flex flex-col pb-4 justify-center items-center h-fit rounded-xl bg-[#15202b]">
       <Image
         src={image}
         alt=""
@@ -20,7 +20,7 @@ const DApp = ({ name, description, image, link }: Props) => {
         className="rounded-t-xl"
       />
       <h1 className="font-marker text-xl">{name}</h1>
-      <p>{description}</p>
+      <p className="px-2 text-center">{description}</p>
       <Link
         href={link}
         className="bg-purple-600 rounded-xl py-2 px-4 uppercase font-marker"

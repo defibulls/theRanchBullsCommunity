@@ -23,13 +23,15 @@ const Banner = () => {
   const dapps = [
     {
       name: "The Ranch Bulls",
-      description: "",
+      description:
+        "The Genesis TR Bull NFTs are the backbone and the key to becoming a member of the TR DAO.",
       image: "/bulls.png",
       link: "/bulls",
     },
     {
       name: "Tuesday Trivia Night",
-      description: "",
+      description:
+        "Weekly Trivia Night with the first question at 8 PM EST - Micro AMA’s  - Cash Prizes - Alpha Drops - NFT Giveaways - WL spots",
       image: "/trivia.jpg",
       link: "/trivia",
     },
