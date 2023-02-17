@@ -11,7 +11,7 @@ type Props = {
 
 const DApp = ({ name, description, image, link }: Props) => {
   return (
-    <div className="text-white z-20 w-1/2 space-y-4 flex flex-col pb-4 justify-center items-center h-fit rounded-xl bg-[#15202b]">
+    <div className="text-white z-20 md:w-1/2 w-full space-y-4 flex flex-col pb-4 justify-center text-center items-center h-fit rounded-xl bg-[#15202b]">
       <Image
         src={image}
         alt=""

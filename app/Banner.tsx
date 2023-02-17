@@ -51,8 +51,8 @@ const Banner = () => {
   return (
     <header className="relative">
       {show ? (
-        <header
-          className="relative flex h-screen w-full flex-col items-center justify-center scrollbar-hide"
+        <div
+          className="relative flex min-h-screen w-full flex-col items-center justify-center scrollbar-hide"
           style={{
             backgroundImage: `url(/farm.png)`,
             backgroundPosition: "center center",
@@ -61,13 +61,13 @@ const Banner = () => {
           }}
         >
           <div
-            className="absolute bottom-0 z-10 h-[100vh] w-full "
+            className="absolute bottom-0 z-10 h-full w-full "
             style={{
               background: "rgba(0,0,0,0.4)",
               backgroundImage: `linear-gradient(to top, rgba(0,0,0, 4) 0, rgba(0,0,0,0) 60%, rgba(0,0,0,0.4) 100%)`,
             }}
           />
-          <div className="grid grid-cols-2 w-full px-20 gap-x-10 place-items-center">
+          <div className="grid md:grid-cols-2 grid-cols-1 w-full md:px-20 px-10  gap-x-10 mt-32 pb-10 space-y-4 md:space-y-0 place-items-center">
             {dapps.map((dapp, i) => (
               <DApp
                 key={i}
@@ -78,7 +78,7 @@ const Banner = () => {
               />
             ))}
           </div>
-        </header>
+        </div>
       ) : (
         <>
           <Particles
