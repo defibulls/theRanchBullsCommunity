@@ -18,6 +18,21 @@ const Menu = (props: Props) => {
 
   return (
     <div className="z-50 grid h-fit w-screen grid-cols-1 flex-col place-content-center place-items-center rounded-3xl bg-[#15202b] p-10 text-white md:grid-cols-2 lg:grid-cols-3">
+      <div className="md:hidden">
+        <h1 className="text-lg font-bold uppercase tracking-wider text-gray-500">
+          Sitemap
+        </h1>
+        <div className="ml-4 mt-4 flex flex-col space-y-2">
+          {/* <a href="#about" className="as">
+            About
+          </a> */}
+          <a href="/bulls/exchange" className="as">
+            Exchange
+          </a>
+          <a href="/bulls/support">Faq's</a>
+          <a href="/bulls/team">Team</a>
+        </div>
+      </div>
       <div>
         <h1 className="text-lg font-bold uppercase tracking-wider text-gray-500">
           Information

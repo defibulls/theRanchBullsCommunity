@@ -67,7 +67,7 @@ const Banner = () => {
               backgroundImage: `linear-gradient(to top, rgba(0,0,0, 4) 0, rgba(0,0,0,0) 60%, rgba(0,0,0,0.4) 100%)`,
             }}
           />
-          <div className="grid md:grid-cols-2 grid-cols-1 w-full md:px-20 px-10  gap-x-10 mt-32 pb-10 space-y-4 md:space-y-0 place-items-center">
+          <div className="grid md:grid-cols-2 grid-cols-1 w-full md:px-20 px-10 md:mt-0 gap-x-10 mt-32 pb-10 space-y-4 md:space-y-0 place-items-center">
             {dapps.map((dapp, i) => (
               <DApp
                 key={i}

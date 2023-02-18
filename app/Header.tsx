@@ -127,14 +127,14 @@ const Header = ({ notLanding, setLanding }: props) => {
             className={style.nav}
           >
             <div className={style.navItemsContainer}>
-              <Link
+              {/* <Link
                 href="/bulls#about"
                 className={`${style.navItem} ${
                   selectedNav === "about" && style.activeNavItem
                 }`}
               >
                 ABOUT
-              </Link>
+              </Link> */}
               <div
                 onClick={() => toast.error("Mint not live!")}
                 className={`${style.navItem} `}
