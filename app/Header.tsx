@@ -94,7 +94,7 @@ const Header = ({ notLanding, setLanding }: props) => {
           className={style.headerLogo}
           onClick={() => {
             router.push("/");
-            handleShow(true);
+            // handleShow(true);
           }}
         >
           <img
