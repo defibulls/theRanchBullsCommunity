@@ -31,7 +31,7 @@ const Banner = () => {
     {
       name: "The Ranch Bulls",
       description:
-        "The Genesis TR Bull NFTs are the backbone and the key to becoming a member of the TR DAO.",
+        "TR Bull NFTs serve as the foundation and gateway to our community, as they represent the key to gaining membership.",
       image: "/bulls.png",
       link: "/bulls",
     },
