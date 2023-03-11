@@ -1,7 +1,8 @@
 "use client";
-
 import { createContext, useEffect, useState } from "react";
 import {
+  alphaBullsContractAddress,
+  aplhaBullsContractABI,
   bullsContractABI,
   bullsContractAddress,
   CurrencyContract,
@@ -25,6 +26,7 @@ export const ContractProvider = ({ children }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [rawNfts, setRawNfts] = useState();
   const [show, handleShow] = useState(false);
+  const [alphaBullsContract, setAlphaBullsContract] = useState();
 
   useEffect(() => {
     const loadTokenContract = async () => {
@@ -34,6 +36,7 @@ export const ContractProvider = ({ children }) => {
         CurrencyContract
       );
       setTokenContract(web3Contract);
+      console.log(web3Contract);
     };
 
     const loadMintContract = async () => {
@@ -47,8 +50,21 @@ export const ContractProvider = ({ children }) => {
       }
     };
 
+    const loadAlphaBullsContract = async () => {
+      const web3 = createAlchemyWeb3(process.env.NEXT_PUBLIC_ALCHEMY_KEY);
+      if (alphaBullsContractAddress && aplhaBullsContractABI) {
+        const web3Contract = new web3.eth.Contract(
+          aplhaBullsContractABI,
+          alphaBullsContractAddress
+        );
+
+        setAlphaBullsContract(web3Contract);
+      }
+    };
+
+    loadAlphaBullsContract();
     // loadMintContract();
-    // loadTokenContract();
+    loadTokenContract();
   }, []);
 
   useEffect(() => {
@@ -91,6 +107,7 @@ export const ContractProvider = ({ children }) => {
         menuOpen,
         nfts,
         show,
+        alphaBullsContract,
         handleShow,
         addUsdcOpen,
         setAddUsdcOpen,

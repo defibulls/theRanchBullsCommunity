@@ -157,6 +157,13 @@ const Header = ({ notLanding, setLanding }: props) => {
               >
                 <div className={style.navItem}>TEAM</div>
               </Link>
+              {/* <Link
+                href="/bulls/alpha"
+                // target="_blank"
+                className={`${selectedNav === "team" && style.activeNavItem}`}
+              >
+                <div className={style.navItem}>ALPHA</div>
+              </Link> */}
               <Link
                 href="https://theranch.gitbook.io/"
                 target="_blank"
@@ -184,9 +191,8 @@ const Header = ({ notLanding, setLanding }: props) => {
           }}
           className="flex cursor-pointer text-white items-center justify-center "
         >
-          {/* {section != "" && ( */}
-          {/* <>
-            <div className="mx-1 rounded-2xl bg-[#191B1F] px-2 py-1 text-[0.9rem] font-semibold">
+          <>
+            {/* <div className="mx-1 rounded-2xl bg-[#191B1F] px-2 py-1 text-[0.9rem] font-semibold">
               <div className="z-50 mx-1 flex h-8 cursor-pointer items-center rounded-2xl border-[#163256] bg-[#172A42] px-3 py-3">
                 <Link
                   href="https://paper.xyz/checkout/5b49511e-a492-4cc5-ab92-5b2d44ba8195"
@@ -196,8 +202,8 @@ const Header = ({ notLanding, setLanding }: props) => {
                 </Link>
               </div>
             </div> */}
-          {/* <div className="mx-1 flex cursor-pointer items-center justify-center rounded-2xl bg-[#191B1F] px-1 py-1 text-[0.9rem] font-semibold"> */}
-          {/* <>
+            <div className="mx-1 flex cursor-pointer items-center justify-center rounded-2xl bg-[#191B1F] px-1 py-1 text-[0.9rem] font-semibold">
+              <>
                 {status == "authenticated" ? (
                   <div
                     className={`mx-2 flex cursor-pointer items-center justify-between rounded-2xl bg-[#191B1F] text-[1rem] font-semibold`}
@@ -206,8 +212,9 @@ const Header = ({ notLanding, setLanding }: props) => {
                       // onClick={() => router.push(`/${section}/exchange`)}
                       className={`z-50 mr-2 flex h-8 cursor-pointer items-center rounded-2xl border-[#163256] bg-[#172A42] p-2`}
                     >
+                      {/* @ts-ignore */}
                       {data.user?.address.slice(0, 5)}...
-                      
+                      {/* @ts-ignore */}
                       {data.user?.address.slice(-4)}
                     </div>
                     <div
@@ -244,8 +251,7 @@ const Header = ({ notLanding, setLanding }: props) => {
                 )}
               </>
             </div>
-          </> */}
-          {/* // )} */}
+          </>
           <div className="mx-1 rounded-2xl bg-[#191B1F] px-2 py-1 text-[0.9rem] font-semibold">
             <Menu>
               <Menu.Button>

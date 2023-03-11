@@ -1,13 +1,13 @@
-import { unstable_getServerSession } from "next-auth";
+import { getServerSession } from "next-auth";
+import { Providers } from "../components/Providers";
 import "../styles/globals.css";
-import Providers from "./Providers";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = unstable_getServerSession();
+  const session = await getServerSession();
   return (
     <html className="bg-black">
       <head />

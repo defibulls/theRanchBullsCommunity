@@ -1,3 +1,5 @@
+"use client";
+import { Toaster } from "react-hot-toast";
 import "../../styles/globals.css";
 
 export default function RootLayout({
@@ -10,6 +12,15 @@ export default function RootLayout({
       <head />
       <body className="bg-black scrollbar-thin text-white scrollbar-thumb-purple-600 scrollbar-thumb-rounded-xl">
         {children}
+        <Toaster
+          toastOptions={{
+            style: {
+              background: "#9E23A3",
+              borderRadius: "25px",
+              color: "#fff",
+            },
+          }}
+        />
       </body>
     </html>
   );

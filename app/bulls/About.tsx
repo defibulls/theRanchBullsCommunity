@@ -48,28 +48,19 @@ const About = () => {
           </div>
         </div>
         <p className="text-md font-normal">
-          <br />
-          The Ranch is a project from a group of Network and Systems Engineers
-          who wholeheartedly believe in the underlying technology of the
-          blockchain and the opportunities that DEFI represents. We know that
-          there must be better projects and developers in the space to make DEFI
-          better, and we are here for that exact reason.
-          <br />
-          <br />
-          The BTC Bulls are here to bridge the best of both sides of the web3
-          NFT spectrum; building a community and NFT collection with rarity
-          rewards, club membership, promotion incentives, and tying real-world
-          assets to the NFTs that hold value and generate rewards for the
-          Community.
-          <br />
-          <br />
-          Each BTC Bull gives membership into a BTC Mining Cluster Reward System
-          composed of the best and most efficient BTC miners, built to be
-          profitable now and thrive in the next bull market. Our BTC mining
-          cluster will bolster Bitcoins' decentralized network while improving
-          the environment as we help reduce greenhouse gases via an off-grid
-          emissions mitigation solution converting flare gas at oil fields to
-          power the operation.
+          At The Ranch, we are committed to building a remarkable DeFi
+          ecosystem, and our native point metric, Bullion, drives the direction
+          we take. Our goal is to create a community of like-minded individuals
+          who share our passion for maximizing the value of Bullion. As a TR
+          Bull holder, you play a pivotal role in determining the direction of
+          our project. Our core members embody our bullish spirit, and we
+          prioritize investments that provide tangible benefits and significant
+          returns, aligning with our values of real utility, real yield, real
+          rewards, and real relationships. We are dedicated to generating
+          meaningful value for our members and aligning with our community's
+          core principles, with Bullion at the center of our ecosystem.
+          Together, we can create a new standard for what DeFi should be. Be a
+          TR Bull holder, and let's get Bullish!
         </p>
       </div>
     </div>
