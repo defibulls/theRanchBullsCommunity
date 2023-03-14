@@ -1,7 +1,8 @@
 "use client";
 
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/solid";
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { ContractContext } from "../../../context/ContractContext";
 
 type Props = {
   question: string;
@@ -10,7 +11,12 @@ type Props = {
 };
 
 const Faq = ({ answer, question, key }: Props) => {
-  const [show, handleShow] = useState(false);
+  const [show, handleShows] = useState(false);
+  const { handleShow } = useContext(ContractContext);
+
+  useEffect(() => {
+    handleShow(true);
+  }, []);
 
   return (
     <div key={key} className="relative h-fit">
@@ -22,7 +28,7 @@ const Faq = ({ answer, question, key }: Props) => {
           </h1>
           <div
             className="cursor-pointer rounded-md bg-gray-600 p-2"
-            onClick={() => handleShow(!show)}
+            onClick={() => handleShows(!show)}
           >
             {show ? (
               <MinusIcon className="h-4" />

@@ -79,7 +79,7 @@ const Header = ({ notLanding, setLanding }: props) => {
       className={`fixed top-0 z-50 h-24 w-full p-[20px] transition-all text-white duration-500 ease-in`}
     >
       <div className="flex justify-between">
-        <motion.div
+        <motion.a
           initial={{
             x: -200,
             opacity: 0,
@@ -92,17 +92,14 @@ const Header = ({ notLanding, setLanding }: props) => {
             duration: 1.5,
           }}
           className={style.headerLogo}
-          onClick={() => {
-            handleShow(true);
-            setTimeout(() => router.push("/"), 10);
-          }}
+          href="/"
         >
           <img
             src="/logo.png"
             alt="TRB"
             className={`cursor-pointer rounded-xl object-contain h-12`}
           />
-        </motion.div>
+        </motion.a>
         {notLanding && (
           <motion.div
             initial={{

@@ -15,8 +15,13 @@ type Props = {
 
 const Card = ({ name, price, totalSupply, points }: Props) => {
   const { data } = useSession();
-  const { tokenContract, alphaBullsContract } = useContext(ContractContext);
+  const { tokenContract, alphaBullsContract, handleShow } =
+    useContext(ContractContext);
   const [alphaBullsMinted, setAlphaBullsMinted] = useState<number>(0);
+
+  useEffect(() => {
+    handleShow(true);
+  }, []);
 
   const getMintedAlphaBulls = async () => {
     if (name.toLowerCase() == "gold") {
