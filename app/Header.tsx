@@ -150,7 +150,7 @@ const Header = ({ notLanding, setLanding }: props) => {
                 <div className={style.navItem}>TEAM</div>
               </Link>
               <Link
-                href="/bulls/alpha"
+                href="/bulls"
                 // target="_blank"
                 aria-disabled={true}
                 className={`${
