@@ -79,7 +79,7 @@ const Header = ({ notLanding, setLanding }: props) => {
       className={`fixed top-0 z-50 h-24 w-full p-[20px] transition-all text-white duration-500 ease-in`}
     >
       <div className="flex justify-between">
-        <motion.a
+        <motion.div
           initial={{
             x: -200,
             opacity: 0,
@@ -91,19 +91,18 @@ const Header = ({ notLanding, setLanding }: props) => {
           transition={{
             duration: 1.5,
           }}
-          href="/"
           className={style.headerLogo}
-          // onClick={() => {
-          //   router.push("/");
-          //   // handleShow(true);
-          // }}
+          onClick={() => {
+            handleShow(true);
+            setTimeout(() => router.push("/"), 10);
+          }}
         >
           <img
             src="/logo.png"
             alt="TRB"
             className={`cursor-pointer rounded-xl object-contain h-12`}
           />
-        </motion.a>
+        </motion.div>
         {notLanding && (
           <motion.div
             initial={{
@@ -129,20 +128,23 @@ const Header = ({ notLanding, setLanding }: props) => {
                 ABOUT
               </Link> */}
               <div
-                onClick={() => toast.error("Mint not live!")}
-                className={`${style.navItem} `}
+                // onClick={() => toast.error("Mint not live!")}
+                className={`${style.navItem} text-gray-600 `}
               >
                 EXCHANGE
               </div>
               <Link href="/bulls/support" className={`${style.navItem}`}>
                 FAQs
               </Link>
-              {/* <Link
+              <Link
                 href="/bulls"
-                className={`${selectedNav === "mint" && style.activeNavItem}`}
+                aria-disabled={true}
+                className={`${
+                  selectedNav === "mint" && style.activeNavItem
+                } text-gray-600`}
               >
                 <div className={style.navItem}>MINT</div>
-              </Link> */}
+              </Link>
               <Link
                 href="/bulls/team"
                 // target="_blank"
@@ -150,21 +152,22 @@ const Header = ({ notLanding, setLanding }: props) => {
               >
                 <div className={style.navItem}>TEAM</div>
               </Link>
-              {/* <Link
+              <Link
                 href="/bulls/alpha"
                 // target="_blank"
-                className={`${selectedNav === "team" && style.activeNavItem}`}
+                aria-disabled={true}
+                className={`${
+                  selectedNav === "team" && style.activeNavItem
+                } text-gray-600`}
               >
-                <div className={style.navItem}>ALPHA</div>
-              </Link> */}
+                <div className={style.navItem}>ALPHA BULLS</div>
+              </Link>
               <Link
                 href="https://theranch.gitbook.io/"
                 target="_blank"
                 className={`${selectedNav === "mint" && style.activeNavItem}`}
               >
-                <div className={style.navItem}>
-                  WHITEPAPER <ArrowUpRightIcon className="ml-2 h-4" />
-                </div>
+                <div className={style.navItem}>WHITEPAPER</div>
               </Link>
             </div>
           </motion.div>

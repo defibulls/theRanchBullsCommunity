@@ -1,5 +1,5 @@
-import { getServerSession } from "next-auth";
-import { Providers } from "../../../components/Providers";
+"use client";
+import { Toaster } from "react-hot-toast";
 import "../../../styles/globals.css";
 
 export default function RootLayout({
@@ -7,12 +7,21 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = getServerSession();
-
   return (
-    <html className="bg-black">
+    <html className="bg-black scrollbar-thin text-white scrollbar-thumb-purple-600 scrollbar-thumb-rounded-xl">
       <head />
-      <body>{children}</body>
+      <body>
+        <Toaster
+          toastOptions={{
+            style: {
+              background: "#9E23A3",
+              borderRadius: "25px",
+              color: "#fff",
+            },
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

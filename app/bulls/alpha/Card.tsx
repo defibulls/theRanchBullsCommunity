@@ -37,9 +37,14 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
     }
   };
 
-  // console.log(alphaBullsContract);s
   const mint = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
+    // @ts-ignore
+    if (data == null) return toast.error("You are not authenticated!");
+
+    if (alphaBullsContract == totalSupply)
+      return toast.error("All Alpha bulls have been minted!");
 
     // @ts-ignore
     const address = data?.user.address;

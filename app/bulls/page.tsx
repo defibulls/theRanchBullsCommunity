@@ -12,7 +12,6 @@ type Props = {};
 const Home = (props: Props) => {
   return (
     <div className="h-full w-full bg-black overflow-x-hidden text-white ">
-      <Header notLanding={true} />
       <Banner />
       <About />
       <Slider />
