@@ -116,56 +116,48 @@ const Header = ({ notLanding, setLanding }: props) => {
             className={style.nav}
           >
             <div className={style.navItemsContainer}>
-              {/* <Link
-                href="/bulls#about"
-                className={`${style.navItem} ${
-                  selectedNav === "about" && style.activeNavItem
-                }`}
-              >
-                ABOUT
-              </Link> */}
               <div
                 // onClick={() => toast.error("Mint not live!")}
                 className={`${style.navItem} text-gray-600 `}
               >
                 EXCHANGE
               </div>
-              <Link href="/bulls/support" className={`${style.navItem}`}>
+              <a href="/bulls/support" className={`${style.navItem}`}>
                 FAQs
-              </Link>
-              <Link
+              </a>
+              <a
                 href="/bulls"
-                aria-disabled={true}
+                // aria-disabled={true}
                 className={`${
                   selectedNav === "mint" && style.activeNavItem
                 } text-gray-600`}
               >
                 <div className={style.navItem}>MINT</div>
-              </Link>
-              <Link
+              </a>
+              <a
                 href="/bulls/team"
                 // target="_blank"
                 className={`${selectedNav === "team" && style.activeNavItem}`}
               >
                 <div className={style.navItem}>TEAM</div>
-              </Link>
-              <Link
+              </a>
+              <a
                 href="/bulls"
                 // target="_blank"
-                aria-disabled={true}
+                // aria-disabled={true}
                 className={`${
                   selectedNav === "team" && style.activeNavItem
                 } text-gray-600`}
               >
                 <div className={style.navItem}>ALPHA BULLS</div>
-              </Link>
-              <Link
+              </a>
+              <a
                 href="https://theranch.gitbook.io/"
                 target="_blank"
                 className={`${selectedNav === "mint" && style.activeNavItem}`}
               >
                 <div className={style.navItem}>WHITEPAPER</div>
-              </Link>
+              </a>
             </div>
           </motion.div>
         )}

@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { ContractContext } from "../../../context/ContractContext";
 import { useContext, MouseEvent, useState, useEffect } from "react";
-import { alphaBullsContractAddress } from "../../../lib/constants";
+import { mintContractAddress } from "../../../lib/constants";
 import toast from "react-hot-toast";
 
 type Props = {
@@ -15,7 +15,7 @@ type Props = {
 
 const Card = ({ name, price, totalSupply, points }: Props) => {
   const { data } = useSession();
-  const { tokenContract, alphaBullsContract, handleShow } =
+  const { tokenContract, mintContract, handleShow } =
     useContext(ContractContext);
   const [alphaBullsMinted, setAlphaBullsMinted] = useState<number>(0);
 
@@ -25,17 +25,15 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
 
   const getMintedAlphaBulls = async () => {
     if (name.toLowerCase() == "gold") {
-      const tokenSupply = await alphaBullsContract.methods
-        .goldTokenSupply()
-        .call();
+      const tokenSupply = await mintContract.methods.goldTokenSupply().call();
       setAlphaBullsMinted(Number(tokenSupply - 4990));
     } else if (name.toLowerCase() == "silver") {
-      const tokenSupplySilver = await alphaBullsContract.methods
+      const tokenSupplySilver = await mintContract.methods
         .silverTokenSupply()
         .call();
       setAlphaBullsMinted(Number(tokenSupplySilver - 4960));
     } else {
-      const tokenSupplyBronze = await alphaBullsContract.methods
+      const tokenSupplyBronze = await mintContract.methods
         .bronzeTokenSupply()
         .call();
       setAlphaBullsMinted(Number(tokenSupplyBronze - 4900));
@@ -48,7 +46,7 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
     // @ts-ignore
     if (data == null) return toast.error("You are not authenticated!");
 
-    if (alphaBullsContract == totalSupply)
+    if (mintContract == totalSupply)
       return toast.error("All Alpha bulls have been minted!");
 
     // @ts-ignore
@@ -60,13 +58,13 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
     }
 
     const allowance = await tokenContract.methods
-      .allowance(address, alphaBullsContractAddress)
+      .allowance(address, mintContractAddress)
       .call();
 
     if (allowance / 1000000 < price) {
       const notAllowed = price - allowance / 1000000;
       await tokenContract.methods
-        .approve(alphaBullsContractAddress, String(notAllowed + "000000"))
+        .approve(mintContractAddress, String(notAllowed + "000000"))
         .send({ from: address }, (err: any) => {
           if (err) {
             toast.error(err.message);
@@ -77,27 +75,25 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
       toast.success("Amount has been approved!");
     }
 
-    await alphaBullsContract.methods
-      .alphaBullsMint(name.toLocaleLowerCase())
-      .send(
-        {
-          from: address,
-        },
-        (err: any) => {
-          if (err) {
-            toast.error(err.message.toLocaleString());
-          }
+    await mintContract.methods.alphaBullsMint(name.toLocaleLowerCase()).send(
+      {
+        from: address,
+      },
+      (err: any) => {
+        if (err) {
+          toast.error(err.message.toLocaleString());
         }
-      );
+      }
+    );
 
     toast.success(`You have sucessfully minted a ${name} TR Bull`);
   };
 
   useEffect(() => {
-    if (alphaBullsContract) {
+    if (mintContract) {
       getMintedAlphaBulls();
     }
-  }, [alphaBullsContract, mint]);
+  }, [mintContract, mint]);
 
   return (
     <div className="relative h-fit">
@@ -134,7 +130,7 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
           </div>
           <button
             onClick={(e) => mint(e)}
-            className="bg-purple-500 w-full py-2 rounded-full  font-marker uppercase"
+            className="bg-purple-500 w-full py-2 rounded-full shadow-md font-marker uppercase"
           >
             Mint
           </button>

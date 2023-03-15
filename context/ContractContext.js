@@ -1,8 +1,8 @@
 "use client";
 import { createContext, useEffect, useState } from "react";
 import {
-  alphaBullsContractAddress,
-  aplhaBullsContractABI,
+  mintContractAddress,
+  mintContractABI,
   bullsContractABI,
   bullsContractAddress,
   CurrencyContract,
@@ -26,7 +26,7 @@ export const ContractProvider = ({ children }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [rawNfts, setRawNfts] = useState();
   const [show, handleShow] = useState(false);
-  const [alphaBullsContract, setAlphaBullsContract] = useState();
+  const [mintContract, setMintContract] = useState();
 
   useEffect(() => {
     const loadTokenContract = async () => {
@@ -36,7 +36,6 @@ export const ContractProvider = ({ children }) => {
         CurrencyContract
       );
       setTokenContract(web3Contract);
-      console.log(web3Contract);
     };
 
     const loadMintContract = async () => {
@@ -50,19 +49,19 @@ export const ContractProvider = ({ children }) => {
       }
     };
 
-    const loadAlphaBullsContract = async () => {
+    const loadmintContract = async () => {
       const web3 = createAlchemyWeb3(process.env.NEXT_PUBLIC_ALCHEMY_KEY);
-      if (alphaBullsContractAddress && aplhaBullsContractABI) {
+      if (mintContractAddress && mintContractABI) {
         const web3Contract = new web3.eth.Contract(
-          aplhaBullsContractABI,
-          alphaBullsContractAddress
+          mintContractABI,
+          mintContractAddress
         );
 
-        setAlphaBullsContract(web3Contract);
+        setMintContract(web3Contract);
       }
     };
 
-    loadAlphaBullsContract();
+    loadmintContract();
     // loadMintContract();
     loadTokenContract();
   }, []);
@@ -80,7 +79,7 @@ export const ContractProvider = ({ children }) => {
         await Moralis.EvmApi.nft
           .getNFTMetadata({
             //@ts-ignore
-            address: contractAddress,
+            address: mintContractAddress,
             chain: EvmChain.MUMBAI,
             tokenId: nft.token_id,
           })
@@ -107,7 +106,7 @@ export const ContractProvider = ({ children }) => {
         menuOpen,
         nfts,
         show,
-        alphaBullsContract,
+        mintContract,
         handleShow,
         addUsdcOpen,
         setAddUsdcOpen,
