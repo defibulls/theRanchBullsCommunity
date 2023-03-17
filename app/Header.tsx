@@ -7,10 +7,8 @@ import { signIn, signOut } from "next-auth/react";
 import { motion } from "framer-motion";
 import { useSession } from "next-auth/react";
 import { ContractContext } from "../context/ContractContext";
-import { ArrowUpRightIcon, Bars3Icon } from "@heroicons/react/24/solid";
+import { Bars3Icon } from "@heroicons/react/24/solid";
 import { customStyles } from "../lib/constants";
-import toast from "react-hot-toast";
-import Link from "next/link";
 import { useAuthRequestChallengeEvm } from "@moralisweb3/next/lib/hooks/auth/useAuthRequestChallengeEvm";
 import ReactModal from "react-modal";
 import Modaluser from "./modals/SetPartnerModal";
@@ -142,12 +140,10 @@ const Header = ({ notLanding, setLanding }: props) => {
                 <div className={style.navItem}>TEAM</div>
               </a>
               <a
-                href="/bulls"
+                href="/bulls/alpha"
                 // target="_blank"
                 // aria-disabled={true}
-                className={`${
-                  selectedNav === "team" && style.activeNavItem
-                } text-gray-600`}
+                className={`${selectedNav === "team" && style.activeNavItem}`}
               >
                 <div className={style.navItem}>ALPHA BULLS</div>
               </a>

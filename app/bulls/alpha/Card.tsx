@@ -18,6 +18,10 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
   const { tokenContract, mintContract, handleShow } =
     useContext(ContractContext);
   const [alphaBullsMinted, setAlphaBullsMinted] = useState<number>(0);
+  const [agreeTerms, setAgreeTerms] = useState(false);
+
+  // @ts-ignore
+  const address = data?.user.address;
 
   useEffect(() => {
     handleShow(true);
@@ -45,6 +49,10 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
 
     // @ts-ignore
     if (data == null) return toast.error("You are not authenticated!");
+    if (!agreeTerms)
+      return toast.error(
+        "You haven't agreed to our Terms of Service and Privacy Policy"
+      );
 
     if (mintContract == totalSupply)
       return toast.error("All Alpha bulls have been minted!");
@@ -96,17 +104,17 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
   }, [mintContract, mint]);
 
   return (
-    <div className="relative h-fit">
+    <div className="relative h-fit w-[85%]">
       <div className="absolute inset-0 bg-purple-500 blur"></div>
-      <div className="text-white relative min-h-fit flex-col shadow-md shadow-purple-500 w-fit flex rounded-lg items-center justify-center bg-[#15202b]">
+      <div className="text-white relative min-h-fit flex-col shadow-md shadow-purple-500 w-full flex rounded-lg items-center justify-center bg-[#15202b]">
         <Image
           src={`/images/${name.toLocaleLowerCase()}.png`}
           alt={name}
           className="rounded-t-lg"
           height={100}
-          width={300}
+          width={320}
         />
-        <div className="py-5 space-y-2 ">
+        <div className="py-5 space-y-2 w-[90%] ">
           <h1 className="uppercase font-marker  text-xl">
             The {name} TR Bulls
           </h1>
@@ -128,11 +136,40 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
               {price} <span className="text-gray-500">USDC</span>
             </p>
           </div>
+
+          <div className="flex w-full space-x-2">
+            <input
+              type="checkbox"
+              className="focus:ring-3  h-4 w-4 rounded border-gray-300 bg-gray-50 focus:ring-blue-300"
+              onChange={(e: any) => setAgreeTerms(e.target.checked)}
+            />
+
+            <p className="text-gray-600 text-xs uppercase">
+              By checking this box, you are agreeing to our{" "}
+              <a
+                href="https://theranch.gitbook.io/the-ranch/legal/terms-of-service"
+                target="_blank"
+                className="text-gray-200 underline underline-offset-2"
+              >
+                terms of service{" "}
+              </a>
+              and{" "}
+              <a
+                href="https://theranch.gitbook.io/the-ranch/legal/privacy-policy"
+                target="_blank"
+                className="text-gray-200 underline underline-offset-2"
+              >
+                privacy policy.
+              </a>
+            </p>
+          </div>
           <button
+            // @ts-ignore
+            disabled={!address}
             onClick={(e) => mint(e)}
-            className="bg-purple-500 w-full py-2 rounded-full shadow-md font-marker uppercase"
+            className="bg-purple-500 w-full py-2 rounded-full shadow-md font-marker uppercase disabled:bg-gray-500"
           >
-            Mint
+            {address ? "Mint" : "Connect Wallet"}
           </button>
         </div>
       </div>
