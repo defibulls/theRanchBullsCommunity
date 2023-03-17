@@ -62,7 +62,7 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
     const _usdcBalance = await tokenContract.methods.balanceOf(address).call();
 
     if (_usdcBalance < price) {
-      return toast.error(`You don't have enough USDC.e`);
+      return toast.error(`You don't have enough USDC`);
     }
 
     const allowance = await tokenContract.methods

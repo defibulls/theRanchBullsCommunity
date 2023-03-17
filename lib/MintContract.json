@@ -19,7 +19,9 @@
   { "inputs": [], "name": "Minting_ExceedsTotalBulls", "type": "error" },
   { "inputs": [], "name": "Minting_FreeMintsNotLive", "type": "error" },
   { "inputs": [], "name": "Minting_IsZeroOrBiggerThanMax", "type": "error" },
+  { "inputs": [], "name": "Minting_MintingNumberNotAllowed", "type": "error" },
   { "inputs": [], "name": "Minting_PublicSaleNotLive", "type": "error" },
+  { "inputs": [], "name": "Pause_MustSetAllVariablesFirst", "type": "error" },
   {
     "anonymous": false,
     "inputs": [
@@ -200,6 +202,19 @@
         "type": "address"
       }
     ],
+    "name": "overallMintWinnerDeclared",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "bullOwner",
+        "type": "address"
+      }
+    ],
     "name": "phaseWinnerDeclared",
     "type": "event"
   },
@@ -240,16 +255,6 @@
     ],
     "name": "withdrawWbtcBalanceEvent",
     "type": "event"
-  },
-  {
-    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "name": "TRBullOwners",
-    "outputs": [
-      { "internalType": "bool", "name": "earlySupporter", "type": "bool" },
-      { "internalType": "bool", "name": "buddyUpdated", "type": "bool" }
-    ],
-    "stateMutability": "view",
-    "type": "function"
   },
   {
     "inputs": [
@@ -333,6 +338,13 @@
     "outputs": [
       { "internalType": "uint256", "name": "_value", "type": "uint256" }
     ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "name": "buddyAlreadyUpdated",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -451,20 +463,6 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "name": "luckyFrogOwnerIndexes",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "name": "luckyTurtleOwnerIndexes",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [],
     "name": "marketingSafe",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
@@ -565,6 +563,13 @@
   },
   {
     "inputs": [],
+    "name": "overallMintCountWinner",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "owner",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
@@ -608,15 +613,6 @@
     "name": "phaseWinnerMints",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "phaseWinnerSupply",
-    "outputs": [
-      { "internalType": "uint256", "name": "_value", "type": "uint256" }
-    ],
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -726,34 +722,6 @@
   {
     "inputs": [
       {
-        "internalType": "enum TheRanchBullsCommunity.MintType",
-        "name": "mintType",
-        "type": "uint8"
-      },
-      { "internalType": "bool", "name": "state", "type": "bool" }
-    ],
-    "name": "setMintActive",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "enum TheRanchBullsCommunity.MintType",
-        "name": "mintType",
-        "type": "uint8"
-      },
-      { "internalType": "uint256", "name": "newCost", "type": "uint256" }
-    ],
-    "name": "setMintCost",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "address",
         "name": "_investmentSafe",
         "type": "address"
@@ -788,16 +756,6 @@
       { "internalType": "bool", "name": "_bool", "type": "bool" }
     ],
     "name": "setVariableStatus",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "uint256", "name": "_nftsMinted", "type": "uint256" },
-      { "internalType": "uint256", "name": "_BonusAmount", "type": "uint256" }
-    ],
-    "name": "setWhitelistBonusAmount",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
