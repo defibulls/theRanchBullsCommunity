@@ -74,7 +74,12 @@ const Menu = (props: Props) => {
           >
             Discord
           </a>
-          abc
+          <a
+            href="https://opensea.io/collection/the-ranch-bulls-community"
+            target="_blank"
+          >
+            OpenSea
+          </a>
         </div>
       </div>
       <div>
