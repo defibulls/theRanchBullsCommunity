@@ -67,11 +67,7 @@ const Menu = (props: Props) => {
           <a href="https://twitter.com/0xTheRanch" target="_blank">
             Twitter
           </a>
-          <a
-            href="https://discord.gg/5UTKa8z8zh"
-            target="_blank"
-            className="as"
-          >
+          <a href="https://discord.gg/5UTKa8z8zh" target="_blank">
             Discord
           </a>
           <a
