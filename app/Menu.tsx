@@ -74,9 +74,7 @@ const Menu = (props: Props) => {
           >
             Discord
           </a>
-          <a href="/" target="_blank">
-            OpenSea
-          </a>
+          abc
         </div>
       </div>
       <div>
