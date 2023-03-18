@@ -97,9 +97,10 @@ const Banner = () => {
                 {/* <div className="absolute inset-0 z-0 bg-purple-600 blur rounded-full"></div> */}
 
                 <video
-                  autoPlay
+                  autoPlay={true}
                   loop
                   muted
+                  controls={false}
                   playsInline
                   height={200}
                   className="rounded-full"
