@@ -5,6 +5,7 @@ import { ContractContext } from "../../../context/ContractContext";
 import { useContext, MouseEvent, useState, useEffect } from "react";
 import { mintContractAddress } from "../../../lib/constants";
 import toast from "react-hot-toast";
+import Web3 from "web3";
 
 type Props = {
   name: string;
@@ -26,6 +27,13 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
   useEffect(() => {
     handleShow(true);
   }, []);
+
+  async function getGasPrice() {
+    const web3 = new Web3(process.env.NEXT_PUBLIC_ALCHEMY_KEY!);
+    const gasPrice = web3.eth.getGasPrice();
+
+    return gasPrice;
+  }
 
   const getMintedAlphaBulls = async () => {
     if (name.toLowerCase() == "gold") {
@@ -65,6 +73,8 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
       return toast.error(`You don't have enough USDC`);
     }
 
+    const gasPrice = await getGasPrice();
+
     const allowance = await tokenContract.methods
       .allowance(address, mintContractAddress)
       .call();
@@ -86,6 +96,7 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
     await mintContract.methods.alphaBullsMint(name.toLocaleLowerCase()).send(
       {
         from: address,
+        gasPrice: gasPrice,
       },
       (err: any) => {
         if (err) {
