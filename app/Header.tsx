@@ -310,7 +310,7 @@ const Header = ({ notLanding, setLanding }: props) => {
                               Discord
                             </a>
                             <a
-                              href="https://opensea.io/collection/theranch-btc-bulls-community"
+                              href="https://opensea.io/collection/the-ranch-bulls-community"
                               target="_blank"
                             >
                               OpenSea
