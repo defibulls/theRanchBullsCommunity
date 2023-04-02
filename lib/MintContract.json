@@ -1,16 +1,10 @@
 [
-  { "inputs": [], "name": "Address_CantBeAddressZero", "type": "error" },
   {
     "inputs": [],
     "name": "Buddy_MutlipleBuddySwitchesNotAllowed",
     "type": "error"
   },
   { "inputs": [], "name": "Buddy_NotAllowed", "type": "error" },
-  {
-    "inputs": [],
-    "name": "Contract_CurrentlyPaused_CheckSocials",
-    "type": "error"
-  },
   {
     "inputs": [],
     "name": "Minting_AddressNotFreeMintOrAlreadyDone",
@@ -166,7 +160,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "indexPurchased",
+        "name": "amountPurchased",
         "type": "uint256"
       }
     ],
@@ -299,9 +293,38 @@
   },
   {
     "inputs": [
-      { "internalType": "string", "name": "_mintTypeStr", "type": "string" }
+      { "internalType": "uint256", "name": "_tokenQuantity", "type": "uint256" }
     ],
-    "name": "alphaBullsMint",
+    "name": "alphaBullsMintBronze",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_address", "type": "address" },
+      { "internalType": "uint256", "name": "_tokenQuantity", "type": "uint256" }
+    ],
+    "name": "alphaBullsMintBronzePaper",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_tokenQuantity", "type": "uint256" }
+    ],
+    "name": "alphaBullsMintGold",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_address", "type": "address" },
+      { "internalType": "uint256", "name": "_tokenQuantity", "type": "uint256" }
+    ],
+    "name": "alphaBullsMintGoldPaper",
     "outputs": [],
     "stateMutability": "payable",
     "type": "function"
@@ -311,6 +334,25 @@
     "name": "alphaBullsMintLive",
     "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_tokenQuantity", "type": "uint256" }
+    ],
+    "name": "alphaBullsMintSilver",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_address", "type": "address" },
+      { "internalType": "uint256", "name": "_tokenQuantity", "type": "uint256" }
+    ],
+    "name": "alphaBullsMintSilverPaper",
+    "outputs": [],
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -352,7 +394,34 @@
     "inputs": [
       { "internalType": "uint256", "name": "quantity", "type": "uint256" }
     ],
-    "name": "checkClaimEligibility",
+    "name": "checkClaimEligibilityBronze",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "quantity", "type": "uint256" }
+    ],
+    "name": "checkClaimEligibilityGold",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "quantity", "type": "uint256" }
+    ],
+    "name": "checkClaimEligibilityNormal",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "quantity", "type": "uint256" }
+    ],
+    "name": "checkClaimEligibilitySilver",
     "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
     "stateMutability": "view",
     "type": "function"
@@ -390,6 +459,16 @@
   {
     "inputs": [],
     "name": "getBronzeMintingCost",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_address", "type": "address" },
+      { "internalType": "uint256", "name": "_tokenQuantity", "type": "uint256" }
+    ],
+    "name": "getCostAndMintEligibility",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
@@ -488,7 +567,7 @@
   {
     "inputs": [
       {
-        "internalType": "enum TheRanchBullsCommunity.MintType",
+        "internalType": "enum TheRanchBullsCommunityV2.MintType",
         "name": "",
         "type": "uint8"
       }
@@ -501,7 +580,7 @@
   {
     "inputs": [
       {
-        "internalType": "enum TheRanchBullsCommunity.MintType",
+        "internalType": "enum TheRanchBullsCommunityV2.MintType",
         "name": "",
         "type": "uint8"
       }
@@ -514,7 +593,7 @@
   {
     "inputs": [
       {
-        "internalType": "enum TheRanchBullsCommunity.MintType",
+        "internalType": "enum TheRanchBullsCommunityV2.MintType",
         "name": "",
         "type": "uint8"
       }
@@ -589,7 +668,7 @@
       { "internalType": "address", "name": "_address", "type": "address" },
       { "internalType": "uint256", "name": "_tokenQuantity", "type": "uint256" }
     ],
-    "name": "paperMint",
+    "name": "paperMintNormal",
     "outputs": [],
     "stateMutability": "payable",
     "type": "function"
@@ -706,6 +785,15 @@
       { "internalType": "bool", "name": "approved", "type": "bool" }
     ],
     "name": "setApprovalForAll",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "_newBaseURI", "type": "string" }
+    ],
+    "name": "setBaseURI",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -850,6 +938,13 @@
       { "internalType": "address", "name": "newOwner", "type": "address" }
     ],
     "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "updateMintBonuses",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

@@ -20,6 +20,7 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
     useContext(ContractContext);
   const [alphaBullsMinted, setAlphaBullsMinted] = useState<number>(0);
   const [agreeTerms, setAgreeTerms] = useState(false);
+  const [count, setCount] = useState<number>(1);
 
   // @ts-ignore
   const address = data?.user.address;
@@ -68,8 +69,11 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
     // @ts-ignore
     const address = data?.user.address;
     const _usdcBalance = await tokenContract.methods.balanceOf(address).call();
+    const totalPrice = price * count;
 
-    if (_usdcBalance < price) {
+    console.log(totalPrice);
+
+    if (_usdcBalance < totalPrice) {
       return toast.error(`You don't have enough USDC`);
     }
 
@@ -79,10 +83,10 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
       .allowance(address, mintContractAddress)
       .call();
 
-    if (allowance / 1000000 < price) {
-      const notAllowed = price - allowance / 1000000;
+    if (allowance / 1000000 < totalPrice) {
+      const notAllowed = totalPrice - allowance / 1000000;
       await tokenContract.methods
-        .approve(mintContractAddress, String(notAllowed + "000000"))
+        .approve(mintContractAddress, String(totalPrice + "000000"))
         .send({ from: address }, (err: any) => {
           if (err) {
             toast.error(err.message);
@@ -93,19 +97,48 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
       toast.success("Amount has been approved!");
     }
 
-    await mintContract.methods.alphaBullsMint(name.toLocaleLowerCase()).send(
-      {
-        from: address,
-        gasPrice: gasPrice,
-      },
-      (err: any) => {
-        if (err) {
-          toast.error(err.message.toLocaleString());
+    if (name.toLocaleLowerCase() == "bronze") {
+      await mintContract.methods.alphaBullsMintBronze(count).send(
+        {
+          from: address,
+          gasPrice: gasPrice,
+        },
+        (err: any) => {
+          if (err) {
+            toast.error(err.message.toLocaleString());
+          }
         }
-      }
+      );
+    } else if (name.toLocaleLowerCase() == "silver") {
+      await mintContract.methods.alphaBullsMintSilver(count).send(
+        {
+          from: address,
+          gasPrice: gasPrice,
+        },
+        (err: any) => {
+          if (err) {
+            toast.error(err.message.toLocaleString());
+          }
+        }
+      );
+    } else {
+      await mintContract.methods.alphaBullsMintGold(count).send(
+        {
+          from: address,
+          gasPrice: gasPrice,
+        },
+        (err: any) => {
+          if (err) {
+            toast.error(err.message.toLocaleString());
+          }
+        }
+      );
+    }
+    toast.success(
+      `You have sucessfully minted ${count} ${name} TR ${
+        count > 1 ? "Bulls" : "Bull"
+      }`
     );
-
-    toast.success(`You have sucessfully minted a ${name} TR Bull`);
   };
 
   useEffect(() => {
@@ -113,6 +146,18 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
       getMintedAlphaBulls();
     }
   }, [mintContract, mint]);
+
+  const increment = () => {
+    if (count < 10) {
+      setCount(count + 1);
+    }
+  };
+
+  const decrement = () => {
+    if (count > 1) {
+      setCount(count - 1);
+    }
+  };
 
   return (
     <div className="relative h-fit w-[85%]">
@@ -146,6 +191,48 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
             <p className="text-2xl text-white font-bold">
               {price} <span className="text-gray-500">USDC</span>
             </p>
+          </div>
+
+          <div className="flex items-center space-x-4  rounded-lg shadow-md px-6 py-4">
+            <button
+              className="text-gray-200 hover:text-gray-400 focus:outline-none"
+              onClick={decrement}
+            >
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M20 12H4"
+                />
+              </svg>
+            </button>
+            <span className="text-gray-400 font-semibold text-2xl">
+              {count}
+            </span>
+            <button
+              className="text-gray-200 hover:text-gray-400 focus:outline-none"
+              onClick={increment}
+            >
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 6v12M6 12h12"
+                />
+              </svg>
+            </button>
           </div>
 
           <div className="flex w-full space-x-2">

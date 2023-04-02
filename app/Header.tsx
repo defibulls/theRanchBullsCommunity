@@ -13,7 +13,7 @@ import { useAuthRequestChallengeEvm } from "@moralisweb3/next/lib/hooks/auth/use
 import ReactModal from "react-modal";
 import Modaluser from "./modals/SetPartnerModal";
 import EmailModal from "./modals/EmailModal";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const style = {
   wrapper: `p-4 w-screen flex justify-between items-center`,
@@ -41,9 +41,9 @@ const Header = ({ notLanding, setLanding }: props) => {
   const { connectAsync } = useConnect();
   const { disconnectAsync } = useDisconnect();
   const { isConnected } = useAccount();
-  const router = useRouter();
   const { signMessageAsync } = useSignMessage();
   const { requestChallengeAsync } = useAuthRequestChallengeEvm();
+  const pathname = usePathname();
 
   const handleAuth = async () => {
     if (isConnected) {
@@ -71,6 +71,14 @@ const Header = ({ notLanding, setLanding }: props) => {
       redirect: false,
     });
   };
+
+  useEffect(() => {
+    if (pathname?.includes("bulls")) {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  });
 
   return (
     <div
@@ -124,11 +132,9 @@ const Header = ({ notLanding, setLanding }: props) => {
                 FAQs
               </a>
               <a
-                href="/bulls"
+                href="/bulls/mint"
                 // aria-disabled={true}
-                className={`${
-                  selectedNav === "mint" && style.activeNavItem
-                } text-gray-600`}
+                className={`${selectedNav === "mint" && style.activeNavItem}`}
               >
                 <div className={style.navItem}>MINT</div>
               </a>
@@ -221,10 +227,10 @@ const Header = ({ notLanding, setLanding }: props) => {
                 ) : (
                   <div
                     onClick={() => handleAuth()}
-                    className={`mx-2 flex cursor-pointer items-center rounded-2xl bg-[#191B1F] text-[0.9rem] font-semibold`}
+                    className={`mx-2 flex cursor-pointer items-center rounded-2xl bg-[#191B1F] md:text-[0.9rem] font-semibold`}
                   >
                     <div
-                      className={`flex h-full items-center justify-center rounded-2xl border border-[#163256] bg-[#172A42] px-2 py-1 text-[#4F90EA] hover:border-[#234169]`}
+                      className={`flex h-full items-center justify-center text-sm md:text-base rounded-2xl border border-[#163256] bg-[#172A42] px-2 py-1 text-[#4F90EA] hover:border-[#234169]`}
                     >
                       Connect Wallet
                     </div>
