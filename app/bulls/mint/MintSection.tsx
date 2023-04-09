@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { useSession } from "next-auth/react";
 import { ContractContext } from "../../../context/ContractContext";
 import { mintContractAddress } from "../../../lib/constants";
+import Link from "next/link";
 
 type Props = {
   minted: number;
@@ -22,6 +23,9 @@ const MintSection = ({ minted, maxbulls, setMinted, setLoading }: Props) => {
   const { data } = useSession();
   const [isWhitelisted, setIsWhitelisted] = useState<boolean>(false);
   const [bonusNFTs, setBonusNFTs] = useState<number>(0);
+  const [phase, setPhase] = useState(1);
+  const [totalBulls, setTotalBulls] = useState(0);
+  const [mintedinTier, setMintedInTier] = useState(0);
   //@ts-ignore
   const account = data?.user?.address;
 
@@ -96,9 +100,30 @@ const MintSection = ({ minted, maxbulls, setMinted, setLoading }: Props) => {
     setIsWhitelisted(_whitelistedAdress);
   };
 
+  const getPhase = () => {
+    if (maxbulls == 250) {
+      setPhase(1);
+      setTotalBulls(maxbulls);
+      setMintedInTier(minted);
+    } else if (maxbulls == 650 && maxbulls > 250) {
+      setPhase(2);
+      setTotalBulls(maxbulls - 250);
+      setMintedInTier(minted - 250);
+    } else if (maxbulls == 1200) {
+      setPhase(3);
+      setTotalBulls(maxbulls - 650);
+      setMintedInTier(minted - 650);
+    } else if (maxbulls == 4893) {
+      setPhase(4);
+      setTotalBulls(maxbulls - 1200);
+      setMintedInTier(minted - 1200);
+    }
+  };
+
   useEffect(() => {
     if (mintContract) {
       fetchData();
+      getPhase();
     }
   }, [mintContract, mint, account]);
 
@@ -150,7 +175,11 @@ const MintSection = ({ minted, maxbulls, setMinted, setLoading }: Props) => {
 
   const increment = (e: any) => {
     e.preventDefault();
-    if (count == 10) return;
+    let limit = 10;
+    if (totalBulls - mintedinTier <= 10) {
+      limit = totalBulls - mintedinTier;
+    }
+    if (count == limit) return;
     setCount(count + 1);
   };
 
@@ -174,15 +203,24 @@ const MintSection = ({ minted, maxbulls, setMinted, setLoading }: Props) => {
         MINT LIVE
       </p>
 
+      <p className="font-marker text-3xl text-orange-400">Phase {phase}</p>
+
       <p className="text-4xl font-black">
-        {minted} / {maxbulls}
+        {mintedinTier} / {totalBulls}
       </p>
       <p className="pb-4 text-5xl font-bold leading-[1.2]">
-        EACH <span className="font-marker text-purple-600">BULLS </span> COSTS{" "}
+        EACH <span className="font-marker text-purple-600">BULL </span> COSTS{" "}
         {price}
         <span className="font-marker text-purple-600"> USDC</span>
         <br />
       </p>
+
+      <div className={` text-lg font-normal text-cyan-600`}>
+        <p className="font-marker uppercase tracking-widest">
+          Max 10 Bulls per transaction
+        </p>
+        <br />
+      </div>
 
       <div className="mb-8 flex h-full w-fit items-center space-x-2">
         <input
@@ -272,6 +310,19 @@ const MintSection = ({ minted, maxbulls, setMinted, setLoading }: Props) => {
         >
           Mint
         </button>
+        <div
+          className="border-cyan-600 mt-3 border w-full py-2 px-2 rounded-md
+          shadow-md font-marker uppercase flex justify-center"
+        >
+          <Link
+            href=""
+            className="w-full text-center"
+            target="_blank"
+            // onClick={(e) => mint(e)}
+          >
+            Mint with credit card
+          </Link>
+        </div>
         <p>
           TOTAL PRICE: <b>{totalPrice} USDC</b>
         </p>

@@ -34,7 +34,7 @@ const Home = async (props: Props) => {
     <div className="pb-20 md:pb-0">
       <Header notLanding={true} />
 
-      <main className="min-h-screen md:mt-5 mt-20 max-w-7xl mx-auto grid md:grid-cols-3 grid-cols-1 w-full sm:grid-cols-2 px-10 md:place-content-center place-items-center gap-10">
+      <main className="min-h-screen md:mt-20 pb-10 mt-20 max-w-7xl mx-auto grid md:grid-cols-3 grid-cols-1 w-full sm:grid-cols-2 px-10 md:place-content-center place-items-center gap-10">
         {data.map((nft, i) => (
           <Card
             key={i}

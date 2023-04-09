@@ -4,11 +4,9 @@ import Modal from "react-modal";
 import { motion } from "framer-motion";
 import PublicSale from "./PublicSale";
 import MintSection from "./MintSection";
-import { useRouter } from "next/router";
 import { ContractContext } from "../../../context/ContractContext";
 import Loader from "../../modals/Loader";
 import { customStyles } from "../../../lib/constants";
-import { useNetwork } from "wagmi";
 
 const NFTMint = () => {
   const [loading, setloading] = useState<boolean>(false);

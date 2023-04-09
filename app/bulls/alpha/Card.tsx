@@ -6,6 +6,7 @@ import { useContext, MouseEvent, useState, useEffect } from "react";
 import { mintContractAddress } from "../../../lib/constants";
 import toast from "react-hot-toast";
 import Web3 from "web3";
+import Link from "next/link";
 
 type Props = {
   name: string;
@@ -148,7 +149,11 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
   }, [mintContract, mint]);
 
   const increment = () => {
-    if (count < 10) {
+    let limit = 10;
+    if (totalSupply - alphaBullsMinted <= 10) {
+      limit = totalSupply - alphaBullsMinted;
+    }
+    if (count < limit) {
       setCount(count + 1);
     }
   };
@@ -160,7 +165,7 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
   };
 
   return (
-    <div className="relative h-fit w-[85%]">
+    <div className="relative h-fit w-[90%]">
       <div className="absolute inset-0 bg-purple-500 blur"></div>
       <div className="text-white relative min-h-fit flex-col shadow-md shadow-purple-500 w-full flex rounded-lg items-center justify-center bg-[#15202b]">
         <Image
@@ -168,7 +173,7 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
           alt={name}
           className="rounded-t-lg"
           height={100}
-          width={320}
+          width={350}
         />
         <div className="py-5 space-y-2 w-[90%] ">
           <h1 className="uppercase font-marker  text-xl">
@@ -192,8 +197,7 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
               {price} <span className="text-gray-500">USDC</span>
             </p>
           </div>
-
-          <div className="flex items-center space-x-4  rounded-lg shadow-md px-6 py-4">
+          <div className="flex items-center space-x-4 justify-center rounded-lg  px-6 py-4">
             <button
               className="text-gray-200 hover:text-gray-400 focus:outline-none"
               onClick={decrement}
@@ -234,7 +238,6 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
               </svg>
             </button>
           </div>
-
           <div className="flex w-full space-x-2">
             <input
               type="checkbox"
@@ -269,6 +272,19 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
           >
             {address ? "Mint" : "Connect Wallet"}
           </button>
+          <div
+            className="border-purple-500 mt-3 border w-full py-2 rounded-full
+          shadow-md font-marker uppercase flex justify-center"
+          >
+            <Link
+              href=""
+              className="w-full text-center"
+              target="_blank"
+              // onClick={(e) => mint(e)}
+            >
+              Mint with credit card
+            </Link>
+          </div>
         </div>
       </div>
     </div>
