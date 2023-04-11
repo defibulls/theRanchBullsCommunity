@@ -98,7 +98,7 @@ const Header = ({ notLanding, setLanding }: props) => {
             duration: 1.5,
           }}
           className={style.headerLogo}
-          href="/"
+          href={show ? "/bulls" : "/"}
         >
           <img
             src="/logo.png"
@@ -272,7 +272,7 @@ const Header = ({ notLanding, setLanding }: props) => {
                           <div className="ml-4 mt-4 flex flex-col space-y-2">
                             <a
                               target="_blank"
-                              href="https://theranch.gitbook.io/the-ranch/legal/privacy-policy"
+                              href="https://theranch.gitbook.io/the-ranch/legal/terms-of-service"
                               className="as"
                             >
                               Terms of Service

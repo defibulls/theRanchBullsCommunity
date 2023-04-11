@@ -73,7 +73,7 @@ const NFTMint = () => {
       <main className="flex flex-col justify-center ">
         <div className="flex min-h-[100vh] w-full flex-col gap-8 p-[10%] text-white md:flex-row md:py-0 md:px-[5%]">
           <div className="flex h-screen w-full flex-col justify-center items-center overflow-hidden">
-            {chainId !== "0x13881" ? (
+            {chainId !== "0x89" ? (
               <ChainNotSupported />
             ) : (
               <div className="flex h-full w-full flex-col items-center justify-center lg:flex-row">
