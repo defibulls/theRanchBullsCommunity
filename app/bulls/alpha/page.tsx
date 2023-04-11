@@ -12,6 +12,8 @@ const data = [
     totalSupply: 60,
     points: 52500,
     description: "",
+    mintWithCard:
+      "https://withpaper.com/checkout/9e7b7cf8-cc03-4e5b-b26f-b5b321927839",
   },
   {
     name: "Silver",
@@ -19,6 +21,8 @@ const data = [
     totalSupply: 30,
     points: 175000,
     description: "",
+    mintWithCard:
+      "https://withpaper.com/checkout/169edea8-f90c-42da-be7c-e414bf2934cc",
   },
   {
     name: "Gold",
@@ -26,6 +30,7 @@ const data = [
     totalSupply: 10,
     points: 1000000,
     description: "",
+    mintWithCard: "",
   },
 ];
 
@@ -42,6 +47,7 @@ const Home = async (props: Props) => {
             points={nft.points}
             price={nft.price}
             totalSupply={nft.totalSupply}
+            mintWithCard={nft.mintWithCard}
           />
         ))}
       </main>

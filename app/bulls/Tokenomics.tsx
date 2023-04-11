@@ -6,7 +6,7 @@ const Tokenomics = () => {
       id="tokenomics"
       className="flex min-h-fit max-w-[90rem] md:pb-64 px-[5%] mx-auto text-white flex-col items-center justify-center gap-4 bg-black "
     >
-      <div className="flex h-full w-full flex-col items-start justify-center lg:p-10">
+      <div className="flex h-full w-full flex-col items-start justify-center ">
         <div className="relative flex w-full flex-row items-end justify-center md:justify-start">
           <div>
             <p className="font-marker text-4xl font-black">

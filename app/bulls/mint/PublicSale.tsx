@@ -40,7 +40,7 @@ const PublicSale = ({ minted, maxbulls, price }: Props) => {
       className="flex w-full flex-col justify-center lg:w-[50%]"
     >
       <p className="mb-1 text-4xl font-black text-cyan-600 underline underline-offset-2">
-        PUBLIC SALE NOT LIVE
+        MINT NOT LIVE
       </p>
 
       <p className="text-4xl font-black">
@@ -49,13 +49,15 @@ const PublicSale = ({ minted, maxbulls, price }: Props) => {
       <p className="text-5xl font-black">
         EACH <span className="font-marker text-purple-600">BULL</span> COSTS{" "}
         {price}
-        <span className="font-marker text-purple-600"> USDC.e</span>
+        <span className="font-marker text-purple-600"> USDC</span>
         <br />
         <br />
       </p>
       <div className={`pb-4 text-lg font-normal text-cyan-600`}>
         <p className="font-marker uppercase tracking-widest">
-          Minting only open between Monday 8 AM EST to Friday at 5 PM EST
+          {maxbulls > 250
+            ? "Next Phase: TBA"
+            : "Minting start on April 12 @ 7PM EST"}
         </p>
         <br />
       </div>
@@ -111,7 +113,7 @@ const PublicSale = ({ minted, maxbulls, price }: Props) => {
           Mint
         </button>
         <p>
-          TOTAL PRICE: <b>0 USDC.e</b>
+          TOTAL PRICE: <b>0 USDC</b>
         </p>
       </div>
     </motion.div>

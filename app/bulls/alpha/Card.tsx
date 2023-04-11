@@ -13,9 +13,10 @@ type Props = {
   price: number;
   totalSupply: number;
   points: number;
+  mintWithCard: string;
 };
 
-const Card = ({ name, price, totalSupply, points }: Props) => {
+const Card = ({ name, price, mintWithCard, totalSupply, points }: Props) => {
   const { data } = useSession();
   const { tokenContract, mintContract, handleShow } =
     useContext(ContractContext);
@@ -272,19 +273,18 @@ const Card = ({ name, price, totalSupply, points }: Props) => {
           >
             {address ? "Mint" : "Connect Wallet"}
           </button>
-          <div
-            className="border-purple-500 mt-3 border w-full py-2 rounded-full
-          shadow-md font-marker uppercase flex justify-center"
-          >
-            <Link
-              href=""
-              className="w-full text-center"
-              target="_blank"
-              // onClick={(e) => mint(e)}
-            >
-              Mint with credit card
-            </Link>
-          </div>
+          {name.toLocaleLowerCase() != "gold" && (
+            <div className="border-purple-500 mt-3 border w-full py-2 rounded-full shadow-md font-marker uppercase flex justify-center">
+              <Link
+                href={mintWithCard}
+                className="w-full text-center"
+                target="_blank"
+                // onClick={(e) => mint(e)}
+              >
+                Mint with credit card
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>

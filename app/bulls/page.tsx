@@ -2,6 +2,8 @@ import React from "react";
 import Header from "../Header";
 import About from "./About";
 import Banner from "./Banner";
+import Bullion from "./Bullion";
+import Gamification from "./Gamification";
 import PresaleDetail from "./PresaleDetail";
 import Roadmap from "./Roadmap";
 import Slider from "./Slider";
@@ -17,7 +19,9 @@ const Home = (props: Props) => {
       <Slider />
       <PresaleDetail />
       <Tokenomics />
-      <Roadmap />
+      {/* <Roadmap /> */}
+      <Bullion />
+      <Gamification />
     </div>
   );
 };

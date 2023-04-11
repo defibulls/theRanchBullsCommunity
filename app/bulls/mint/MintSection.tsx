@@ -74,11 +74,8 @@ const MintSection = ({ minted, maxbulls, setMinted, setLoading }: Props) => {
       .then(() => {
         const minted = count;
         toast.success(
-          `You've sucessfully minted ${minted} ${
+          `You've sucessfully minted ${minted + bonusNFTs} ${
             minted > 1 ? "bulls" : "bull"
-          } ${
-            bonusNFTs > 0 &&
-            `and ${bonusNFTs} Bonus ${minted > 1 ? "Bulls" : "Bull"}`
           }!`
         );
         setLoading(false);
@@ -105,18 +102,22 @@ const MintSection = ({ minted, maxbulls, setMinted, setLoading }: Props) => {
       setPhase(1);
       setTotalBulls(maxbulls);
       setMintedInTier(minted);
+      setPrice(150);
     } else if (maxbulls == 650 && maxbulls > 250) {
       setPhase(2);
       setTotalBulls(maxbulls - 250);
       setMintedInTier(minted - 250);
+      setPrice(160);
     } else if (maxbulls == 1200) {
       setPhase(3);
       setTotalBulls(maxbulls - 650);
       setMintedInTier(minted - 650);
+      setPrice(170);
     } else if (maxbulls == 4893) {
       setPhase(4);
       setTotalBulls(maxbulls - 1200);
       setMintedInTier(minted - 1200);
+      setPrice(180);
     }
   };
 
@@ -143,27 +144,12 @@ const MintSection = ({ minted, maxbulls, setMinted, setLoading }: Props) => {
     setCount(count - 1);
   };
 
-  const fetchPrice = async () => {
-    const _price = await mintContract.methods
-      //@ts-ignore
-      .getCostAndMintEligibility(data?.user?.address, 1)
-      .call();
-
-    setPrice(_price / 1000000);
-  };
-
-  useEffect(() => {
-    if (mintContract) {
-      fetchPrice();
-    }
-  }, [mintContract]);
-
   useEffect(() => {
     if (mintContract) {
       calculateTotalPrice(count);
       fetchBonusNFTs();
     }
-  }, [fetchPrice, count]);
+  }, [count]);
 
   const calculateTotalPrice = async (count: number) => {
     const _price = await mintContract.methods
@@ -203,7 +189,9 @@ const MintSection = ({ minted, maxbulls, setMinted, setLoading }: Props) => {
         MINT LIVE
       </p>
 
-      <p className="font-marker text-3xl text-orange-400">Phase {phase}</p>
+      <p className="font-marker text-3xl text-orange-400">
+        {phase == 4 ? "Public Phase" : `Phase ${phase}`}
+      </p>
 
       <p className="text-4xl font-black">
         {mintedinTier} / {totalBulls}
@@ -315,7 +303,7 @@ const MintSection = ({ minted, maxbulls, setMinted, setLoading }: Props) => {
           shadow-md font-marker uppercase flex justify-center"
         >
           <Link
-            href=""
+            href="https://withpaper.com/checkout/aecc7ea9-9af0-44aa-8eae-83ffd2b3dc3c"
             className="w-full text-center"
             target="_blank"
             // onClick={(e) => mint(e)}

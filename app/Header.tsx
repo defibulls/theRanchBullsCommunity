@@ -128,6 +128,12 @@ const Header = ({ notLanding, setLanding }: props) => {
               >
                 EXCHANGE
               </div>
+              <div
+                // onClick={() => toast.error("Mint not live!")}
+                className={`${style.navItem} text-gray-600 `}
+              >
+                VAULT
+              </div>
               <a href="/bulls/support" className={`${style.navItem}`}>
                 FAQs
               </a>
