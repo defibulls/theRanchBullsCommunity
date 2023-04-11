@@ -51,21 +51,25 @@ const About = () => {
           Welcome to The Ranch, where we are building a revolutionary DeFi
           ecosystem anchored by our native point metric, Bullion. Our goal is to
           foster a vibrant community of like-minded individuals who share our
-          passion for maximizing the value of Bullion. Unlike the unsustainable
-          P2E (Play To Earn) gaming model, we believe in the P2I (Play To
-          Increase) approach, where our treasury is built on a sustainable model
-          that doesn't rely on new players to add liquidity. Through carefully
-          curated partnerships, such as with AlpharShares, we are developing a
-          diversified portfolio that maximizes profits for our Bullion holders
-          over the long term. As a TR Bull holder, you play a crucial role in
-          our DAO that helps guide the direction of our project. Our core team
-          embodies a bullish spirit, prioritizing investments that offer
-          tangible benefits and significant returns while aligning with our
-          values of real utility, yield, rewards, and relationships. We are
-          committed to creating real value for our members and staying true to
-          our community's principles, with Bullion at the heart of our
-          ecosystem. Together, let's set a new standard for what DeFi can be.
-          Join us as a TR Bull holder and let's get Bullish!
+          passion for maximizing the value of Bullion.
+          <br />
+          <br />
+          Unlike the unsustainable P2E (Play To Earn) gaming model, we believe
+          in the P2I (Play To Increase) approach, where our treasury is built on
+          a sustainable model that doesn't rely on new players to add liquidity.
+          Through carefully curated partnerships, such as with AlpharShares, we
+          are developing a diversified portfolio that maximizes profits for our
+          Bullion holders over the long term.
+          <br /> <br />
+          As a TR Bull holder, you play a crucial role in our DAO that helps
+          guide the direction of our project. Our core team embodies a bullish
+          spirit, prioritizing investments that offer tangible benefits and
+          significant returns while aligning with our values of real utility,
+          yield, rewards, and relationships.
+          <br /> <br /> We are committed to creating real value for our members
+          and staying true to our community's principles, with Bullion at the
+          heart of our ecosystem. Together, let's set a new standard for what
+          DeFi can be. Join us as a TR Bull holder and let's get Bullish!
         </p>
       </div>
     </div>

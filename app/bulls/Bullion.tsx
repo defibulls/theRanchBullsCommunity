@@ -30,17 +30,18 @@ const Bullion = (props: Props) => {
             (Normal or Alpha) earns a specific amount of Bullion every month,
             which is derived from the cost of the NFT multiplied by the
             Magnifier value. Accrued Bullion serves two primary purposes: reward
-            distribution and voting power. Unlike other fixed-value tokens,
-            Bullion does not have a fixed value but is the basis for calculating
-            the percentage of rewards each stakeholder receives based on their
-            staked amount and voting activity. At the beginning of each month,
-            the Bullion amount is deliberately calculated to snapshot and
-            determine the reward allocation ratio for that month's reward
-            tokens. Snapshotting the Bullion tokens at the start of the month
-            allows each account to optionally participate in Bull Battles
-            through the gamification layer. During Bull Battles, the total token
-            count in the ecosystem remains constant, as none is created out of
-            thin air. After rewards are dispensed mid-month based on the
+            distribution and voting power. <br /> <br /> Unlike other
+            fixed-value tokens, Bullion does not have a fixed value but is the
+            basis for calculating the percentage of rewards each stakeholder
+            receives based on their staked amount and voting activity. At the
+            beginning of each month, the Bullion amount is deliberately
+            calculated to snapshot and determine the reward allocation ratio for
+            that month's reward tokens. <br /> <br /> Snapshotting the Bullion
+            tokens at the start of the month allows each account to optionally
+            participate in Bull Battles through the gamification layer. During
+            Bull Battles, the total token count in the ecosystem remains
+            constant, as none is created out of thin air.
+            <br /> <br /> After rewards are dispensed mid-month based on the
             accounts' Bullion holding, all Bullion is wiped from stakeholders'
             accounts and recalculated the following month to repeat the
             rewarding process. However, the deflationary mechanism of death
