@@ -12,6 +12,8 @@ const data = [
     totalSupply: 60,
     points: 52500,
     description: "",
+    mintWithCard:
+      "https://withpaper.com/checkout/9e7b7cf8-cc03-4e5b-b26f-b5b321927839",
   },
   {
     name: "Silver",
@@ -19,6 +21,8 @@ const data = [
     totalSupply: 30,
     points: 175000,
     description: "",
+    mintWithCard:
+      "https://withpaper.com/checkout/169edea8-f90c-42da-be7c-e414bf2934cc",
   },
   {
     name: "Gold",
@@ -26,6 +30,7 @@ const data = [
     totalSupply: 10,
     points: 1000000,
     description: "",
+    mintWithCard: "",
   },
 ];
 
@@ -34,7 +39,7 @@ const Home = async (props: Props) => {
     <div className="pb-20 md:pb-0">
       <Header notLanding={true} />
 
-      <main className="min-h-screen md:mt-5 mt-20 max-w-7xl mx-auto grid md:grid-cols-3 grid-cols-1 w-full sm:grid-cols-2 px-10 md:place-content-center place-items-center gap-10">
+      <main className="min-h-screen md:mt-20 pb-10 mt-20 max-w-7xl mx-auto grid md:grid-cols-3 grid-cols-1 w-full sm:grid-cols-2 px-10 md:place-content-start place-content-start items-start place-items-center gap-10">
         {data.map((nft, i) => (
           <Card
             key={i}
@@ -42,6 +47,7 @@ const Home = async (props: Props) => {
             points={nft.points}
             price={nft.price}
             totalSupply={nft.totalSupply}
+            mintWithCard={nft.mintWithCard}
           />
         ))}
       </main>

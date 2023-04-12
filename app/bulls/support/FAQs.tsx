@@ -18,7 +18,7 @@ const FAQs = async () => {
   return (
     <div
       id="faqs"
-      className="relative mt-5 flex min-h-fit w-full flex-col  items-start justify-start gap-4 bg-black px-[10%] pb-10 transition-all duration-500 ease-in-out sm:mt-10 md:min-h-[100vh] md:px-[10%]"
+      className="relative mt-5 flex min-h-fit w-full flex-col max-w-7xl mx-auto items-start justify-start gap-4 bg-black px-[10%] transition-all duration-500 ease-in-out sm:mt-10 md:min-h-[100vh] md:px-[10%]"
     >
       <div className="relative flex w-full items-start">
         <div className="font-marker text-3xl font-black uppercase">

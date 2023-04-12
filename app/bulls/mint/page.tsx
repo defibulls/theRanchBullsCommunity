@@ -2,6 +2,7 @@
 import { useSession } from "next-auth/react";
 import Header from "../../Header";
 import ConnectWallet from "./ConnectWallet";
+import NFTMint from "./NFTMint";
 
 type Props = {};
 
@@ -11,7 +12,7 @@ const Mint = (props: Props) => {
   return (
     <div>
       <Header notLanding={true} />
-      {status == "authenticated" ? <div /> : <ConnectWallet />}
+      <main>{status == "authenticated" ? <NFTMint /> : <ConnectWallet />}</main>
     </div>
   );
 };

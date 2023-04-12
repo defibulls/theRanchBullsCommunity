@@ -3,8 +3,6 @@ import { createContext, useEffect, useState } from "react";
 import {
   mintContractAddress,
   mintContractABI,
-  bullsContractABI,
-  bullsContractAddress,
   CurrencyContract,
   currencyContractABI,
 } from "../lib/constants";
@@ -40,17 +38,6 @@ export const ContractProvider = ({ children }) => {
 
     const loadMintContract = async () => {
       const web3 = createAlchemyWeb3(process.env.NEXT_PUBLIC_ALCHEMY_KEY);
-      if (bullsContractAddress && bullsContractABI) {
-        const web3Contract = new web3.eth.Contract(
-          bullsContractABI,
-          bullsContractAddress
-        );
-        setContract(web3Contract);
-      }
-    };
-
-    const loadmintContract = async () => {
-      const web3 = createAlchemyWeb3(process.env.NEXT_PUBLIC_ALCHEMY_KEY);
       if (mintContractAddress && mintContractABI) {
         const web3Contract = new web3.eth.Contract(
           mintContractABI,
@@ -61,8 +48,7 @@ export const ContractProvider = ({ children }) => {
       }
     };
 
-    loadmintContract();
-    // loadMintContract();
+    loadMintContract();
     loadTokenContract();
   }, []);
 

@@ -1,46 +1,21 @@
 [
-  { "inputs": [], "name": "BadLogicInputParameter", "type": "error" },
   {
     "inputs": [],
-    "name": "Contract_CurrentlyPaused_CheckSocials",
+    "name": "Buddy_MutlipleBuddySwitchesNotAllowed",
+    "type": "error"
+  },
+  { "inputs": [], "name": "Buddy_NotAllowed", "type": "error" },
+  {
+    "inputs": [],
+    "name": "Minting_AddressNotFreeMintOrAlreadyDone",
     "type": "error"
   },
   { "inputs": [], "name": "Minting_ExceedsTotalBulls", "type": "error" },
-  { "inputs": [], "name": "Minting_IsZeroOrBiggerThanFive", "type": "error" },
-  { "inputs": [], "name": "Minting_OnlyOneOwnerMintAllowed", "type": "error" },
+  { "inputs": [], "name": "Minting_FreeMintsNotLive", "type": "error" },
+  { "inputs": [], "name": "Minting_IsZeroOrBiggerThanMax", "type": "error" },
+  { "inputs": [], "name": "Minting_MintingNumberNotAllowed", "type": "error" },
   { "inputs": [], "name": "Minting_PublicSaleNotLive", "type": "error" },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "operator", "type": "address" }
-    ],
-    "name": "OperatorNotAllowed",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "Partner_MutliplePartnerSwitchesNotAllowed",
-    "type": "error"
-  },
-  { "inputs": [], "name": "Partner_NotAllowed", "type": "error" },
-  { "inputs": [], "name": "Pause_MustBePaused", "type": "error" },
   { "inputs": [], "name": "Pause_MustSetAllVariablesFirst", "type": "error" },
-  {
-    "inputs": [],
-    "name": "Rewarding_HasAlreadyHappenedThisMonth",
-    "type": "error"
-  },
-  { "inputs": [], "name": "Rewarding_NoBalanceToWithdraw", "type": "error" },
-  { "inputs": [], "name": "Rewarding_NotReady", "type": "error" },
-  {
-    "inputs": [],
-    "name": "Rewarding_SatoshiRoundingErrorWillHappen",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "Rewarding_SkippingOrDoubleRewarding",
-    "type": "error"
-  },
   {
     "anonymous": false,
     "inputs": [
@@ -152,25 +127,6 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
-        "internalType": "address",
-        "name": "_account",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "bool",
-        "name": "_changedTo",
-        "type": "bool"
-      }
-    ],
-    "name": "PauseChanged",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
         "indexed": true,
         "internalType": "address",
         "name": "from",
@@ -198,104 +154,62 @@
       {
         "indexed": true,
         "internalType": "address",
-        "name": "nftOwner",
+        "name": "NewBullOwner",
         "type": "address"
       },
       {
-        "indexed": true,
+        "indexed": false,
         "internalType": "uint256",
-        "name": "totalAmountliquidated",
+        "name": "amountPurchased",
         "type": "uint256"
       }
     ],
-    "name": "liquidationEvent",
+    "name": "alphaBullMinted",
     "type": "event"
   },
   {
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
-        "internalType": "address[]",
-        "name": "giveawayWinners",
-        "type": "address[]"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256[]",
-        "name": "winningIndexes",
-        "type": "uint256[]"
-      },
-      {
-        "indexed": false,
-        "internalType": "address[]",
-        "name": "amoeGiveawayWinners",
-        "type": "address[]"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256[]",
-        "name": "amoeWinningIndexes",
-        "type": "uint256[]"
+        "indexed": true,
+        "internalType": "address",
+        "name": "NewBullOwner",
+        "type": "address"
       },
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "giveawayWinningAmount",
+        "name": "BullGiven",
         "type": "uint256"
       }
     ],
-    "name": "mintingGiveawayEvent",
+    "name": "freeBullsEnteringRanch",
     "type": "event"
   },
   {
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "payPerNftForTheMonth",
-        "type": "uint256"
-      },
-      {
         "indexed": true,
-        "internalType": "uint256",
-        "name": "startingIndex",
-        "type": "uint256"
-      },
-      {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "endingIndex",
-        "type": "uint256"
+        "internalType": "address",
+        "name": "bullOwner",
+        "type": "address"
       }
     ],
-    "name": "rewardEvent",
+    "name": "overallMintWinnerDeclared",
     "type": "event"
   },
   {
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "totalDeposit",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "calculatedPayPerNFT",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "rewardDate",
-        "type": "uint256"
+        "indexed": true,
+        "internalType": "address",
+        "name": "bullOwner",
+        "type": "address"
       }
     ],
-    "name": "setPayPerNFTEvent",
+    "name": "phaseWinnerDeclared",
     "type": "event"
   },
   {
@@ -337,22 +251,113 @@
     "type": "event"
   },
   {
-    "inputs": [],
-    "name": "USDCRewardsBalance",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "inputs": [
+      { "internalType": "address[]", "name": "_users", "type": "address[]" },
+      { "internalType": "bool", "name": "_bool", "type": "bool" }
+    ],
+    "name": "addOrRemoveAddressesFreeMint",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address[]", "name": "_users", "type": "address[]" },
+      { "internalType": "bool", "name": "_bool", "type": "bool" }
+    ],
+    "name": "addOrRemoveWhitelistMintAddresses",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "name": "addressHasFreeMintLeft",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "amoeSafe",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "name": "addressMintedDuringThisPhase",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "allowedMintingQuantity",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "operator", "type": "address" },
+      { "internalType": "uint256", "name": "_tokenQuantity", "type": "uint256" }
+    ],
+    "name": "alphaBullsMintBronze",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_address", "type": "address" },
+      { "internalType": "uint256", "name": "_tokenQuantity", "type": "uint256" }
+    ],
+    "name": "alphaBullsMintBronzePaper",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_tokenQuantity", "type": "uint256" }
+    ],
+    "name": "alphaBullsMintGold",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_address", "type": "address" },
+      { "internalType": "uint256", "name": "_tokenQuantity", "type": "uint256" }
+    ],
+    "name": "alphaBullsMintGoldPaper",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "alphaBullsMintLive",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_tokenQuantity", "type": "uint256" }
+    ],
+    "name": "alphaBullsMintSilver",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_address", "type": "address" },
+      { "internalType": "uint256", "name": "_tokenQuantity", "type": "uint256" }
+    ],
+    "name": "alphaBullsMintSilverPaper",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "to", "type": "address" },
       { "internalType": "uint256", "name": "tokenId", "type": "uint256" }
     ],
     "name": "approve",
@@ -370,60 +375,68 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "name": "btcBullOwners",
+    "inputs": [],
+    "name": "bronzeTokenSupply",
     "outputs": [
-      { "internalType": "uint256", "name": "USDC_Balance", "type": "uint256" },
-      { "internalType": "uint256", "name": "WBTC_Balance", "type": "uint256" },
-      {
-        "internalType": "uint256",
-        "name": "lastRewardDate",
-        "type": "uint256"
-      },
-      { "internalType": "bool", "name": "earlySupporter", "type": "bool" }
+      { "internalType": "uint256", "name": "_value", "type": "uint256" }
     ],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "btcMinersSafe",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "name": "buddyAlreadyUpdated",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "quantity", "type": "uint256" }
+    ],
+    "name": "checkClaimEligibilityBronze",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "quantity", "type": "uint256" }
+    ],
+    "name": "checkClaimEligibilityGold",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "quantity", "type": "uint256" }
+    ],
+    "name": "checkClaimEligibilityNormal",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "quantity", "type": "uint256" }
+    ],
+    "name": "checkClaimEligibilitySilver",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "btcMinersSafeBalance",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
+    "name": "freeMint",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "chainLinkVRFContractMintAddress",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "coreTeam_1",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "coreTeam_2",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "currentRewardingDate",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "freeMintLive",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -445,22 +458,48 @@
   },
   {
     "inputs": [],
-    "name": "getNumberOfGiveawayPlayers",
+    "name": "getBronzeMintingCost",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_address", "type": "address" },
+      { "internalType": "uint256", "name": "_tokenQuantity", "type": "uint256" }
+    ],
+    "name": "getCostAndMintEligibility",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "getRewardAddressesLength",
+    "name": "getGoldMintingCost",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "hostingSafe",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "name": "getNormalMintingCost",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getSilverMintingCost",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "goldTokenSupply",
+    "outputs": [
+      { "internalType": "uint256", "name": "_value", "type": "uint256" }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
@@ -480,15 +519,15 @@
   },
   {
     "inputs": [],
-    "name": "insuranceSafe",
+    "name": "investmentSafe",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "name": "isApprovedCaller",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "inputs": [],
+    "name": "investmentSafeBalance",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -499,13 +538,6 @@
     ],
     "name": "isApprovedForAll",
     "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "lastDeposit",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -524,13 +556,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "maxSupply",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       { "internalType": "uint256", "name": "_tokenQuantity", "type": "uint256" }
     ],
@@ -540,8 +565,27 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "mintingCost",
+    "inputs": [
+      {
+        "internalType": "enum TheRanchBullsCommunityV2.MintType",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "name": "mintActive",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum TheRanchBullsCommunityV2.MintType",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "name": "mintCost",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
@@ -549,48 +593,27 @@
   {
     "inputs": [
       {
-        "internalType": "uint256[]",
-        "name": "_winningIndexes",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "address[]",
-        "name": "_amoeWinningAddresses",
-        "type": "address[]"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "_amoeWinningIndexes",
-        "type": "uint256[]"
-      },
-      { "internalType": "uint256", "name": "_winningAmount", "type": "uint256" }
+        "internalType": "enum TheRanchBullsCommunityV2.MintType",
+        "name": "",
+        "type": "uint8"
+      }
     ],
-    "name": "mintingGiveaway",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "mintingGiveawayBalance",
+    "name": "mintStoppingPoint",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "name": "mintingPrices",
-    "outputs": [
-      { "internalType": "uint256", "name": "_maxSupply", "type": "uint256" },
-      { "internalType": "uint256", "name": "_cost", "type": "uint256" }
-    ],
+    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "name": "myBuddy",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "name": "myPartner",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "name": "myParnterNetworkTeamCount",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -603,29 +626,31 @@
   },
   {
     "inputs": [],
-    "name": "owner",
+    "name": "normalMintStoppingPoint",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "normalTokenSupply",
+    "outputs": [
+      { "internalType": "uint256", "name": "_value", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "overallMintCountWinner",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "ownerMint",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "ownerMintDone",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "ownerMintMax",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "owner",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -639,6 +664,16 @@
     "type": "function"
   },
   {
+    "inputs": [
+      { "internalType": "address", "name": "_address", "type": "address" },
+      { "internalType": "uint256", "name": "_tokenQuantity", "type": "uint256" }
+    ],
+    "name": "paperMintNormal",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "paused",
     "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
@@ -647,8 +682,29 @@
   },
   {
     "inputs": [],
-    "name": "payPerNftForTheMonth",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "phaseMintCountWinner",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "phaseWinnerMints",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "procurementWallet",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "publicPaperSaleLive",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -661,8 +717,15 @@
   },
   {
     "inputs": [],
-    "name": "readyToReward",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "name": "raritySafe",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "raritySafeBalance",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -674,42 +737,23 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_stockyardNumber",
-        "type": "uint256"
-      }
-    ],
-    "name": "rewardBulls",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "name": "rewardedAddresses",
+    "inputs": [],
+    "name": "royaltiesSafe",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      {
-        "internalType": "address[]",
-        "name": "_winningAddresses",
-        "type": "address[]"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "_winningIndexes",
-        "type": "uint256[]"
-      },
-      { "internalType": "uint256", "name": "_winningAmount", "type": "uint256" }
+      { "internalType": "uint256", "name": "_tokenId", "type": "uint256" },
+      { "internalType": "uint256", "name": "_salePrice", "type": "uint256" }
     ],
-    "name": "royaltyGiveaway",
-    "outputs": [],
-    "stateMutability": "payable",
+    "name": "royaltyInfo",
+    "outputs": [
+      { "internalType": "address", "name": "", "type": "address" },
+      { "internalType": "uint256", "name": "royaltyAmount", "type": "uint256" }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -747,98 +791,27 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_address", "type": "address" },
-      { "internalType": "bool", "name": "value", "type": "bool" }
+      { "internalType": "string", "name": "_newBaseURI", "type": "string" }
     ],
-    "name": "setApprovedCallerRole",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "setFinishedRewarding",
+    "name": "setBaseURI",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_changeAtIndex",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_changeMaxSupplyTo",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_priceToChangeTo",
-        "type": "uint256"
-      }
+      { "internalType": "address", "name": "_newBuddy", "type": "address" }
     ],
-    "name": "setMintPrice",
+    "name": "setBuddyAddress",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_newPartner", "type": "address" }
-    ],
-    "name": "setPartnerAddress",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "bool", "name": "_paused", "type": "bool" }],
-    "name": "setPauseStatus",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_totalAmountToDeposit",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_dateOfRewarding",
-        "type": "uint256"
-      }
-    ],
-    "name": "setPayPerNftForTheMonthAndCurrentRewardingDate",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "bool", "name": "_active", "type": "bool" }],
-    "name": "setPublicSaleLiveStatus",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "setReadyToReward",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "_hostingSafe", "type": "address" },
       {
         "internalType": "address",
-        "name": "_btcMinersSafe",
+        "name": "_investmentSafe",
         "type": "address"
       },
       {
@@ -846,21 +819,18 @@
         "name": "_marketingSafe",
         "type": "address"
       },
+      { "internalType": "address", "name": "_raritySafe", "type": "address" },
       {
         "internalType": "address",
-        "name": "_insuranceSafe",
+        "name": "_royaltiesSafe",
         "type": "address"
       },
-      { "internalType": "address", "name": "_amoeSafe", "type": "address" },
       {
         "internalType": "address",
-        "name": "_chainlinkVRFMint",
+        "name": "_procurementWallet",
         "type": "address"
       },
-      { "internalType": "address", "name": "_coreTeam1", "type": "address" },
-      { "internalType": "address", "name": "_coreTeam2", "type": "address" },
       { "internalType": "address", "name": "_usdcContract", "type": "address" },
-      { "internalType": "address", "name": "_wbtcContract", "type": "address" },
       { "internalType": "string", "name": "_newBaseURI", "type": "string" }
     ],
     "name": "setSafeAddresses",
@@ -870,37 +840,20 @@
   },
   {
     "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_stockyardNumber",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_startingIndex",
-        "type": "uint256"
-      },
-      { "internalType": "uint256", "name": "_endingIndex", "type": "uint256" }
+      { "internalType": "uint256", "name": "_target", "type": "uint256" },
+      { "internalType": "bool", "name": "_bool", "type": "bool" }
     ],
-    "name": "setStockYardInfo",
+    "name": "setVariableStatus",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "name": "stockyardInfo",
-    "outputs": [
-      { "internalType": "uint256", "name": "startingIndex", "type": "uint256" },
-      { "internalType": "uint256", "name": "endingIndex", "type": "uint256" }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [],
-    "name": "stockyardsThatHaveBeenRewardedCount",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "silverTokenSupply",
+    "outputs": [
+      { "internalType": "uint256", "name": "_value", "type": "uint256" }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
@@ -950,6 +903,20 @@
   },
   {
     "inputs": [],
+    "name": "topNetworker_1",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "topNetworker_2",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "totalSupply",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
@@ -977,6 +944,13 @@
   },
   {
     "inputs": [],
+    "name": "updateMintBonuses",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "usdcTokenContract",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
@@ -991,8 +965,15 @@
   },
   {
     "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "name": "userInMintingGiveaway",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "name": "userMintCountForPhase",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "name": "userMintCountOverall",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -1008,24 +989,36 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "wbtcTokenContract",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "wbtcTokenDecimals",
+    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "whitelistBonusAmount",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [
-      { "internalType": "uint256", "name": "_safeToTarget", "type": "uint256" }
-    ],
-    "name": "withdrawSafe",
+    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "name": "whitelistMintAddresses",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "withdrawInvestmentSafe",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "withdrawMarketingSafe",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "withdrawRaritySafe",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1035,20 +1028,6 @@
       { "internalType": "address", "name": "_tokenContract", "type": "address" }
     ],
     "name": "withdrawToken",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "withdrawUsdcBalance",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "withdrawWbtcBalance",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

@@ -13,7 +13,7 @@ import { useAuthRequestChallengeEvm } from "@moralisweb3/next/lib/hooks/auth/use
 import ReactModal from "react-modal";
 import Modaluser from "./modals/SetPartnerModal";
 import EmailModal from "./modals/EmailModal";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const style = {
   wrapper: `p-4 w-screen flex justify-between items-center`,
@@ -41,9 +41,9 @@ const Header = ({ notLanding, setLanding }: props) => {
   const { connectAsync } = useConnect();
   const { disconnectAsync } = useDisconnect();
   const { isConnected } = useAccount();
-  const router = useRouter();
   const { signMessageAsync } = useSignMessage();
   const { requestChallengeAsync } = useAuthRequestChallengeEvm();
+  const pathname = usePathname();
 
   const handleAuth = async () => {
     if (isConnected) {
@@ -72,6 +72,14 @@ const Header = ({ notLanding, setLanding }: props) => {
     });
   };
 
+  useEffect(() => {
+    if (pathname?.includes("bulls")) {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  });
+
   return (
     <div
       className={`fixed top-0 z-50 h-24 w-full p-[20px] transition-all text-white duration-500 ease-in`}
@@ -90,7 +98,7 @@ const Header = ({ notLanding, setLanding }: props) => {
             duration: 1.5,
           }}
           className={style.headerLogo}
-          href="/"
+          href={show ? "/bulls" : "/"}
         >
           <img
             src="/logo.png"
@@ -120,15 +128,19 @@ const Header = ({ notLanding, setLanding }: props) => {
               >
                 EXCHANGE
               </div>
+              <div
+                // onClick={() => toast.error("Mint not live!")}
+                className={`${style.navItem} text-gray-600 `}
+              >
+                VAULT
+              </div>
               <a href="/bulls/support" className={`${style.navItem}`}>
                 FAQs
               </a>
               <a
-                href="/bulls"
+                href="/bulls/mint"
                 // aria-disabled={true}
-                className={`${
-                  selectedNav === "mint" && style.activeNavItem
-                } text-gray-600`}
+                className={`${selectedNav === "mint" && style.activeNavItem}`}
               >
                 <div className={style.navItem}>MINT</div>
               </a>
@@ -221,10 +233,10 @@ const Header = ({ notLanding, setLanding }: props) => {
                 ) : (
                   <div
                     onClick={() => handleAuth()}
-                    className={`mx-2 flex cursor-pointer items-center rounded-2xl bg-[#191B1F] text-[0.9rem] font-semibold`}
+                    className={`mx-2 flex cursor-pointer items-center rounded-2xl bg-[#191B1F] md:text-[0.9rem] font-semibold`}
                   >
                     <div
-                      className={`flex h-full items-center justify-center rounded-2xl border border-[#163256] bg-[#172A42] px-2 py-1 text-[#4F90EA] hover:border-[#234169]`}
+                      className={`flex h-full items-center justify-center text-sm md:text-base rounded-2xl border border-[#163256] bg-[#172A42] px-2 py-1 text-[#4F90EA] hover:border-[#234169]`}
                     >
                       Connect Wallet
                     </div>
@@ -260,7 +272,7 @@ const Header = ({ notLanding, setLanding }: props) => {
                           <div className="ml-4 mt-4 flex flex-col space-y-2">
                             <a
                               target="_blank"
-                              href="https://theranch.gitbook.io/the-ranch/legal/privacy-policy"
+                              href="https://theranch.gitbook.io/the-ranch/legal/terms-of-service"
                               className="as"
                             >
                               Terms of Service
