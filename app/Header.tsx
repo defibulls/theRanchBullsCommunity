@@ -206,9 +206,9 @@ const Header = ({ notLanding, setLanding }: props) => {
                       className={`z-50 mr-2 flex h-8 cursor-pointer items-center rounded-2xl border-[#163256] bg-[#172A42] p-2`}
                     >
                       {/* @ts-ignore */}
-                      {data.user?.address.slice(0, 5)}...
+                      {data.user?.address?.slice(0, 5)}...
                       {/* @ts-ignore */}
-                      {data.user?.address.slice(-4)}
+                      {data.user?.address?.slice(-4)}
                     </div>
                     <div
                       onClick={() => signOut({ redirect: false })}

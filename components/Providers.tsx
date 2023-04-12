@@ -26,7 +26,9 @@ export function Providers({ children, session }: Props) {
   return (
     <ContractProvider>
       <WagmiConfig client={client}>
-        <Provider>{children}</Provider>
+        <Provider session={session} refetchInterval={0}>
+          {children}
+        </Provider>
       </WagmiConfig>
     </ContractProvider>
   );
