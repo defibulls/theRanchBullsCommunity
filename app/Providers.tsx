@@ -22,7 +22,9 @@ const Providers = ({ children, session }: any) => {
   return (
     <ContractProvider>
       <WagmiConfig client={client}>
-        <SessionProvider session={session}>{children}</SessionProvider>
+        <SessionProvider session={session} refetchInterval={0}>
+          {children}
+        </SessionProvider>
       </WagmiConfig>
     </ContractProvider>
   );
