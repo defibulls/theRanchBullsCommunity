@@ -27,7 +27,7 @@ const MintSection = ({ minted, maxbulls, setMinted, setLoading }: Props) => {
   const [totalBulls, setTotalBulls] = useState(0);
   const [mintedinTier, setMintedInTier] = useState(0);
   //@ts-ignore
-  const account = data?.user?.address;
+  const account = data?.user.address;
 
   const mint = async () => {
     if (!agreeTerms)
@@ -40,6 +40,9 @@ const MintSection = ({ minted, maxbulls, setMinted, setLoading }: Props) => {
       return toast.error("You can only mint up to 10 NFTs at a time");
 
     if (minted == maxbulls) return toast.error("All bulls have been minted!");
+
+    // @ts-ignore
+    const account = data?.user.address;
 
     const _usdcBalance = await tokenContract.methods.balanceOf(account).call();
 
