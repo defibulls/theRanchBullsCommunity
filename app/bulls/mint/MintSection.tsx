@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { ContractContext } from "../../../context/ContractContext";
 import { mintContractAddress } from "../../../lib/constants";
 import Link from "next/link";
+import Web3 from "web3";
 
 type Props = {
   minted: number;
@@ -28,6 +29,13 @@ const MintSection = ({ minted, maxbulls, setMinted, setLoading }: Props) => {
   const [mintedinTier, setMintedInTier] = useState(0);
   //@ts-ignore
   const account = data?.user.address;
+
+  async function getGasPrice() {
+    const web3 = new Web3(process.env.NEXT_PUBLIC_ALCHEMY_KEY!);
+    const gasPrice = web3.eth.getGasPrice();
+
+    return gasPrice;
+  }
 
   const mint = async () => {
     if (!agreeTerms)
@@ -56,10 +64,12 @@ const MintSection = ({ minted, maxbulls, setMinted, setLoading }: Props) => {
       .allowance(account, mintContractAddress)
       .call();
 
+    const gasPrice = await getGasPrice();
+
     if (allowance / 1000000 < totalPrice) {
       await tokenContract.methods
         .approve(mintContractAddress, String(totalPrice + "000000"))
-        .send({ from: account }, (err: any) => {
+        .send({ from: account, gasPrice: gasPrice }, (err: any) => {
           if (err) {
             toast.error(err.message);
             setLoading(false);
@@ -73,6 +83,7 @@ const MintSection = ({ minted, maxbulls, setMinted, setLoading }: Props) => {
       .mint(count)
       .send({
         from: account,
+        gasPrice: gasPrice,
       })
       .then(() => {
         const minted = count;
@@ -148,16 +159,21 @@ const MintSection = ({ minted, maxbulls, setMinted, setLoading }: Props) => {
   };
 
   useEffect(() => {
-    if (mintContract) {
-      calculateTotalPrice(count);
-      fetchBonusNFTs();
+    if (mintContract && account) {
+      calculateTotalPrice(count, account);
     }
   }, [count, mintContract, account]);
 
-  const calculateTotalPrice = async (count: number) => {
+  useEffect(() => {
+    if (mintContract) {
+      fetchBonusNFTs();
+    }
+  }, [count, mintContract]);
+
+  const calculateTotalPrice = async (count: number, account: any) => {
     const _price = await mintContract.methods
       //@ts-ignore
-      .getCostAndMintEligibility(data?.user.address, count)
+      .getCostAndMintEligibility(account, count)
       .call();
     setTotalPrice(_price / 1000000);
   };

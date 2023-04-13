@@ -27,7 +27,7 @@ const NFTMint = () => {
           });
           //@ts-ignore
           setChainId(chainId);
-          console.log(chainId);
+          // console.log(chainId);
         } catch (error) {
           console.error(error);
         }
