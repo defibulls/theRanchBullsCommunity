@@ -157,7 +157,7 @@ const MintSection = ({ minted, maxbulls, setMinted, setLoading }: Props) => {
   const calculateTotalPrice = async (count: number) => {
     const _price = await mintContract.methods
       //@ts-ignore
-      .getCostAndMintEligibility(data?.user?.address, count)
+      .getCostAndMintEligibility(data?.user.address, count)
       .call();
     setTotalPrice(_price / 1000000);
   };

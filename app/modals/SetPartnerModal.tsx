@@ -12,7 +12,7 @@ function Modaluser() {
   const [updating, setUpdating] = useState(false);
   const { data } = useSession();
   //@ts-ignore
-  const account = data?.user?.address;
+  const account = data?.user.address;
 
   const getBuddyAddress = async () => {
     const _buddyAddress = await mintContract.methods.myBuddy(account).call();
@@ -29,7 +29,7 @@ function Modaluser() {
     setUpdating(true);
     await mintContract.methods.setBuddyAddress(buddyAddress).send({
       //@ts-ignore
-      from: data?.user?.address,
+      from: data?.user.address,
     });
     setBuddyAddress("");
     setOpen(false);

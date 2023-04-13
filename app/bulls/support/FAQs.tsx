@@ -13,7 +13,40 @@ const fetchFaqs = async () => {
 };
 
 const FAQs = async () => {
-  const faqs = await fetchFaqs();
+  const faqs = [
+    {
+      id: 1,
+      question: "How many TR Bull NFTs are in the collection?",
+      answer: "5,000",
+    },
+    {
+      id: 2,
+      question: "When are NFT holders rewarded?",
+      answer:
+        "Monthly the 1st and 5th of that given month. You only get rewarded by having a staked TR Bull on the rewards contract. ",
+    },
+    {
+      id: 3,
+      question: "How will NFT holders be paid?",
+      answer:
+        "In any ERC20 token on the polygon blockchain, the community drives the decisions of which token these would be.",
+    },
+    {
+      id: 4,
+      question: "Can I sell my NFTs in the project?",
+      answer: "You can sell your NFTs (The Ranch Bulls) on OpenSea. ",
+    },
+    // {
+    //   id: 5,
+    //   question: "",
+    //   answer: "",
+    // },
+    // {
+    //   id: 6,
+    //   question: "",
+    //   answer: "",
+    // },
+  ];
 
   return (
     <div
