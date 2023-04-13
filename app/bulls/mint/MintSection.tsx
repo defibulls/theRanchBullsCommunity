@@ -152,7 +152,7 @@ const MintSection = ({ minted, maxbulls, setMinted, setLoading }: Props) => {
       calculateTotalPrice(count);
       fetchBonusNFTs();
     }
-  }, [count, mintContract]);
+  }, [count, mintContract, account]);
 
   const calculateTotalPrice = async (count: number) => {
     const _price = await mintContract.methods
