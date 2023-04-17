@@ -1,0 +1,105 @@
+{
+  "questions": [
+    {
+      "question": "What is the overall goal of the TR Bulls project?",
+      "answer": "The Ranch and TR Bulls specifically aim to establish a robust DeFi ecosystem that revolves around NFTs and Bullion. It strives to become the pioneer project in DeFi that employs a P2I (play-to-increase) model supported by a sustainable treasury, achieved through strategic relationships and investments. The ultimate goal is to create a platform that incentivizes participation and growth in the DeFi space while prioritizing sustainability and responsible financial practices.",
+      "type": "Overview"
+    },
+    {
+      "question": "Can non-NFT holders participate in the TR Bulls ecosystem?",
+      "answer": "If you don't hold any TR Bulls NFTs, you won't be able to participate in certain parts of the TR Bulls ecosystem, such as Bull Battles, Death Battles, voting, or rewards distribution. However, there may be other sections of the ecosystem that allow non-NFT holders to participate, such as trivia nights. Please note that participation in these events may require a higher entry fee.",
+      "type": "Overview"
+    },
+    {
+      "question": "Can TR Bull NFT owners sell their NFT to exit the project?",
+      "answer": "Yes, TR Bull NFTs can be sold on marketplaces, and the owner can choose to exit the project by selling their NFT. However, if the owner no longer holds any TR Bull NFTs, their membership in the DAO is automatically canceled.",
+      "type": "Overview"
+    },
+    {
+      "question": "What are Bull Battles and Death Battles?",
+      "answer": "Bull Battles are competitions where NFT owners can wager their accrued bullion tokens against other players for a chance to win even more. Death Battles are a higher risk, higher reward option in which players can risk losing their NFTs for a chance to earn more bullion tokens and a Battle Stone.",
+      "type": "Battles"
+    },
+    {
+      "question": "How do I participate in Bull Battles and Death Battles?",
+      "answer": "To participate in Bull Battles or Death Battles, players need to own an NFT from the TR Bull ecosystem.",
+      "type": "Battles"
+    },
+    {
+      "question": "What is the risk in Death Battles, and what are the potential rewards?",
+      "answer": "The risk in Death Battles is that players can lose their NFTs, which have real-world value. However, if they win, they have a chance to earn more bullion tokens and a Battle Stone.",
+      "type": "Battles"
+    },
+    {
+      "question": "Can I participate in Death Battles without risking my NFT?",
+      "answer": "No, players cannot participate in Death Battles without risking their NFTs.",
+      "type": "Battles"
+    },
+    {
+      "question": "Will non-participation in Bull Battles or Death Battles affect my monthly rewards?",
+      "answer": "Non-participation in Bull Battles or Death Battles will not affect monthly rewards. The percentage of rewards received by an NFT holder remains constant against the total Bullion amount, regardless of participation.",
+      "type": "Battles"
+    },
+    {
+      "question": "What happens to my NFT if I lose in a Death Battle?",
+      "answer": "If a player loses in a Death Battle, their NFT will be transferred to the Graveyard Wallet and therefore can't be rewarded anymore Bullion Tokens",
+      "type": "Battles"
+    },
+    {
+      "question": "What happens if there is a tie in a Death Battle?",
+      "answer": "If there is a tie in a Death Battle although most games are geared to avoid ties, both participants will keep their NFTs.",
+      "type": "Battles"
+    },
+    {
+      "question": "How does the TR Bull community ensure a fair and transparent competition in Bull Battles and Death Battles?",
+      "answer": "The TR Bull community aims to ensure a fair and transparent competition in Bull Battles and Death Battles through clear rules, guidelines, and oversight.",
+      "type": "Battles"
+    },
+    {
+      "question": "How does Death Battles impact the supply of Bullion?",
+      "answer": "Death Battles are a way to increase the amount of Bullion for an NFT. However, this will also reduce the overall supply of Bullion, as the defeated NFT will only receive 75% of the Bullion from the battle. This mechanism ensures that Bullion remains deflationary and scarce, adding value to the NFTs and incentivizing community engagement.",
+      "type": "Battles"
+    },
+    {
+      "question": "How is the monthly Bullion supply determined?",
+      "answer": "The monthly Bullion supply is determined via a snapshot on the smart contract as all the wallet addresses that have staked their NFTs and the smart contract calculates the Total Bullion from all the NFTs that those wallets own to determine to total Bullion Supply for the Month.",
+      "type": "Bullion"
+    },
+
+    {
+      "question": "How are the Bullion Tokens earned and the number of Bulls defeated displayed on my NFT?",
+      "answer": "The metadata files and NFT images are updated to reflect the new Bullion Tokens earned per month and the number of Bulls defeated.",
+      "type": "Bullion"
+    },
+    {
+      "question": "What are the two primary purposes of Bullion within The Ranches Ecosystem?",
+      "answer": "The two primary purposes of Bullion within The Ranches Ecosystem are reward distribution and voting power. Accrued Bullion serves as a means of tracking ownership and enabling participation in the system.",
+      "type": "Bullion"
+    },
+    {
+      "question": "How is Bullion calculated and what is its value?",
+      "answer": "Bullion itself does not have a fixed value. Instead, it serves as a basis for calculating the percentage of rewards each stakeholder receives based on their staked amount and voting activity. At the start of each month, the smart contract computes the total bullion accumulated by the staked owner across all NFTs they possess. The bullion is then deliberately calculated to determine the reward allocation ratio for that month's reward tokens.",
+      "type": "Bullion"
+    },
+    {
+      "question": "How is bullion distributed and what is the crucial reward eligibility requirement?",
+      "answer": "Before distributing rewards to stakeholders, the bullion is deliberately calculated to determine the reward allocation ratio for that month's reward tokens. After rewards are dispensed, all bullion is wiped from stakeholders' accounts and recalculated the following month to repeat the rewarding process. Regardless of which NFT you stake, the bullion output remains the same. The crucial reward eligibility requirement is to stake at least one NFT and vote for the DAO. Voting can be manually done each month by you or you can delegate your voting tokens to someone else within the community.",
+      "type": "Bullion"
+    },
+    {
+      "question": "When are rewards distributed for the project?",
+      "answer": "Rewards are distributed monthly to contributors of the TR Bulls DAO based on their staked amount and voting activity. The amount of Bullion accrued by each TR Bull NFT owner determines their percentage of rewards. These rewards are distributed to contributors in the middle of each month, providing them with ample time to participate in marketplace activities that involve the transfer of Bullion among them. The project is designed to incentivize community engagement and reward those who actively participate in the DAO.",
+      "type": "Bullion"
+    },
+    {
+      "question": "How do I stake my NFT to earn rewards?",
+      "answer": "We are building that out now, in terms of the runway for staking. This really comes back to the roadmap AlphaShares has and probably a couple months before rewards come back to the project via the BTC mining in Paraguay in the Summer of 23'. We are building out a 'Town Hall' on the Dapp will be the place where you can enter and pick the Bull you want to stake. Its not there yet but will be soon.",
+      "type": "Staking & Governance"
+    },
+    {
+      "question": "Which NFT do I have to stake to vote and be eligible for rewards?",
+      "answer": "The specific NFT you stake doesn't matter as long as you stake at least one NFT from your wallet. By staking an NFT, you become eligible to participate in voting and earn rewards based on the amount of Bullion accrued. The amount of Bullion you earn is determined by the total value of the NFTs in your wallet of that staked TR Bull.",
+      "type": "Staking & Governance"
+    }
+  ]
+}

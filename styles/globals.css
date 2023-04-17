@@ -7,6 +7,10 @@
     grid-template-columns: 1fr 1fr;
 }
 
+.transition-custom {
+    transition: max-height 1.4s ease;
+}
+
 .slide-track {
     display: flex;
     width: calc(250px*18);

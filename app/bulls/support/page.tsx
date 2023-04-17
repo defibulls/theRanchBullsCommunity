@@ -9,7 +9,6 @@ const Support = (props: Props) => {
     <div>
       <Header notLanding={true} />
       <section className="pt-24">
-        {/* @ts-ignore */}
         <FAQs />
       </section>
     </div>

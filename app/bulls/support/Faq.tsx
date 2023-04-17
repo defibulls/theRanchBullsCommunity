@@ -1,5 +1,4 @@
 "use client";
-
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/solid";
 import React, { useState, useEffect, useContext } from "react";
 import { ContractContext } from "../../../context/ContractContext";
@@ -37,8 +36,12 @@ const Faq = ({ answer, question, key }: Props) => {
             )}
           </div>
         </div>
-        <div className={`mt-6 ${!show && "hidden"} `}>
-          <p className="text-xs font-normal tracking-widest text-gray-400">
+        <div
+          className={`mt-6 transition-all duration-300 transition-custom ease-in-out ${
+            !show && "hidden"
+          } `}
+        >
+          <p className="text-xs font-normal tracking-widest  text-gray-400">
             {answer}
           </p>
         </div>
