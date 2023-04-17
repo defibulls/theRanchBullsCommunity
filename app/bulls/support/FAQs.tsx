@@ -105,23 +105,21 @@ const FAQs = () => {
                       </div>
                     )}
                   </Menu.Item>
-                  <form method="POST" action="#">
-                    <Menu.Item>
-                      {({ active }) => (
-                        <div
-                          onClick={() => setTab("Staking & Governance")}
-                          className={classNames(
-                            active
-                              ? "bg-gray-800 text-gray-400"
-                              : "text-gray-300",
-                            "block w-full px-4 py-2 text-left text-sm cursor-pointer"
-                          )}
-                        >
-                          Staking & Governance
-                        </div>
-                      )}
-                    </Menu.Item>
-                  </form>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <div
+                        onClick={() => setTab("Staking & Governance")}
+                        className={classNames(
+                          active
+                            ? "bg-gray-800 text-gray-400"
+                            : "text-gray-300",
+                          "block w-full px-4 py-2 text-left text-sm cursor-pointer"
+                        )}
+                      >
+                        Staking & Governance
+                      </div>
+                    )}
+                  </Menu.Item>
                 </div>
               </Menu.Items>
             </Transition>
