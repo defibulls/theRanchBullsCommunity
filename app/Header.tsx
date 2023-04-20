@@ -160,7 +160,7 @@ const Header = ({ notLanding, setLanding }: props) => {
                 <div className={style.navItem}>ALPHA BULLS</div>
               </a>
               <a
-                href="https://theranch.gitbook.io/"
+                href="https://theranch.gitbook.io/the-ranch-dao/"
                 target="_blank"
                 className={`${selectedNav === "mint" && style.activeNavItem}`}
               >
