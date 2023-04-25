@@ -38,7 +38,7 @@ const Banner = (props: Props) => {
           </p>
           <hr className="z-10 mb-2 w-full border-gray-400" />
           <p className="z-10 mb-4 w-full text-center text-xl font-light md:text-4xl">
-            APRIL 12 @ 7 PM EST
+            Q2 2023
           </p>
           {/* <button
             type="button"
