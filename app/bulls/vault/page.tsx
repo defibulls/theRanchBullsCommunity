@@ -4,7 +4,7 @@ import { EvmChain } from "moralis/common-evm-utils";
 import ImageCard from "./ImageCard";
 
 const getVaultNFTs = async () => {
-  Moralis.start({ apiKey: process.env.NEXT_PUBLIC_MORALIS_API_KEY });
+  await Moralis.start({ apiKey: process.env.NEXT_PUBLIC_MORALIS_API_KEY });
 
   const address = "0x309fE120B00859becaC99abf87338Ab996096F61";
 

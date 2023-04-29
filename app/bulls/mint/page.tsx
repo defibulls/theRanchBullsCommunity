@@ -14,6 +14,7 @@ const Mint = (props: Props) => {
   const { status, data } = useSession();
   const { mintContract, setOpen } = useContext(ContractContext);
   const [updated, setUpdated] = useState(false);
+  const [show, setShow] = useState(true);
 
   const getIfBuddyIsUpdated = async () => {
     const _isUpdated = await mintContract.methods
@@ -27,6 +28,7 @@ const Mint = (props: Props) => {
       setUpdated(true);
     } else {
       setUpdated(false);
+      setShow(false);
     }
   };
 
@@ -40,7 +42,7 @@ const Mint = (props: Props) => {
   return (
     <div>
       <Header notLanding={true} />
-      {!updated && <ShepherdAlert setOpen={setOpen} />}
+      {!updated && <ShepherdAlert setOpen={setOpen} setShow={setShow} />}
       <main>{status == "authenticated" ? <NFTMint /> : <ConnectWallet />}</main>
     </div>
   );

@@ -29,7 +29,11 @@ const ImageCard = ({ name, uri, desc, link }: Props) => {
           </span>{" "}
           9
         </p>
-        <Link className="px-2 py-2 rounded-lg mt-5 bg-purple-600" href={link}>
+        <Link
+          target="_blank"
+          className="px-2 py-2 rounded-lg mt-5 bg-purple-600"
+          href={link}
+        >
           Visit Website
         </Link>
       </div>
