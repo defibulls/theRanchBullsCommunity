@@ -1,25 +1,36 @@
 import Header from "../../Header";
 import Moralis from "moralis";
-import { EvmChain } from "moralis/common-evm-utils";
 import ImageCard from "./ImageCard";
 
 const getVaultNFTs = async () => {
-  await Moralis.start({ apiKey: process.env.NEXT_PUBLIC_MORALIS_API_KEY });
+  // once();
+  //@ts-ignore
+  if (!Moralis.isWeb3Enabled()) {
+    await Moralis.start({ apiKey: process.env.NEXT_PUBLIC_MORALIS_API_KEY });
+  }
 
   const address = "0x309fE120B00859becaC99abf87338Ab996096F61";
 
-  const chain = EvmChain.ETHEREUM;
+  // const chain = EvmChain.ETHEREUM;
 
   const response = await Moralis.EvmApi.nft.getWalletNFTs({
     address,
-    chain,
+    // chain,
     tokenAddresses: ["0xa8a49255026ec0ab032bbb5c4f457aaa9b138ea6"],
   });
 
   return response.result[0];
 };
 const Vault = async () => {
-  const nfts = await getVaultNFTs();
+  const nfts = {
+    metadata: {
+      name: "Alpha Mining Co. Reserve",
+      description:
+        "The Alpha Mining Co. Reserve round of NFTs consists of 3,000 NFTs that are minting for $1,000 each. These NFTs are an access pass to Alpha Mining Co.'s ecosystem and come with valuable perks.",
+      external_link: "https://mining.alphashares.io/",
+    },
+    tokenUri: "",
+  };
 
   return (
     <div className="h-full w-full overflow-x-hidden pb-20">
