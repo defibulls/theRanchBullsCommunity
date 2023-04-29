@@ -14,6 +14,7 @@ import ReactModal from "react-modal";
 import Modaluser from "./modals/SetPartnerModal";
 import EmailModal from "./modals/EmailModal";
 import { usePathname } from "next/navigation";
+import toast from "react-hot-toast";
 
 const style = {
   wrapper: `p-4 w-screen flex justify-between items-center`,
@@ -85,42 +86,15 @@ const Header = ({ notLanding, setLanding }: props) => {
       className={`fixed top-0 z-50 h-24 w-full p-[20px] transition-all text-white duration-500 ease-in`}
     >
       <div className="flex justify-between">
-        <motion.a
-          initial={{
-            x: -200,
-            opacity: 0,
-          }}
-          animate={{
-            x: 0,
-            opacity: 1,
-          }}
-          transition={{
-            duration: 1.5,
-          }}
-          className={style.headerLogo}
-          href={show ? "/bulls" : "/"}
-        >
+        <a className={style.headerLogo} href={show ? "/bulls" : "/"}>
           <img
             src="/logo.png"
             alt="TRB"
             className={`cursor-pointer rounded-xl object-contain h-12`}
           />
-        </motion.a>
+        </a>
         {notLanding && (
-          <motion.div
-            initial={{
-              y: -200,
-              opacity: 0,
-            }}
-            animate={{
-              y: 0,
-              opacity: 1,
-            }}
-            transition={{
-              duration: 1.5,
-            }}
-            className={style.nav}
-          >
+          <div className={style.nav}>
             <div className={style.navItemsContainer}>
               <div
                 // onClick={() => toast.error("Mint not live!")}
@@ -128,25 +102,20 @@ const Header = ({ notLanding, setLanding }: props) => {
               >
                 EXCHANGE
               </div>
-              <div
-                // onClick={() => toast.error("Mint not live!")}
-                className={`${style.navItem} text-gray-600 `}
-              >
+              <a href="/bulls/vault" className={`${style.navItem}`}>
                 VAULT
-              </div>
+              </a>
               <a href="/bulls/support" className={`${style.navItem}`}>
                 FAQs
               </a>
               <a
                 href="/bulls/mint"
-                // aria-disabled={true}
                 className={`${selectedNav === "mint" && style.activeNavItem}`}
               >
                 <div className={style.navItem}>MINT</div>
               </a>
               <a
                 href="/bulls/team"
-                // target="_blank"
                 className={`${selectedNav === "team" && style.activeNavItem}`}
               >
                 <div className={style.navItem}>TEAM</div>
@@ -154,7 +123,6 @@ const Header = ({ notLanding, setLanding }: props) => {
               <a
                 href="/bulls/alpha"
                 // target="_blank"
-                // aria-disabled={true}
                 className={`${selectedNav === "team" && style.activeNavItem}`}
               >
                 <div className={style.navItem}>ALPHA BULLS</div>
@@ -167,23 +135,10 @@ const Header = ({ notLanding, setLanding }: props) => {
                 <div className={style.navItem}>WHITEPAPER</div>
               </a>
             </div>
-          </motion.div>
+          </div>
         )}
 
-        <motion.div
-          initial={{
-            x: 200,
-            opacity: 0,
-          }}
-          animate={{
-            x: 0,
-            opacity: 1,
-          }}
-          transition={{
-            duration: 1.5,
-          }}
-          className="flex cursor-pointer text-white items-center justify-center "
-        >
+        <div className="flex cursor-pointer text-white items-center justify-center ">
           <>
             {/* <div className="mx-1 rounded-2xl bg-[#191B1F] px-2 py-1 text-[0.9rem] font-semibold">
               <div className="z-50 mx-1 flex h-8 cursor-pointer items-center rounded-2xl border-[#163256] bg-[#172A42] px-3 py-3">
@@ -332,38 +287,50 @@ const Header = ({ notLanding, setLanding }: props) => {
                       )}
                     </Menu.Item>
                   </div>
-                  <div className="px-1 py-1">
-                    <Menu.Item>
-                      {({ active }) => (
-                        <div>
-                          <h1 className="text-lg font-bold uppercase tracking-wider text-gray-500">
-                            Account
-                          </h1>
-                          <div className="ml-4 mt-4 space-y-2">
-                            {show && (
+                  {status == "authenticated" && (
+                    <div className="px-1 py-1">
+                      <Menu.Item>
+                        {({ active }) => (
+                          <div>
+                            <h1 className="text-lg font-bold uppercase tracking-wider text-gray-500">
+                              Account
+                            </h1>
+                            <div className="ml-4 mt-4 space-y-2">
+                              {show && (
+                                <p
+                                  className="cursor-pointer"
+                                  onClick={() => setOpen(true)}
+                                >
+                                  Buddy Address
+                                </p>
+                              )}
                               <p
                                 className="cursor-pointer"
-                                onClick={() => setOpen(true)}
+                                onClick={async () => {
+                                  try {
+                                    await navigator.clipboard.writeText(
+                                      // @ts-ignore
+                                      `https://www.theranch.community/bulls/mint?ref=${data.user?.address}`
+                                    );
+                                    toast.success("Link Copied!");
+                                  } catch (err) {
+                                    console.error("Failed to copy text: ", err);
+                                  }
+                                }}
                               >
-                                Buddy Address
+                                Copy Refferer Link
                               </p>
-                            )}
-                            <p
-                              className="cursor-pointer"
-                              onClick={() => setEmailModal(true)}
-                            >
-                              Email
-                            </p>
+                            </div>
                           </div>
-                        </div>
-                      )}
-                    </Menu.Item>
-                  </div>
+                        )}
+                      </Menu.Item>
+                    </div>
+                  )}
                 </Menu.Items>
               </Transition>
             </Menu>
           </div>
-        </motion.div>
+        </div>
       </div>
       <ReactModal isOpen={open} style={customStyles}>
         <Modaluser />

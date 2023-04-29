@@ -45,11 +45,11 @@ function Modaluser() {
     <div className={style.wrapper}>
       {currentBuddy == "0x0000000000000000000000000000000000000000" ? (
         <div className="text-xl font-semibold uppercase tracking-widest text-gray-400">
-          Update Buddy Address
+          Update Shepherd Address
         </div>
       ) : (
         <div className="text-xl font-semibold uppercase tracking-widest text-gray-400">
-          Buddy Address
+          Shepherd Address
         </div>
       )}
 

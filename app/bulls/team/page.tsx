@@ -56,7 +56,7 @@ const Team = async () => {
   return (
     <div className="h-full w-full overflow-x-hidden ">
       <Header notLanding={true} />
-      <section className="mt-24">
+      <section className="min-h-screen mt-32 flex flex-col justify-center items-cen">
         <h1 className="text-2xl  text-gray-500 font-semibold tracking-widest ml-10">
           TEAM
         </h1>

@@ -1,11 +1,15 @@
+"use client";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
-import React from "react";
+import { useContext, useEffect, useState } from "react";
+import { ContractContext } from "../../../context/ContractContext";
 import Header from "../../Header";
 import Card from "./Card";
+import ShepherdAlert from "../mint/ReffererAlert";
 
 type Props = {};
 
-const data = [
+const datas = [
   {
     name: "Bronze",
     price: 350,
@@ -34,13 +38,38 @@ const data = [
   },
 ];
 
-const Home = async (props: Props) => {
-  return (
-    <div className="pb-20 md:pb-0">
-      <Header notLanding={true} />
+const Home = (props: Props) => {
+  const { status, data } = useSession();
+  const { mintContract, setOpen } = useContext(ContractContext);
+  const [updated, setUpdated] = useState(false);
+  const getIfBuddyIsUpdated = async () => {
+    const _isUpdated = await mintContract.methods
+      .buddyAlreadyUpdated(
+        // @ts-ignore
+        data?.user?.address
+      )
+      .call();
 
-      <main className="min-h-screen md:mt-20 pb-10 mt-20 max-w-7xl mx-auto grid md:grid-cols-3 grid-cols-1 w-full sm:grid-cols-2 px-10 md:place-content-start place-content-start items-start place-items-center gap-10">
-        {data.map((nft, i) => (
+    if (_isUpdated == true || window.location.href.split("=")[1]) {
+      setUpdated(true);
+    } else {
+      setUpdated(false);
+    }
+  };
+
+  useEffect(() => {
+    if (mintContract) {
+      getIfBuddyIsUpdated();
+    }
+    //@ts-ignore
+  }, [data?.user.address, mintContract]);
+  return (
+    <div className="pb-20 md:pb-0 flex flex-col items-center justify-center">
+      <Header notLanding={true} />
+      {!updated && <ShepherdAlert setOpen={setOpen} />}
+
+      <main className="min-h-screen md:mt-28 pb-10 mt-20 max-w-7xl mx-auto grid md:grid-cols-3 grid-cols-1 w-full sm:grid-cols-2 px-10 md:place-content-start place-content-start items-start place-items-center gap-10">
+        {datas.map((nft, i) => (
           <Card
             key={i}
             name={nft.name}

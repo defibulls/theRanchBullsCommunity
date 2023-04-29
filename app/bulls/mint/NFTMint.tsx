@@ -70,7 +70,7 @@ const NFTMint = () => {
 
   return (
     <div className="h-full overflow-y-scroll lg:overflow-hidden">
-      <main className="flex flex-col justify-center ">
+      <main className="flex flex-col justify-center items-center">
         <div className="flex min-h-[100vh] w-full flex-col gap-8 p-[10%] text-white md:flex-row md:py-0 md:px-[5%]">
           <div className="flex h-screen w-full flex-col justify-center items-center overflow-hidden">
             {chainId !== "0x89" ? (
@@ -90,11 +90,11 @@ const NFTMint = () => {
                   transition={{
                     duration: 1.5,
                   }}
-                  className="flex h-full w-full items-center justify-center lg:h-[60%] lg:w-[50%] "
+                  className="flex w-full h-full items-center justify-center lg:h-[50%] lg:w-[50%]"
                 >
                   <iframe
                     src={`/bulls/demo/data.html`}
-                    height="60%"
+                    height="50%"
                     width="100%"
                   >
                     LOGO

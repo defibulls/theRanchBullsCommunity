@@ -25,9 +25,9 @@ const Banner = (props: Props) => {
       <Suspense>
         <iframe
           src="/bulls/demo/data.html"
-          height="auto"
+          height="50%"
           className="z-10 h-52 md:h-[40%] md:w-[50%]"
-          width="auto"
+          width="50%"
         ></iframe>
       </Suspense>
 
@@ -38,7 +38,7 @@ const Banner = (props: Props) => {
           </p>
           <hr className="z-10 mb-2 w-full border-gray-400" />
           <p className="z-10 mb-4 w-full text-center text-xl font-light md:text-4xl">
-            Q2 23'
+            Q2 2023
           </p>
           {/* <button
             type="button"
