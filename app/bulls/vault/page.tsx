@@ -52,9 +52,6 @@ const getVaultNFTs = async () => {
 };
 const Vault = async () => {
   const nfts = await getVaultNFTs();
-
-  console.log(nfts);
-
   return (
     <div className="h-full w-full overflow-x-hidden pb-20">
       <Header notLanding={true} />
