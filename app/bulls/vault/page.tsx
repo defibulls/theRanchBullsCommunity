@@ -1,26 +1,27 @@
 import Header from "../../Header";
-import Moralis from "moralis";
+// import Moralis from "moralis";
 import ImageCard from "./ImageCard";
 
-const getVaultNFTs = async () => {
-  // once();
-  //@ts-ignore
-  if (!Moralis.isWeb3Enabled()) {
-    await Moralis.start({ apiKey: process.env.NEXT_PUBLIC_MORALIS_API_KEY });
-  }
+// const getVaultNFTs = async () => {
+//   // once();
+//   //@ts-ignore
+//   if (!Moralis.isWeb3Enabled()) {
+//     await Moralis.start({ apiKey: process.env.NEXT_PUBLIC_MORALIS_API_KEY });
+//   }
 
-  const address = "0x309fE120B00859becaC99abf87338Ab996096F61";
+//   const address = "0x309fE120B00859becaC99abf87338Ab996096F61";
 
-  // const chain = EvmChain.ETHEREUM;
+//   // const chain = EvmChain.ETHEREUM;
 
-  const response = await Moralis.EvmApi.nft.getWalletNFTs({
-    address,
-    // chain,
-    tokenAddresses: ["0xa8a49255026ec0ab032bbb5c4f457aaa9b138ea6"],
-  });
+//   const response = await Moralis.EvmApi.nft.getWalletNFTs({
+//     address,
 
-  return response.result[0];
-};
+//     // chain,
+//     tokenAddresses: ["0xa8a49255026ec0ab032bbb5c4f457aaa9b138ea6"],
+//   });
+
+//   return response.result[0];
+// };
 const Vault = async () => {
   const nfts = {
     metadata: {
@@ -49,8 +50,7 @@ const Vault = async () => {
             name={nfts.metadata.name!}
             // @ts-ignore
             desc={nfts.metadata.description!}
-            // @ts-ignore
-            link={nfts.metadata.external_url}
+            link={nfts.metadata.external_link}
             uri={nfts.tokenUri!}
           />
         </div>
