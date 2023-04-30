@@ -96,7 +96,7 @@ const MintSection = ({ minted, maxbulls, setMinted, setLoading }: Props) => {
       })
       .catch((err: any) => {
         toast.error("Something went wrong! Please Try Again Later");
-        console.log(err);
+        // console.log(err);
         setLoading(false);
       });
   };
