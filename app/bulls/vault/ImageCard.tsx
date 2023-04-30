@@ -6,9 +6,10 @@ type Props = {
   uri: string;
   desc: string;
   link: string;
+  quantity: number;
 };
 
-const ImageCard = ({ name, uri, desc, link }: Props) => {
+const ImageCard = ({ name, uri, desc, link, quantity }: Props) => {
   return (
     <div className="dark:bg-gray-800 rounded-lg flex w-full h-fit shadow-md overflow-hidden">
       <img
@@ -27,7 +28,7 @@ const ImageCard = ({ name, uri, desc, link }: Props) => {
           <span className="uppercase tracking-widest font-semibold text-white">
             Quantity:
           </span>{" "}
-          9
+          {quantity + 1}
         </p>
         <Link
           target="_blank"

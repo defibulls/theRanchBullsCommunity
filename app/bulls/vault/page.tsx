@@ -1,37 +1,59 @@
 import Header from "../../Header";
-// import Moralis from "moralis";
+import Moralis from "moralis";
 import ImageCard from "./ImageCard";
+import { EvmChain } from "moralis/common-evm-utils";
 
-// const getVaultNFTs = async () => {
-//   // once();
-//   //@ts-ignore
-//   if (!Moralis.isWeb3Enabled()) {
-//     await Moralis.start({ apiKey: process.env.NEXT_PUBLIC_MORALIS_API_KEY });
-//   }
+function removeDuplicates(arr: any[], prop: string) {
+  const duplicates: any = {};
+  const result: any[] = [];
 
-//   const address = "0x309fE120B00859becaC99abf87338Ab996096F61";
+  arr.forEach((item) => {
+    const key = item[prop];
 
-//   // const chain = EvmChain.ETHEREUM;
+    if (!duplicates[key]) {
+      duplicates[key] = 0;
+    }
 
-//   const response = await Moralis.EvmApi.nft.getWalletNFTs({
-//     address,
+    duplicates[key]++;
 
-//     // chain,
-//     tokenAddresses: ["0xa8a49255026ec0ab032bbb5c4f457aaa9b138ea6"],
-//   });
+    if (duplicates[key] === 1) {
+      result.push(item);
+    }
+  });
 
-//   return response.result[0];
-// };
+  return result.map((item) => {
+    return {
+      ...item,
+      repeated: duplicates[item[prop]] - 1,
+    };
+  });
+}
+
+const getVaultNFTs = async () => {
+  // once();
+  //@ts-ignore
+  if (!Moralis.Core.isStarted) {
+    await Moralis.start({ apiKey: process.env.NEXT_PUBLIC_MORALIS_API_KEY });
+  }
+
+  const address = "0x309fE120B00859becaC99abf87338Ab996096F61";
+
+  const chain = EvmChain.ETHEREUM;
+
+  const response = await Moralis.EvmApi.nft.getWalletNFTs({
+    address,
+    chain,
+    tokenAddresses: ["0xa8a49255026ec0ab032bbb5c4f457aaa9b138ea6"],
+  });
+
+  const newArr = removeDuplicates(response.result, "tokenAddress");
+
+  return newArr;
+};
 const Vault = async () => {
-  const nfts = {
-    metadata: {
-      name: "Alpha Mining Co. Reserve",
-      description:
-        "The Alpha Mining Co. Reserve round of NFTs consists of 3,000 NFTs that are minting for $1,000 each. These NFTs are an access pass to Alpha Mining Co.'s ecosystem and come with valuable perks.",
-      external_link: "https://mining.alphashares.io/",
-    },
-    tokenUri: "",
-  };
+  const nfts = await getVaultNFTs();
+
+  console.log(nfts);
 
   return (
     <div className="h-full w-full overflow-x-hidden pb-20">
@@ -44,15 +66,21 @@ const Vault = async () => {
             <hr aria-orientation="horizontal" className="my-5" />
           </div>
         </div>
+
         <div className="flex justify-center items-center w-full">
-          <ImageCard
-            // @ts-ignore
-            name={nfts.metadata.name!}
-            // @ts-ignore
-            desc={nfts.metadata.description!}
-            link={nfts.metadata.external_link}
-            uri={nfts.tokenUri!}
-          />
+          {nfts.map((nft) => (
+            <ImageCard
+              // @ts-ignore
+              name={nft._data.metadata.name!}
+              // @ts-ignore
+              desc={nft._data.metadata.description!}
+              //@ts-ignore
+              link={nft._data.metadata.external_url!}
+              quantity={nft.repeated}
+              //@ts-ignore
+              uri={nft._data.tokenUri!}
+            />
+          ))}
         </div>
       </div>
     </div>
