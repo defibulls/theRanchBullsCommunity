@@ -301,18 +301,21 @@ const Header = ({ notLanding, setLanding }: props) => {
                                   className="cursor-pointer"
                                   onClick={() => setOpen(true)}
                                 >
-                                  Buddy Address
+                                  Shepherd Address
                                 </p>
                               )}
                               <p
                                 className="cursor-pointer"
                                 onClick={async () => {
                                   try {
-                                    await navigator.clipboard.writeText(
-                                      // @ts-ignore
-                                      `https://www.theranch.community/bulls/mint?ref=${data.user?.address}`
-                                    );
-                                    toast.success("Link Copied!");
+                                    // @ts-ignore
+                                    if (data.user.address) {
+                                      await navigator.clipboard.writeText(
+                                        // @ts-ignore
+                                        `https://www.theranch.community/bulls/mint?ref=${data.user?.address}`
+                                      );
+                                      toast.success("Link Copied!");
+                                    }
                                   } catch (err) {
                                     console.error("Failed to copy text: ", err);
                                   }

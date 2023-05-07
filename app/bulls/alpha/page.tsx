@@ -43,14 +43,17 @@ const Home = (props: Props) => {
   const { mintContract, setOpen } = useContext(ContractContext);
   const [updated, setUpdated] = useState(false);
   const getIfBuddyIsUpdated = async () => {
-    const _isUpdated = await mintContract.methods
-      .buddyAlreadyUpdated(
-        // @ts-ignore
-        data?.user?.address
-      )
-      .call();
+    const _shepherdAddress = await mintContract.methods.myShepherd(
+      // @ts-ignore
+      data?.user.address
+    );
+    if (_shepherdAddress == "0x0000000000000000000000000000000000000000") {
+      setUpdated(false);
+    } else {
+      setUpdated(true);
+    }
 
-    if (_isUpdated == true || window.location.href.split("=")[1]) {
+    if (updated == true || window.location.href.split("=")[1]) {
       setUpdated(true);
     } else {
       setUpdated(false);

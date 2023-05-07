@@ -1,4 +1,5 @@
-import { getServerSession } from "next-auth";
+// import { getServerSession } from "next-auth";
+import { getSession } from "next-auth/react";
 import { Providers } from "../components/Providers";
 import "../styles/globals.css";
 
@@ -7,7 +8,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession();
+  const session = await getSession();
   return (
     <html className="bg-black">
       <head />
