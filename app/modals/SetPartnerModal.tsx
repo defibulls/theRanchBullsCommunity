@@ -24,6 +24,9 @@ function Modaluser() {
     if (mintContract) {
       getBuddyAddress();
     }
+    if (window.location.href.split("=")[1]) {
+      setBuddyAddress(window.location.href.split("=")[1]);
+    }
   }, [mintContract, setOpen]);
 
   const updateBuddyAddress = async () => {

@@ -14,20 +14,24 @@ const Mint = (props: Props) => {
   const { status, data } = useSession();
   const { mintContract, setOpen } = useContext(ContractContext);
   const [updated, setUpdated] = useState(false);
-  const [show, setShow] = useState(true);
-
   const getIfBuddyIsUpdated = async () => {
-    const _shepherdAddress = await mintContract.methods.myShepherd(
-      // @ts-ignore
-      data?.user.address
-    );
-    if (_shepherdAddress == "0x0000000000000000000000000000000000000000") {
-      setUpdated(false);
-    } else {
+    const _shepherdAddress = await mintContract.methods
+      .myShepherd(
+        // @ts-ignore
+        data?.user.address
+      )
+      .call();
+
+    if (_shepherdAddress != "0x0000000000000000000000000000000000000000") {
       setUpdated(true);
+    } else {
+      setUpdated(false);
     }
 
-    if (updated == true || window.location.href.split("=")[1]) {
+    if (
+      _shepherdAddress != "0x0000000000000000000000000000000000000000" ||
+      window.location.href.split("=")[1]
+    ) {
       setUpdated(true);
     } else {
       setUpdated(false);
@@ -39,13 +43,19 @@ const Mint = (props: Props) => {
     if (mintContract && data?.user.address != undefined) {
       getIfBuddyIsUpdated();
     }
+
+    if (window.location.href.split("=")[1] && updated == false) {
+      setOpen(true);
+    } else {
+      setOpen(false);
+    }
     //@ts-ignore
-  }, [data?.user.address, mintContract]);
+  }, [data?.user.address, mintContract, updated]);
 
   return (
     <div>
       <Header notLanding={true} />
-      {!updated && <ShepherdAlert setOpen={setOpen} setShow={setShow} />}
+      {!updated && <ShepherdAlert setOpen={setOpen} />}
       <main>{status == "authenticated" ? <NFTMint /> : <ConnectWallet />}</main>
     </div>
   );
