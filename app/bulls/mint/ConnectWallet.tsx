@@ -52,7 +52,6 @@ const ConnectWallet = () => {
           Please connect your wallet to continue.
         </div>
 
-        {/* <Image src={metamaskLogo} width={200} height={200} /> */}
         <div
           className="mb-10 cursor-pointer rounded-full bg-purple-600 px-6 py-4 text-2xl font-bold text-black hover:bg-purple-800"
           onClick={() => handleAuth()}
