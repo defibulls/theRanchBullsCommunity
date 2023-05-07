@@ -1,8 +1,7 @@
 import { useSwitchNetwork } from "wagmi";
 
 const ChainNotSupported = () => {
-  const { chains, error, isLoading, pendingChainId, switchNetwork } =
-    useSwitchNetwork();
+  const { switchNetwork } = useSwitchNetwork();
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
