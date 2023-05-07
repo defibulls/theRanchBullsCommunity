@@ -4,9 +4,7 @@ import Header from "../../Header";
 import ConnectWallet from "./ConnectWallet";
 import NFTMint from "./NFTMint";
 
-type Props = {};
-
-const Mint = (props: Props) => {
+const Mint = () => {
   const { status } = useSession();
 
   return (
