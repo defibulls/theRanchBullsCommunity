@@ -1,6 +1,7 @@
 import { XCircleIcon } from "@heroicons/react/24/solid";
 import { useSession } from "next-auth/react";
 import { useState, useContext, useEffect } from "react";
+import toast from "react-hot-toast";
 import { ContractContext } from "../../context/ContractContext";
 
 function Modaluser() {
@@ -12,10 +13,10 @@ function Modaluser() {
   const [updating, setUpdating] = useState(false);
   const { data } = useSession();
   //@ts-ignore
-  const account = data?.user?.address;
+  const account = data?.user.address;
 
   const getBuddyAddress = async () => {
-    const _buddyAddress = await mintContract.methods.myBuddy(account).call();
+    const _buddyAddress = await mintContract.methods.myShepherd(account).call();
     setCurrentBuddy(_buddyAddress);
   };
 
@@ -23,13 +24,22 @@ function Modaluser() {
     if (mintContract) {
       getBuddyAddress();
     }
+
+    if (window.location.href.split("=")[1]) {
+      setBuddyAddress(window.location.href.split("=")[1]);
+    }
   }, [mintContract, setOpen]);
 
   const updateBuddyAddress = async () => {
+    //@ts-ignore
+    if (buddyAddress == data?.user.address)
+      return toast.error(
+        "You can't set your own wallet address as your shepherd address"
+      );
     setUpdating(true);
-    await mintContract.methods.setBuddyAddress(buddyAddress).send({
+    await mintContract.methods.setShepherdAddress(buddyAddress).send({
       //@ts-ignore
-      from: data?.user?.address,
+      from: data?.user.address,
     });
     setBuddyAddress("");
     setOpen(false);
@@ -45,11 +55,11 @@ function Modaluser() {
     <div className={style.wrapper}>
       {currentBuddy == "0x0000000000000000000000000000000000000000" ? (
         <div className="text-xl font-semibold uppercase tracking-widest text-gray-400">
-          Update Buddy Address
+          Update Shepherd Address
         </div>
       ) : (
         <div className="text-xl font-semibold uppercase tracking-widest text-gray-400">
-          Buddy Address
+          Shepherd Address
         </div>
       )}
 

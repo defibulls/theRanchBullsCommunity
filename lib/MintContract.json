@@ -1,12 +1,6 @@
 [
   {
     "inputs": [],
-    "name": "Buddy_MutlipleBuddySwitchesNotAllowed",
-    "type": "error"
-  },
-  { "inputs": [], "name": "Buddy_NotAllowed", "type": "error" },
-  {
-    "inputs": [],
     "name": "Minting_AddressNotFreeMintOrAlreadyDone",
     "type": "error"
   },
@@ -16,6 +10,12 @@
   { "inputs": [], "name": "Minting_MintingNumberNotAllowed", "type": "error" },
   { "inputs": [], "name": "Minting_PublicSaleNotLive", "type": "error" },
   { "inputs": [], "name": "Pause_MustSetAllVariablesFirst", "type": "error" },
+  {
+    "inputs": [],
+    "name": "shepherd_MutlipleshepherdSwitchesNotAllowed",
+    "type": "error"
+  },
+  { "inputs": [], "name": "shepherd_NotAllowed", "type": "error" },
   {
     "anonymous": false,
     "inputs": [
@@ -85,19 +85,19 @@
       {
         "indexed": true,
         "internalType": "address",
-        "name": "NewBullOwner",
+        "name": "newBullOwner",
         "type": "address"
       },
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "BullsPurchased",
+        "name": "bullsPurchased",
         "type": "uint256"
       },
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "_NFTCount",
+        "name": "NFTCount",
         "type": "uint256"
       }
     ],
@@ -173,13 +173,13 @@
       {
         "indexed": true,
         "internalType": "address",
-        "name": "NewBullOwner",
+        "name": "newBullOwner",
         "type": "address"
       },
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "BullGiven",
+        "name": "bullGiven",
         "type": "uint256"
       }
     ],
@@ -232,25 +232,6 @@
     "type": "event"
   },
   {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "nftOwner",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "totalAmountTransferred",
-        "type": "uint256"
-      }
-    ],
-    "name": "withdrawWbtcBalanceEvent",
-    "type": "event"
-  },
-  {
     "inputs": [
       { "internalType": "address[]", "name": "_users", "type": "address[]" },
       { "internalType": "bool", "name": "_bool", "type": "bool" }
@@ -285,13 +266,6 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "name": "allowedMintingQuantity",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       { "internalType": "uint256", "name": "_tokenQuantity", "type": "uint256" }
     ],
@@ -315,16 +289,6 @@
       { "internalType": "uint256", "name": "_tokenQuantity", "type": "uint256" }
     ],
     "name": "alphaBullsMintGold",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "_address", "type": "address" },
-      { "internalType": "uint256", "name": "_tokenQuantity", "type": "uint256" }
-    ],
-    "name": "alphaBullsMintGoldPaper",
     "outputs": [],
     "stateMutability": "payable",
     "type": "function"
@@ -384,26 +348,10 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "name": "buddyAlreadyUpdated",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       { "internalType": "uint256", "name": "quantity", "type": "uint256" }
     ],
     "name": "checkClaimEligibilityBronze",
-    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "uint256", "name": "quantity", "type": "uint256" }
-    ],
-    "name": "checkClaimEligibilityGold",
     "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
     "stateMutability": "view",
     "type": "function"
@@ -424,6 +372,13 @@
     "name": "checkClaimEligibilitySilver",
     "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "founderMints",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -488,6 +443,17 @@
     "type": "function"
   },
   {
+    "inputs": [
+      { "internalType": "address", "name": "shepherd", "type": "address" }
+    ],
+    "name": "getShepherdIndices",
+    "outputs": [
+      { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "getSilverMintingCost",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
@@ -507,6 +473,13 @@
     "inputs": [],
     "name": "hostingSafeBalance",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "indexTiedToShepherd",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -557,7 +530,16 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_tokenQuantity", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "_tokenQuantity",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_shepherdAddress",
+        "type": "address"
+      }
     ],
     "name": "mint",
     "outputs": [],
@@ -567,7 +549,7 @@
   {
     "inputs": [
       {
-        "internalType": "enum TheRanchBullsCommunityV2.MintType",
+        "internalType": "enum TheRanchBulls.MintType",
         "name": "",
         "type": "uint8"
       }
@@ -580,7 +562,7 @@
   {
     "inputs": [
       {
-        "internalType": "enum TheRanchBullsCommunityV2.MintType",
+        "internalType": "enum TheRanchBulls.MintType",
         "name": "",
         "type": "uint8"
       }
@@ -593,7 +575,7 @@
   {
     "inputs": [
       {
-        "internalType": "enum TheRanchBullsCommunityV2.MintType",
+        "internalType": "enum TheRanchBulls.MintType",
         "name": "",
         "type": "uint8"
       }
@@ -605,15 +587,8 @@
   },
   {
     "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "name": "myBuddy",
+    "name": "myShepherd",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "name": "myParnterNetworkTeamCount",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -675,13 +650,6 @@
   },
   {
     "inputs": [],
-    "name": "paused",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "phaseMintCountWinner",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
@@ -713,6 +681,16 @@
     "name": "publicSaleLive",
     "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_address", "type": "address" },
+      { "internalType": "uint256", "name": "_tokenQuantity", "type": "uint256" }
+    ],
+    "name": "raffleMint",
+    "outputs": [],
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -800,15 +778,6 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_newBuddy", "type": "address" }
-    ],
-    "name": "setBuddyAddress",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
       {
         "internalType": "address",
         "name": "_investmentSafe",
@@ -817,6 +786,11 @@
       {
         "internalType": "address",
         "name": "_marketingSafe",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_startupRecoupSafe",
         "type": "address"
       },
       { "internalType": "address", "name": "_raritySafe", "type": "address" },
@@ -840,6 +814,15 @@
   },
   {
     "inputs": [
+      { "internalType": "address", "name": "_newshepherd", "type": "address" }
+    ],
+    "name": "setShepherdAddress",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
       { "internalType": "uint256", "name": "_target", "type": "uint256" },
       { "internalType": "bool", "name": "_bool", "type": "bool" }
     ],
@@ -849,11 +832,42 @@
     "type": "function"
   },
   {
+    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "name": "shepherdCount",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "", "type": "address" },
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ],
+    "name": "shepherdIndices",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "silverTokenSupply",
     "outputs": [
       { "internalType": "uint256", "name": "_value", "type": "uint256" }
     ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "startupRecoupSafe",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "startupRecoupSafeBalance",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -903,14 +917,14 @@
   },
   {
     "inputs": [],
-    "name": "topNetworker_1",
+    "name": "topShepherd_1",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "topNetworker_2",
+    "name": "topShepherd_2",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
@@ -943,8 +957,10 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "updateMintBonuses",
+    "inputs": [
+      { "internalType": "address", "name": "_newShepherd", "type": "address" }
+    ],
+    "name": "updateShepherd",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1019,6 +1035,13 @@
   {
     "inputs": [],
     "name": "withdrawRaritySafe",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "withdrawStartupRecoupSafe",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

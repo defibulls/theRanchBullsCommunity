@@ -14,6 +14,7 @@ import ReactModal from "react-modal";
 import Modaluser from "./modals/SetPartnerModal";
 import EmailModal from "./modals/EmailModal";
 import { usePathname } from "next/navigation";
+import toast from "react-hot-toast";
 
 const style = {
   wrapper: `p-4 w-screen flex justify-between items-center`,
@@ -345,14 +346,23 @@ const Header = ({ notLanding, setLanding }: props) => {
                                 className="cursor-pointer"
                                 onClick={() => setOpen(true)}
                               >
-                                Buddy Address
+                                Shepherd Address
                               </p>
                             )}
                             <p
                               className="cursor-pointer"
-                              onClick={() => setEmailModal(true)}
+                              onClick={async () => {
+                                // @ts-ignore
+                                if (data.user.address) {
+                                  await navigator.clipboard.writeText(
+                                    // @ts-ignore
+                                    `https://www.theranch.community/bulls/mint?ref=${data.user?.address}`
+                                  );
+                                  toast.success("Link Copied!");
+                                }
+                              }}
                             >
-                              Email
+                              Copy Refferer Link
                             </p>
                           </div>
                         </div>
